@@ -21,7 +21,47 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctOptionIndex: 0
   },
-  // Add more questions with their options...
+  {
+    id: 2,
+    questionDutch: "Hoeveel provincies heeft Nederland en kun je er een paar noemen?",
+    questionEnglish: "How many provinces does the Netherlands have, and can you name a few?",
+    answerDutch: "Nederland heeft 12 provincies, zoals Noord-Holland, Zuid-Holland en Utrecht.",
+    answerEnglish: "The Netherlands has 12 provinces, such as North Holland, South Holland, and Utrecht.",
+    optionsDutch: [
+      "Nederland heeft 12 provincies, zoals Noord-Holland, Zuid-Holland en Utrecht.",
+      "Nederland heeft 10 provincies, zoals Brabant en Limburg.",
+      "Nederland heeft 8 provincies, waaronder Amsterdam en Rotterdam.",
+      "Nederland heeft 15 provincies, inclusief Vlaanderen."
+    ],
+    optionsEnglish: [
+      "The Netherlands has 12 provinces, such as North Holland, South Holland, and Utrecht.",
+      "The Netherlands has 10 provinces, such as Brabant and Limburg.",
+      "The Netherlands has 8 provinces, including Amsterdam and Rotterdam.",
+      "The Netherlands has 15 provinces, including Flanders."
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 3,
+    questionDutch: "Wat is de hoofdstad van Nederland en wat is de regeringszetel?",
+    questionEnglish: "What is the capital of the Netherlands and where is the seat of government?",
+    answerDutch: "De hoofdstad is Amsterdam, maar de regering zit in Den Haag.",
+    answerEnglish: "The capital is Amsterdam, but the government is seated in The Hague.",
+    optionsDutch: [
+      "De hoofdstad is Amsterdam, maar de regering zit in Den Haag.",
+      "De hoofdstad is Den Haag, waar ook de regering zit.",
+      "De hoofdstad is Rotterdam, maar de regering zit in Amsterdam.",
+      "De hoofdstad en regeringszetel zijn beide in Utrecht."
+    ],
+    optionsEnglish: [
+      "The capital is Amsterdam, but the government is seated in The Hague.",
+      "The capital is The Hague, where the government is also seated.",
+      "The capital is Rotterdam, but the government is in Amsterdam.",
+      "Both the capital and seat of government are in Utrecht."
+    ],
+    correctOptionIndex: 0
+  },
+  // ... Add more questions following the same pattern
 ];
 
 export const shuffleQuestions = (questions: QuizQuestion[]): QuizQuestion[] => {
