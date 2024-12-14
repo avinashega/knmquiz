@@ -2,6 +2,9 @@ import { QuizQuestion } from "@/types/quiz";
 import { historyQuestions } from "./quiz/history";
 import { cultureQuestions } from "./quiz/culture";
 import { geographyQuestions } from "./quiz/geography";
+import { politicsQuestions } from "./quiz/politics";
+import { sportsQuestions } from "./quiz/sports";
+import { artQuestions } from "./quiz/art";
 
 export const baseQuestions: QuizQuestion[] = [
   {
@@ -211,6 +214,9 @@ export const allQuestions = [
   ...historyQuestions,
   ...cultureQuestions,
   ...geographyQuestions,
+  ...politicsQuestions,
+  ...sportsQuestions,
+  ...artQuestions,
 ];
 
 export const shuffleQuestions = (questions: QuizQuestion[]): QuizQuestion[] => {
