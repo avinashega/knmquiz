@@ -22,7 +22,7 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
   const [shuffledOptions, setShuffledOptions] = useState<{ text: string; index: number }[]>([]);
   const { toast } = useToast();
 
-  // Shuffle options when question changes
+  // Reset state and shuffle options when question changes
   useEffect(() => {
     const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
     const optionsWithIndices = options.map((text, index) => ({ text, index }));
