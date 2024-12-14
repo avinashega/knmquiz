@@ -60,5 +60,45 @@ export const scienceQuestions: QuizQuestion[] = [
       "The water treatment plant"
     ],
     correctOptionIndex: 0
+  },
+  {
+    id: 84,
+    questionDutch: "Welke Nederlandse wetenschapper won de Nobelprijs voor natuurkunde in 1953?",
+    questionEnglish: "Which Dutch scientist won the Nobel Prize in Physics in 1953?",
+    answerDutch: "Frits Zernike won de Nobelprijs voor zijn fasecontrastmicroscoop.",
+    answerEnglish: "Frits Zernike won the Nobel Prize for his phase contrast microscope.",
+    optionsDutch: [
+      "Frits Zernike",
+      "Hendrik Lorentz",
+      "Pieter Zeeman",
+      "Heike Kamerlingh Onnes"
+    ],
+    optionsEnglish: [
+      "Frits Zernike",
+      "Hendrik Lorentz",
+      "Pieter Zeeman",
+      "Heike Kamerlingh Onnes"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 85,
+    questionDutch: "Wie ontdekte de supergeleiding?",
+    questionEnglish: "Who discovered superconductivity?",
+    answerDutch: "Heike Kamerlingh Onnes ontdekte de supergeleiding in 1911.",
+    answerEnglish: "Heike Kamerlingh Onnes discovered superconductivity in 1911.",
+    optionsDutch: [
+      "Heike Kamerlingh Onnes",
+      "Willem Einthoven",
+      "Hendrik Lorentz",
+      "Pieter Zeeman"
+    ],
+    optionsEnglish: [
+      "Heike Kamerlingh Onnes",
+      "Willem Einthoven",
+      "Hendrik Lorentz",
+      "Pieter Zeeman"
+    ],
+    correctOptionIndex: 0
   }
 ];

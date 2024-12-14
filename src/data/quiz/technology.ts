@@ -60,5 +60,45 @@ export const technologyQuestions: QuizQuestion[] = [
       "ASML"
     ],
     correctOptionIndex: 0
+  },
+  {
+    id: 94,
+    questionDutch: "Welk Nederlands bedrijf ontwikkelde de Compact Cassette?",
+    questionEnglish: "Which Dutch company developed the Compact Cassette?",
+    answerDutch: "Philips ontwikkelde de Compact Cassette in 1963.",
+    answerEnglish: "Philips developed the Compact Cassette in 1963.",
+    optionsDutch: [
+      "Philips",
+      "Sony",
+      "ASML",
+      "TomTom"
+    ],
+    optionsEnglish: [
+      "Philips",
+      "Sony",
+      "ASML",
+      "TomTom"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 95,
+    questionDutch: "Welk Nederlands bedrijf is een pionier in kunstmatige intelligentie en robotica?",
+    questionEnglish: "Which Dutch company is a pioneer in artificial intelligence and robotics?",
+    answerDutch: "TU Delft is een pionier in kunstmatige intelligentie en robotica onderzoek.",
+    answerEnglish: "TU Delft is a pioneer in artificial intelligence and robotics research.",
+    optionsDutch: [
+      "TU Delft",
+      "Universiteit van Amsterdam",
+      "Universiteit Utrecht",
+      "Universiteit Leiden"
+    ],
+    optionsEnglish: [
+      "TU Delft",
+      "University of Amsterdam",
+      "Utrecht University",
+      "Leiden University"
+    ],
+    correctOptionIndex: 0
   }
 ];
