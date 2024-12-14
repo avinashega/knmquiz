@@ -20,7 +20,6 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<{ text: string; index: number }[]>([]);
-  const [showTranslation, setShowTranslation] = useState(false);
   const { toast } = useToast();
 
   // Shuffle options when question changes
@@ -31,7 +30,6 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
     setShuffledOptions(shuffled);
     setSelectedOption(null);
     setHasAnswered(false);
-    setShowTranslation(false);
   }, [question, language]);
 
   const handleSubmit = () => {
@@ -66,7 +64,6 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
   const handleNext = () => {
     setSelectedOption(null);
     setHasAnswered(false);
-    setShowTranslation(false);
     onNext();
   };
 
@@ -111,7 +108,7 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
               <Label 
                 htmlFor={`option-${index}`} 
                 className={cn(
-                  "text-left flex-1 p-2 rounded",
+                  "text-left flex-1 p-2 rounded cursor-pointer",
                   hasAnswered && index === question.correctOptionIndex && "bg-green-100 text-green-800",
                   hasAnswered && selectedOption === index && index !== question.correctOptionIndex && "bg-red-100 text-red-800"
                 )}
