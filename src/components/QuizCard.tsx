@@ -7,7 +7,7 @@ import { QuizQuestion } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Languages } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface QuizCardProps {
   question: QuizQuestion;
@@ -77,28 +77,22 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
           <h2 className="text-2xl font-bold text-dutch-blue">
             {language === 'dutch' ? question.questionDutch : question.questionEnglish}
           </h2>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowTranslation(!showTranslation)}
-                >
-                  <Languages className="h-5 w-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>
-                  {showTranslation
-                    ? language === 'dutch'
-                      ? question.questionEnglish
-                      : question.questionDutch
-                    : "Click to see translation"}
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-dutch-blue"
+              >
+                <Languages className="h-5 w-5" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-4">
+              <p className="text-sm">
+                {language === 'dutch' ? question.questionEnglish : question.questionDutch}
+              </p>
+            </PopoverContent>
+          </Popover>
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
