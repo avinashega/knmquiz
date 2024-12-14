@@ -5,6 +5,7 @@ import { QuizProgress } from "@/components/QuizProgress";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import type { QuizState } from "@/types/quiz";
 import { BookOpen } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [quizState, setQuizState] = useState<QuizState>({
@@ -79,8 +80,10 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-4 bg-white border-t">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          Made by Avinash Ega
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-gray-600">
+            Made by Avinash Ega | <Link to="/questions" className="text-blue-600 hover:underline">View All Questions</Link>
+          </p>
         </div>
       </footer>
     </div>
