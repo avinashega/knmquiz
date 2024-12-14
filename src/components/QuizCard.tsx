@@ -95,7 +95,7 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
       <CardContent className="space-y-6">
         <RadioGroup
           value={selectedOption?.toString()}
-          onValueChange={(value) => setSelectedOption(parseInt(value))}
+          onValueChange={(value) => !hasAnswered && setSelectedOption(parseInt(value))}
           className="space-y-4"
         >
           {shuffledOptions.map(({ text, index }) => (
@@ -104,6 +104,9 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
                 value={index.toString()} 
                 id={`option-${index}`} 
                 disabled={hasAnswered}
+                className={cn(
+                  hasAnswered && "opacity-50"
+                )}
               />
               <Label 
                 htmlFor={`option-${index}`} 
