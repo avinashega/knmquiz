@@ -15,6 +15,7 @@ interface QuizCardProps {
 
 export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [hasAnswered, setHasAnswered] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = () => {
@@ -26,6 +27,8 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
       });
       return;
     }
+
+    setHasAnswered(true);
 
     if (selectedOption === question.correctOptionIndex) {
       onScore();
@@ -42,8 +45,11 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
         duration: 3000,
       });
     }
-    
+  };
+
+  const handleNext = () => {
     setSelectedOption(null);
+    setHasAnswered(false);
     onNext();
   };
 
@@ -64,19 +70,28 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
         >
           {options.map((option, index) => (
             <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+              <RadioGroupItem value={index.toString()} id={`option-${index}`} disabled={hasAnswered} />
               <Label htmlFor={`option-${index}`} className="text-left">{option}</Label>
             </div>
           ))}
         </RadioGroup>
       </CardContent>
-      <CardFooter className="flex justify-center pt-6">
-        <Button
-          onClick={handleSubmit}
-          className="bg-dutch-orange hover:bg-dutch-orange/90 w-full max-w-xs"
-        >
-          Submit Answer
-        </Button>
+      <CardFooter className="flex justify-center pt-6 space-x-4">
+        {!hasAnswered ? (
+          <Button
+            onClick={handleSubmit}
+            className="bg-dutch-orange hover:bg-dutch-orange/90 w-full max-w-xs"
+          >
+            Submit Answer
+          </Button>
+        ) : (
+          <Button
+            onClick={handleNext}
+            className="bg-dutch-blue hover:bg-dutch-blue/90 w-full max-w-xs"
+          >
+            Next Question
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
