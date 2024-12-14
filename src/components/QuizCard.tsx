@@ -109,8 +109,9 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
                 htmlFor={`option-${index}`} 
                 className={cn(
                   "text-left flex-1 p-2 rounded cursor-pointer",
-                  hasAnswered && index === question.correctOptionIndex && "bg-green-100 text-green-800",
-                  hasAnswered && selectedOption === index && index !== question.correctOptionIndex && "bg-red-100 text-red-800"
+                  hasAnswered && selectedOption === index && index === question.correctOptionIndex && "bg-green-100 text-green-800",
+                  hasAnswered && selectedOption === index && index !== question.correctOptionIndex && "bg-red-100 text-red-800",
+                  hasAnswered && selectedOption !== index && index === question.correctOptionIndex && "bg-green-100 text-green-800"
                 )}
               >
                 {text}
