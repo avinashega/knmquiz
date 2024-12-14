@@ -10,18 +10,15 @@ const Index = () => {
     currentQuestion: 0,
     score: 0,
     showAnswer: false,
-    language: 'english',
-    questions: [],
+    language: 'dutch',
+    questions: shuffleQuestions(allQuestions),
   });
 
-  const startQuiz = (language: 'dutch' | 'english') => {
-    setQuizState({
-      currentQuestion: 0,
-      score: 0,
-      showAnswer: false,
+  const handleLanguageChange = (language: 'dutch' | 'english') => {
+    setQuizState(prev => ({
+      ...prev,
       language,
-      questions: shuffleQuestions(allQuestions),
-    });
+    }));
   };
 
   const handleNext = () => {
@@ -50,7 +47,7 @@ const Index = () => {
   };
 
   if (!quizState.questions.length) {
-    return <LanguageSelector onSelectLanguage={startQuiz} />;
+    return <LanguageSelector onSelectLanguage={handleLanguageChange} />;
   }
 
   return (

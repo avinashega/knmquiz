@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { QuizQuestion } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { Languages } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface QuizCardProps {
   question: QuizQuestion;
@@ -18,6 +20,7 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<{ text: string; index: number }[]>([]);
+  const [showTranslation, setShowTranslation] = useState(false);
   const { toast } = useToast();
 
   // Shuffle options when question changes
@@ -28,6 +31,7 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
     setShuffledOptions(shuffled);
     setSelectedOption(null);
     setHasAnswered(false);
+    setShowTranslation(false);
   }, [question, language]);
 
   const handleSubmit = () => {
@@ -62,15 +66,40 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
   const handleNext = () => {
     setSelectedOption(null);
     setHasAnswered(false);
+    setShowTranslation(false);
     onNext();
   };
 
   return (
     <Card className="w-full max-w-2xl mx-auto animate-fadeIn">
       <CardHeader>
-        <h2 className="text-2xl font-bold text-center text-dutch-blue">
-          {language === 'dutch' ? question.questionDutch : question.questionEnglish}
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-dutch-blue">
+            {language === 'dutch' ? question.questionDutch : question.questionEnglish}
+          </h2>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setShowTranslation(!showTranslation)}
+                >
+                  <Languages className="h-5 w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>
+                  {showTranslation
+                    ? language === 'dutch'
+                      ? question.questionEnglish
+                      : question.questionDutch
+                    : "Click to see translation"}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         <RadioGroup
