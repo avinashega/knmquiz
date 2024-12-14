@@ -61,7 +61,146 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctOptionIndex: 0
   },
-  // ... Add more questions following the same pattern
+  {
+    id: 4,
+    questionDutch: "Wat is de nationale bloem van Nederland?",
+    questionEnglish: "What is the national flower of the Netherlands?",
+    answerDutch: "De tulp is het nationale bloem symbool van Nederland.",
+    answerEnglish: "The tulip is the national flower symbol of the Netherlands.",
+    optionsDutch: [
+      "De tulp",
+      "De roos",
+      "De lelie",
+      "De zonnebloem"
+    ],
+    optionsEnglish: [
+      "The tulip",
+      "The rose",
+      "The lily",
+      "The sunflower"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 5,
+    questionDutch: "Wanneer is Koningsdag in Nederland?",
+    questionEnglish: "When is King's Day in the Netherlands?",
+    answerDutch: "Koningsdag wordt gevierd op 27 april, de verjaardag van Koning Willem-Alexander.",
+    answerEnglish: "King's Day is celebrated on April 27th, King Willem-Alexander's birthday.",
+    optionsDutch: [
+      "27 april",
+      "30 april",
+      "5 mei",
+      "31 augustus"
+    ],
+    optionsEnglish: [
+      "April 27th",
+      "April 30th",
+      "May 5th",
+      "August 31st"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 6,
+    questionDutch: "Wat is de hoogste berg van Nederland?",
+    questionEnglish: "What is the highest point in the Netherlands?",
+    answerDutch: "De Vaalserberg in Limburg is met 322,7 meter het hoogste punt van Nederland.",
+    answerEnglish: "The Vaalserberg in Limburg is the highest point in the Netherlands at 322.7 meters.",
+    optionsDutch: [
+      "De Vaalserberg",
+      "De Zugspitze",
+      "De Mont Blanc",
+      "De Kilimanjaro"
+    ],
+    optionsEnglish: [
+      "The Vaalserberg",
+      "The Zugspitze",
+      "The Mont Blanc",
+      "The Kilimanjaro"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 7,
+    questionDutch: "Welk percentage van Nederland ligt onder zeeniveau?",
+    questionEnglish: "What percentage of the Netherlands lies below sea level?",
+    answerDutch: "Ongeveer 26% van Nederland ligt onder zeeniveau.",
+    answerEnglish: "Approximately 26% of the Netherlands lies below sea level.",
+    optionsDutch: [
+      "26%",
+      "50%",
+      "75%",
+      "10%"
+    ],
+    optionsEnglish: [
+      "26%",
+      "50%",
+      "75%",
+      "10%"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 8,
+    questionDutch: "Wat is de grootste haven van Europa?",
+    questionEnglish: "What is the largest port in Europe?",
+    answerDutch: "De haven van Rotterdam is de grootste haven van Europa.",
+    answerEnglish: "The Port of Rotterdam is the largest port in Europe.",
+    optionsDutch: [
+      "Rotterdam",
+      "Amsterdam",
+      "Antwerpen",
+      "Hamburg"
+    ],
+    optionsEnglish: [
+      "Rotterdam",
+      "Amsterdam",
+      "Antwerp",
+      "Hamburg"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 9,
+    questionDutch: "Welke Nederlandse schilder sneed zijn eigen oor af?",
+    questionEnglish: "Which Dutch painter cut off his own ear?",
+    answerDutch: "Vincent van Gogh sneed een deel van zijn oor af tijdens een psychische crisis.",
+    answerEnglish: "Vincent van Gogh cut off part of his ear during a mental health crisis.",
+    optionsDutch: [
+      "Vincent van Gogh",
+      "Rembrandt van Rijn",
+      "Johannes Vermeer",
+      "Piet Mondriaan"
+    ],
+    optionsEnglish: [
+      "Vincent van Gogh",
+      "Rembrandt van Rijn",
+      "Johannes Vermeer",
+      "Piet Mondrian"
+    ],
+    correctOptionIndex: 0
+  },
+  {
+    id: 10,
+    questionDutch: "Wat is de nationale sport van Nederland?",
+    questionEnglish: "What is the national sport of the Netherlands?",
+    answerDutch: "Voetbal wordt beschouwd als de nationale sport van Nederland.",
+    answerEnglish: "Football (soccer) is considered the national sport of the Netherlands.",
+    optionsDutch: [
+      "Voetbal",
+      "Hockey",
+      "Schaatsen",
+      "Volleybal"
+    ],
+    optionsEnglish: [
+      "Football (soccer)",
+      "Hockey",
+      "Ice skating",
+      "Volleyball"
+    ],
+    correctOptionIndex: 0
+  }
 ];
 
 export const shuffleQuestions = (questions: QuizQuestion[]): QuizQuestion[] => {
