@@ -1,208 +1,191 @@
-"Waar ligt Nederland in Europa?","Where is the Netherlands located in Europe?","In Noordwest-Europa","In Zuid-Europa","In Oost-Europa","In Noord-Europa","option1"
-"Met welke landen grenst Nederland?","Which countries border the Netherlands?","België en Duitsland","Frankrijk en Spanje","Denemarken en Zweden","Italië en Oostenrijk","option1"
-"Hoeveel provincies heeft Nederland?","How many provinces does the Netherlands have?","12","10","8","14","option1"
-"Welke zee ligt ten westen en noorden van Nederland?","Which sea lies to the west and north of the Netherlands?","De Noordzee","De Oostzee","De Middellandse Zee","De Zwarte Zee","option1"
-"Wat is de hoofdstad van Nederland?","What is the capital of the Netherlands?","Amsterdam","Rotterdam","Den Haag","Utrecht","option1"
-"In welk klimaat ligt Nederland?","In what climate is the Netherlands located?","Gematigd zeeklimaat","Tropisch klimaat","Woestijnklimaat","Poolklimaat","option1"
-"Wat is een polder?","What is a polder?","Drooggelegd land omringd door dijken","Een groot bosgebied","Een hoog berggebied","Een strandgebied","option1"
-"Wat is de functie van dijken in Nederland?","What is the function of dikes in the Netherlands?","Ze beschermen tegen overstromingen","Ze zijn alleen voor transport","Ze zijn voor olieopslag","Ze zijn voor drinkwatervoorziening","option1"
-"Welk land ligt ten oosten van Nederland?","Which country lies to the east of the Netherlands?","Duitsland","België","Frankrijk","Luxemburg","option1"
-"Welke grote rivier stroomt door Nederland?","Which major river flows through the Netherlands?","De Rijn","De Donau","De Thames","De Seine","option1"
-
-"Welke staatsvorm heeft Nederland?","What form of government does the Netherlands have?","Constitutionele monarchie","Republiek","Dictatuur","Militaire staat","option1"
-"Wat is de Tweede Kamer?","What is the Second Chamber?","Het direct gekozen deel van het parlement","De Raad van State","Het Europees Parlement","Het Koninklijk Huis","option1"
-"Hoe vaak zijn er verkiezingen voor de Tweede Kamer?","How often are there elections for the Second Chamber?","Eens per vier jaar","Eens per jaar","Eens per twee jaar","Eens per vijf jaar","option1"
-"Wie mogen stemmen bij de Tweede Kamerverkiezingen?","Who can vote in the Second Chamber elections?","Nederlandse burgers van 18 jaar en ouder","Alle inwoners ongeacht nationaliteit","Kinderen vanaf 12 jaar","Alleen mannen boven 18","option1"
-"Wat is de taak van de regering?","What is the task of the government?","Het land besturen en wetten uitvoeren","Alleen belastingen innen","Alleen ceremonies uitvoeren","Geen enkele taak","option1"
-"Wat is de Staten-Generaal?","What are the States General?","Het Nederlandse parlement","De lokale politie","De Europese Commissie","De Hoge Raad","option1"
-"Hoe heet de Eerste Kamer ook wel?","What is the First Chamber also called?","De Senaat","De Volksraad","Het Lagerhuis","De Bondsraad","option1"
-"Door wie wordt de Eerste Kamer gekozen?","By whom is the First Chamber elected?","Door de Provinciale Staten","Door de burgers rechtstreeks","Door de koning","Door de Europese Raad","option1"
-"Wat gebeurt er in een democratie?","What happens in a democracy?","Burgers kiezen hun vertegenwoordigers","Een persoon heeft alle macht","Er zijn geen verkiezingen","Alle macht ligt bij de koning","option1"
-"Wie vormt samen met de koning de regering?","Who forms the government together with the King?","De ministers","De rechters","De burgemeesters","De Staten-Generaal","option1"
-
-"Wie is het staatshoofd van Nederland?","Who is the head of state of the Netherlands?","De koning","De premier","De voorzitter van de Tweede Kamer","De burgemeester van Amsterdam","option1"
-"Wat is de rol van de koning in Nederland?","What is the king's role in the Netherlands?","Ceremonieel en symbolisch","Absolute macht uitoefenen","Ministers benoemen zonder advies","Leden van de Tweede Kamer kiezen","option1"
-"Hoe wordt de troonopvolging in Nederland bepaald?","How is the succession to the throne determined in the Netherlands?","Volgens erfopvolging binnen het koninklijk huis","Door verkiezingen","Door loting","Door de Eerste Kamer","option1"
-"Wat is Koningsdag?","What is King's Day?","De verjaardag van de koning","De nationale verkiezingsdag","De dag van de boeren","De dag van de politie","option1"
-"Waar woont de koning meestal?","Where does the King usually live?","In een paleis in Den Haag","In de Tweede Kamer","In het stadhuis van Amsterdam","In een gewoon woonhuis","option1"
-"Wat gebeurt er tijdens Prinsjesdag?","What happens on Prinsjesdag?","De koning leest de troonrede voor","Er zijn nationale sportwedstrijden","Burgers kiezen de premier","Er worden nieuwe koningen gekozen","option1"
-"Wie schrijft de Troonrede?","Who writes the Speech from the Throne?","De ministers (regering)","De koning alleen","De Eerste Kamerleden","De burgemeester van Den Haag","option1"
-"Wat is de Gouden Koets?","What is the Golden Carriage?","Het voertuig waarin de koning op Prinsjesdag rijdt","Een bus voor de Tweede Kamerleden","Een veerpont in Rotterdam","Een trein van de NS","option1"
-"Welke familie vormt het koninklijk huis?","Which family forms the royal house?","De familie van Oranje-Nassau","De familie De Wit","De familie Rembrandt","De familie van Beethoven","option1"
-"Welke invloed heeft de koning op politieke beslissingen?","What influence does the King have on political decisions?","Hij heeft vooral een symbolische rol, weinig politieke macht","Hij bepaalt alle wetten","Hij mag veto uitspreken over alle wetten","Hij kiest persoonlijk de premier","option1"
-
-"Wat zijn Provinciale Staten?","What are the Provincial States?","Het parlement op provinciaal niveau","De rechterlijke macht","Een adviesraad van de koning","Een Europese instelling","option1"
-"Wie is de hoogste baas in de gemeente?","Who is the highest authority in the municipality?","De burgemeester","De premier","De koning","De commissaris van de Koning","option1"
-"Wat is een gemeente?","What is a municipality?","Een lokale bestuurslaag","Een religieuze instelling","Een bedrijf","Een provincie","option1"
-"Wie kiezen de leden van de gemeenteraad?","Who elects the members of the municipal council?","De inwoners van de gemeente","De koning","De Eerste Kamer","De Europese Commissie","option1"
-"Hoe heet het hoofd van een provincie?","What is the head of a province called?","De commissaris van de Koning","De burgemeester","De minister-president","De stadsregent","option1"
-"Wat doet de gemeenteraad?","What does the municipal council do?","Beslist over lokale zaken","Beheert de landsgrenzen","Beheert de munt","Is verantwoordelijk voor de rechtspraak","option1"
-"Waarvoor kun je bij het gemeentehuis terecht?","What can you do at the town hall?","Paspoorten aanvragen, huwelijken sluiten","Boodschappen doen","Medische behandeling krijgen","Je rijbewijs halen zonder examen","option1"
-"Hoe heet de vergadering waar de gemeente besluit over lokale plannen?","What is the meeting called where the municipality decides on local plans?","Raadsvergadering","Ministerraad","Troonrede","Europa-raad","option1"
-"Wat is de rol van de commissaris van de Koning?","What is the role of the King's commissioner?","Hij vertegenwoordigt de regering in de provincie","Hij is de nationale premier","Hij is burgemeester van alle steden","Hij beslist over alle gemeentelijke zaken","option1"
-"Kun je als EU-burger stemmen bij gemeenteraadsverkiezingen in Nederland?","Can you as an EU citizen vote in municipal elections in the Netherlands?","Ja, als je in de gemeente woont","Nee, nooit","Alleen als je 10 jaar in Nederland woont","Alleen bij nationale verkiezingen","option1"
-
-"Wat betekent een rechtsstaat?","What does a rule of law mean?","Iedereen moet zich aan de wet houden, ook de overheid","Alleen de overheid maakt de regels maar volgt ze niet","Er zijn geen vaste wetten","De koning bepaalt alleen de wetten","option1"
-"Wat doet een rechter?","What does a judge do?","Beslist onafhankelijk in rechtszaken","Schrijft alle wetten","Bepaalt de prijs van producten","Controleert stemlokalen","option1"
-"Wat is de Hoge Raad?","What is the Hoge Raad (Supreme Court)?","De hoogste rechterlijke instantie","Het gemeentebestuur","Een politieke partij","Een internationale organisatie","option1"
-"Waarom is discriminatie verboden?","Why is discrimination forbidden?","Iedereen is gelijk voor de wet","Het helpt bij meer winst voor bedrijven","Het is alleen verboden in sommige landen","Discriminatie is economisch voordelig","option1"
-"Wat is vrijheid van meningsuiting?","What is freedom of expression?","Je mag je eigen mening geven, zonder te discrimineren of oproepen tot geweld","Je mag altijd schelden en beledigen","Je mag alleen thuis je mening geven","Je mag alleen de mening van de overheid herhalen","option1"
-"Welke instantie maakt wetten in Nederland?","Which body makes laws in the Netherlands?","Het parlement (Staten-Generaal)","De rechter","De politie","De burgemeester","option1"
-"Wat is een grondrecht?","What is a fundamental right?","Een basisrecht dat in de grondwet staat","Een recht dat door de koning wordt gegeven","Een internationaal recht","Een recht dat in een lokale verordening staat","option1"
-"Kun je naar de rechter als je het niet eens bent met een besluit van de overheid?","Can you go to court if you disagree with a government decision?","Ja, in een rechtsstaat wel","Nee, nooit","Alleen met toestemming van de politie","Alleen als de koning het goedkeurt","option1"
-"Wat doet de politie?","What does the police do?","Handhaaft de wet en zorgt voor veiligheid","Maakt nieuwe wetten","Beheert het openbaar vervoer","Beslist over onderwijsprogramma’s","option1"
-"Wat is het doel van de wetgeving tegen discriminatie?","What is the purpose of anti-discrimination legislation?","Gelijke behandeling van iedereen","Beperken van vrijheid van meningsuiting","Alleen mannen beschermen","Alleen vrouwen beschermen","option1"
-
-"Wat is het doel van inburgering?","What is the purpose of integration (inburgering)?","Meedoen in de Nederlandse samenleving","Alleen Nederlands leren en verder niets","Alleen werk vinden","Migranten weren uit het land","option1"
-"Wat is het KNM-examen?","What is the KNM exam?","Een examen over kennis van de Nederlandse samenleving","Een rijexamen","Een medisch examen","Een sporttest","option1"
-"Wie moeten vaak inburgeren?","Who often has to integrate?","Nieuwkomers van buiten de EU","Iedereen met de Nederlandse nationaliteit","Alleen mensen die hier geboren zijn","Niemand","option1"
-"Waar vraag je inburgeringscursussen aan?","Where do you apply for integration courses?","Bij DUO of erkende taal- en inburgeringsscholen","Bij de supermarkt","Bij de politie","Bij een sportclub","option1"
-"Wat test het inburgeringsexamen?","What does the integration exam test?","Taal, kennis van maatschappij en oriëntatie op de arbeidsmarkt","Alleen wiskunde","Alleen geschiedenis","Alleen rijvaardigheid","option1"
-"Wat is DUO?","What is DUO?","Dienst Uitvoering Onderwijs, regelt studiefinanciering en inburgeringsexamens","Een sportorganisatie","Een politieke partij","Een woningcorporatie","option1"
-"Wat is de IND?","What is the IND?","Immigratie- en Naturalisatiedienst","Een bank","Een telecombedrijf","Een supermarktketen","option1"
-"Wat betekent naturalisatie?","What does naturalization mean?","De Nederlandse nationaliteit krijgen","Verhuizen naar een andere stad","Geld lenen bij de bank","Een rijbewijs behalen","option1"
-"Waarom is kennis van de Nederlandse taal belangrijk?","Why is knowledge of the Dutch language important?","Om te kunnen communiceren en meedoen in de samenleving","Om alleen films te begrijpen","Om minder belasting te betalen","Om geen werk te hoeven zoeken","option1"
-"Wat gebeurt er als je niet slaagt voor het inburgeringsexamen?","What happens if you do not pass the integration exam?","Je kunt een boete krijgen of geen verblijfsvergunning","Je wordt automatisch staatsburger","Je hoeft nooit meer iets te doen","Je krijgt een cadeau","option1"
-
-"Wat is basisschool?","What is primary school?","Onderwijs voor kinderen van 4 tot 12 jaar","Onderwijs voor studenten met diploma","Alleen voor volwassenen","Een type universiteit","option1"
-"Wat is voortgezet onderwijs?","What is secondary education?","Onderwijs na de basisschool zoals VMBO, HAVO, VWO","Onderwijs voor kleuters","Alleen studie in de avond","Alleen privéonderwijs","option1"
-"Wat is MBO?","What is MBO?","Middelbaar beroepsonderwijs","Basisuniversiteit","Politieke opleiding","Militaire training","option1"
-"Welke opleidingen volg je aan een hogeschool (HBO)?","Which courses do you follow at a university of applied sciences (HBO)?","Praktisch en theoretisch hoger beroepsonderwijs","Alleen wetenschappelijk onderzoek","Alleen talenonderwijs","Alleen sportopleidingen","option1"
-"Wat is WO?","What is WO?","Wetenschappelijk onderwijs (universiteit)","Winkelopleiding","Wereldonderwijs","Wiskundeonderwijs","option1"
-"Is leerplicht verplicht in Nederland?","Is compulsory education mandatory in the Netherlands?","Ja, kinderen vanaf 5 jaar moeten naar school","Nee, niemand hoeft naar school","Alleen jongens moeten naar school","Alleen vanaf 18 jaar","option1"
-"Wie bepaalt het niveau van voortgezet onderwijs voor een kind?","Who determines the level of secondary education for a child?","De basisschooladvies en Cito-toets","De koning","De burgemeester","De politie","option1"
-"Hoe betaal je voor hoger onderwijs?","How do you pay for higher education?","Met collegegeld, studiefinanciering is mogelijk via DUO","Helemaal gratis","Alleen met een lening bij een bank","Je wordt altijd betaald om te studeren","option1"
-"Wat doet een consultatiebureau?","What does a well-baby clinic do?","Controleert de gezondheid van jonge kinderen","Verkoopt kleding","Organiseert sportwedstrijden","Geeft belastingadvies","option1"
-"Krijg je hulp bij het leren van Nederlands op school als je het nog niet goed spreekt?","Do you get help at school if you do not speak Dutch well yet?","Ja, extra taalondersteuning","Nee, nooit","Alleen als je 18 bent","Alleen als je betaalt","option1"
-
-"Wat is een arbeidscontract?","What is an employment contract?","Een schriftelijke afspraak tussen werknemer en werkgever","Een auto die je huurt","Een huis dat je koopt","Een verzekering tegen onweer","option1"
-"Wat is het minimumloon?","What is the minimum wage?","Het laagste toegestane salaris","Het hoogste salaris","Een soort belasting","Een studiebeurs","option1"
-"Wie helpt je bij het zoeken naar werk als je werkloos bent?","Who helps you find work if you are unemployed?","Het UWV","De politie","De supermarkt","De GGD","option1"
-"Wat is een CAO (Collectieve Arbeidsovereenkomst)?","What is a CAO?","Afspraken over arbeidsvoorwaarden tussen vakbonden en werkgevers","Een winkelovereenkomst","Een examen","Een medisch protocol","option1"
-"Moet je belasting betalen over je loon?","Do you have to pay tax on your wages?","Ja, loonbelasting","Nee, nooit","Alleen als je meer dan 65 bent","Alleen als je wil","option1"
-"Wat is een proeftijd?","What is a probationary period?","Een periode aan het begin van een baan om te beoordelen of het past","Een periode waarin je niet hoeft te werken","Een periode voor vakantie","Een periode waarin je geen salaris krijgt","option1"
-"Mag je zomaar ontslagen worden?","Can you be fired just like that?","Nee, er zijn regels en bescherming voor werknemers","Ja, zonder reden","Ja, maar alleen als het mooi weer is","Alleen als je collega het wil","option1"
-"Wat is een uitzendbureau?","What is a temp agency?","Een bureau dat tijdelijke banen bemiddelt","Een bank voor leningen","Een fabriek","Een overheidsinstantie","option1"
-"Welk document heb je nodig om in Nederland te werken?","Which document do you need to work in the Netherlands?","Een geldig verblijfsdocument en eventueel een werkvergunning","Geen enkel document","Een zwemdiploma","Een gemeentelijke vergunning","option1"
-"Wat betekent deeltijd werken?","What does part-time working mean?","Minder dan voltijduren werken","Altijd 40 uur werken","Nooit werken","Alleen in het weekend werken","option1"
-
-"Wat is de WW-uitkering?","What is unemployment benefit (WW)?","Een uitkering als je onvrijwillig werkloos bent","Een verzekering voor je auto","Een studiefinanciering","Een toeslag voor huur","option1"
-"Wat is de bijstand?","What is social assistance?","Een uitkering voor mensen zonder inkomsten","Een medische verzekering","Een reisdocument","Een rijbewijs","option1"
-"Wat is de WIA?","What is the WIA?","Een uitkering bij arbeidsongeschiktheid","Een type rijexamen","Een belastingvorm","Een huurtoeslag","option1"
-"Wat is kinderbijslag?","What is child benefit?","Een financiële bijdrage voor ouders met kinderen","Een boete als je kinderen hebt","Een toeslag voor huisdieren","Een vakantietoeslag","option1"
-"Wie voert sociale verzekeringen uit?","Who implements social insurances?","Het UWV","De politie","De brandweer","De bibliotheek","option1"
-"Wat is AOW?","What is AOW?","Algemene Ouderdomswet, pensioenuitkering","Een sportwedstrijd","Een universiteit","Een autoverzekering","option1"
-"Wat is de zorgtoeslag?","What is the healthcare allowance?","Een toeslag om de zorgpremie betaalbaarder te maken","Een toeslag voor huur","Een toeslag voor auto","Een studietoeslag","option1"
-"Wanneer heb je recht op bijstand?","When are you entitled to social assistance?","Als je geen of te weinig inkomen en vermogen hebt","Altijd, ongeacht inkomen","Nooit","Alleen als je een auto bezit","option1"
-"Wat is Wajong?","What is Wajong?","Een uitkering voor jonggehandicapten","Een rijexamen","Een woningmarkt","Een studiebeurs","option1"
-"Wie betalen de sociale zekerheid?","Who pays for social security?","Werknemers en werkgevers via premies","Alleen de koning","Alleen de burgemeester","Niemand betaalt","option1"
-
-"Wat is een sociale huurwoning?","What is a social rental home?","Een woning met lagere huur voor mensen met lager inkomen","Een heel duur huis","Een koopwoning","Een studentenhuis","option1"
-"Wie beheren vaak sociale huurwoningen?","Who often manage social rental homes?","Woningcorporaties","Supermarkten","Ziekenhuizen","Politiebureaus","option1"
-"Wat is huurtoeslag?","What is housing allowance?","Een bijdrage om de huur betaalbaar te houden","Een belasting op je huis","Een premie voor de brandweer","Een toeslag om boodschappen te doen","option1"
-"Heb je een huurcontract nodig?","Do you need a rental contract?","Ja, om rechten en plichten vast te leggen","Nee, nooit","Alleen als de buren het willen","Alleen voor koopwoningen","option1"
-"Moet je je inschrijven bij de gemeente als je verhuist?","Must you register at the municipality when you move?","Ja, binnen 5 dagen","Nee, nooit","Alleen als je naar het buitenland verhuist","Alleen als je binnen dezelfde straat verhuist","option1"
-"Wat is een energielabel bij een woning?","What is an energy label for a house?","Een label met info over energiezuinigheid","Een vergunning om te verbouwen","Een belastingdocument","Een bewijs van eigendom","option1"
-"Kan de huur elk jaar stijgen?","Can the rent increase every year?","Ja, vaak met een vast percentage","Nee, nooit","Alleen als je het zelf wil","Alleen als de politie het toestaat","option1"
-"Wat is een makelaar?","What is a real estate agent?","Iemand die helpt bij de aan- en verkoop of huur van huizen","Iemand die eten verkoopt","Iemand die medische hulp biedt","Iemand die treinkaartjes verkoopt","option1"
-"Wat is een hypotheek?","What is a mortgage?","Een lening om een huis te kopen","Een huurcontract","Een verzekering tegen brand","Een type belasting","option1"
-"Waar kun je informatie krijgen over woningtoewijzing?","Where can you get information about housing allocation?","Bij de woningcorporatie of gemeente","Bij de bakker","Bij de politie","Bij de bibliotheek","option1"
-
-"Hoe groet je meestal mensen in Nederland?","How do you usually greet people in the Netherlands?","Met een handdruk en hallo","Door te buigen","Door te klappen","Door te zingen","option1"
-"Wat betekent ‘afspraak is afspraak’?","What does ‘afspraak is afspraak’ mean?","Als je iets afspreekt, moet je het nakomen","Je mag afspraken altijd veranderen","Afspraken zijn niet belangrijk","Je hoeft geen afspraken te maken","option1"
-"Hoe worden verjaardagen vaak gevierd?","How are birthdays often celebrated?","Met koffie, gebak en visite thuis","Door op straat te dansen","Door een huis te verven","Door naar het gemeentehuis te gaan","option1"
-"Is op tijd komen belangrijk in Nederland?","Is being on time important in the Netherlands?","Ja, het wordt als beleefd gezien","Nee, je mag altijd te laat komen","Alleen voor officiële ceremonies","Alleen bij de koning","option1"
-"Mag je overal roken in Nederland?","Can you smoke everywhere in the Netherlands?","Nee, er zijn veel rookvrije ruimtes","Ja, overal","Alleen in kerken","Alleen in ziekenhuizen","option1"
-"Wat doen Nederlanders vaak op zaterdag?","What do Dutch people often do on Saturdays?","Boodschappen doen op de markt","Werken op het gemeentehuis","Naar school gaan","Stemmen voor de regering","option1"
-"Wat is gebruikelijk bij het binnenkomen van een huis?","What is customary when entering a home?","Soms schoenen uitdoen, maar niet altijd verplicht","Altijd op de grond gaan zitten","Met een trompet spelen","Je pet afnemen en knielen","option1"
-"Mag je iemand zomaar duwen in een rij?","Can you just push someone in a queue?","Nee, dat is onbeleefd","Ja, altijd","Alleen als je haast hebt","Alleen als de ander het goed vindt","option1"
-"Wat betekent direct zijn in communicatie?","What does being direct in communication mean?","Je zegt eerlijk wat je denkt, zonder veel omwegen","Je zegt niets","Je spreekt altijd met poëzie","Je zegt iets via een brief","option1"
-"Wat betekent het om tolerant te zijn?","What does it mean to be tolerant?","Anderen respecteren en accepteren ondanks verschillen","Altijd boos worden","Iedereen verplichten hetzelfde te zijn","Nooit naar anderen luisteren","option1"
-
-"Wat is Koningsdag?","What is King's Day?","De verjaardag van de koning, gevierd op 27 april","Een religieus feest","Een herdenkingsdag voor de oorlog","Een verkiezingsdag","option1"
-"Wat vieren Nederlanders met Sinterklaas?","What do the Dutch celebrate with Sinterklaas?","Een kinderfeest met cadeaus op 5 december","Het nieuwjaar","Pasen","Kerstmis","option1"
-"Wat is Kerstmis in Nederland?","What is Christmas in the Netherlands?","Een christelijk feest op 25 en 26 december","Een zomers festival","Een sportevenement","Een nationale verkiezingsdag","option1"
-"Wat wordt herdacht op 4 mei?","What is commemorated on May 4?","De doden uit de Tweede Wereldoorlog","De geboorte van de koning","De start van de lente","De oprichting van Amsterdam","option1"
-"Wat viert men op 5 mei?","What is celebrated on May 5?","Bevrijdingsdag, de vrijheid na WOII","Een nieuwe regering","De langste dag van het jaar","Een voetbalwedstrijd","option1"
-"Wat is Pasen?","What is Easter?","Een christelijk feest in het voorjaar","Een feest van nationale verkiezingen","Een dag voor autoverkoop","Een zomerfestival","option1"
-"Wat is Pinksteren?","What is Pentecost?","Een christelijk feest, 50 dagen na Pasen","Een sportwedstrijd","De start van de herfst","De verjaardag van de premier","option1"
-"Wat is Carnaval?","What is Carnival?","Een uitbundig feest in het zuiden van Nederland voor de vastentijd","Een herdenkingsdag voor de oorlog","Een politieke vergadering","Een toets op school","option1"
-"Wat is Oud en Nieuw?","What is New Year's Eve and New Year’s Day?","De overgang van 31 december naar 1 januari","Een dag in de zomer","Een religieuze vastendag","Een willekeurige vakantie","option1"
-"Wat is Koningshuisconcert?","What is the Royal House Concert?","Een evenement georganiseerd door het koninklijk huis","Een verplicht schoolconcert","Een traditioneel examen","Een politieke bijeenkomst","option1"
-
-"Hoeveel religies zijn er in Nederland?","How many religions are there in the Netherlands?","Meerdere, er is religieuze diversiteit","Geen enkele","Alleen het christendom","Alleen de islam","option1"
-"Hebben mensen vrijheid van godsdienst?","Do people have freedom of religion?","Ja, iedereen mag geloven wat hij wil","Nee, alleen christenen","Nee, alleen moslims","Nee, religie is verboden","option1"
-"Wat betekent secularisatie?","What does secularization mean?","Minder invloed van religie in de samenleving","Meer religie in het openbaar","Alleen christelijke feestdagen","Verbod op alle religies","option1"
-"Worden andere religies getolereerd?","Are other religions tolerated?","Ja, tolerantie is belangrijk","Nee, nooit","Alleen als de regering het zegt","Alleen op zondag","option1"
-"Is er scheiding tussen kerk en staat?","Is there separation of church and state?","Ja, de overheid is neutraal in religieuze zaken","Nee, de kerk beslist alles","Nee, de staat bepaalt religie","Ja, maar alleen voor christenen","option1"
-"Mogen scholen religieus onderwijs geven?","May schools provide religious education?","Ja, maar er zijn ook openbare scholen zonder religie","Nee, nooit","Alleen islamitische scholen","Alleen als de gemeente dat wil","option1"
-"Waar staan moskeeën, kerken en tempels voor?","What do mosques, churches, and temples represent?","Plaatsen van gebed en samenkomst voor gelovigen","Winkels voor religieuze producten","Alleen musea","Discotheken","option1"
-"Mag je van religie veranderen?","Can you change your religion?","Ja, je bent vrij in je keuze","Nee, nooit","Alleen met toestemming van de overheid","Alleen als je 50 jaar bent","option1"
-"Wat is een humanist?","What is a humanist?","Iemand die het belang van de mens centraal stelt, vaak zonder religie","Iemand die in alle goden tegelijk gelooft","Een ambtenaar bij de gemeente","Een dokter","option1"
-"Welk deel van de bevolking is niet religieus?","Which part of the population is not religious?","Een aanzienlijk deel is niet gelovig (ongelovig of atheïst)","Niemand","Iedereen is religieus","Alleen kinderen niet","option1"
-
-"Wat is de OV-chipkaart?","What is the OV-chipkaart?","Een kaart om te reizen met openbaar vervoer","Een betaalpas voor boodschappen","Een lidmaatschap van een sportclub","Een identiteitskaart","option1"
-"Wat is de NS?","What is NS?","De Nederlandse Spoorwegen, het treinbedrijf","Een sportvereniging","Een politieke partij","Een supermarktketen","option1"
-"Heb je een rijbewijs nodig om auto te rijden?","Do you need a driving license to drive a car?","Ja, absoluut","Nee, nooit","Alleen als je ouder dan 50 bent","Alleen als het regent","option1"
-"Waarom fietsen mensen veel in Nederland?","Why do people cycle a lot in the Netherlands?","Omdat het vlak is en er goede fietspaden zijn","Omdat auto's verboden zijn","Omdat niemand mag lopen","Omdat fietsen gratis wordt weggegeven","option1"
-"Zijn er speciale fietspaden?","Are there special bike lanes?","Ja, bijna overal","Nee, nooit","Alleen in de winter","Alleen in het buitenland","option1"
-"Wat is een NS Business Card?","What is an NS Business Card?","Een vervoerskaart voor zakelijke reizigers","Een pas voor dokter","Een bankpas","Een bibliotheekkaart","option1"
-"Kun je met de bus reizen binnen één OV-chipkaart systeem?","Can you travel by bus within one OV-chipkaart system?","Ja, de OV-chipkaart werkt bij trein, bus, tram, metro","Nee, alleen voor treinen","Alleen voor internationale reizen","Alleen voor taxi's","option1"
-"Wat is carpoolen?","What is carpooling?","Samen rijden met anderen om brandstof en kosten te besparen","Alleen rijden","Op een boot reizen","Met een helikopter reizen","option1"
-"Moet je fietsverlichting hebben in het donker?","Do you need bicycle lights in the dark?","Ja, dat is verplicht","Nee, nooit","Alleen als je wil","Alleen in de zomer","option1"
-"Wat is een boete?","What is a fine?","Een strafbedrag dat je moet betalen bij overtreding van de regels","Een beloning voor goed gedrag","Een soort lening","Een toeslag voor boodschappen","option1"
-
-"Wat is een milieuzone?","What is an environmental zone?","Een gebied met regels voor auto's om luchtvervuiling te verminderen","Een winkelzone","Een sportgebied","Een militaire basis","option1"
-"Waarom scheiden mensen afval?","Why do people separate waste?","Om recycling mogelijk te maken","Om het duurder te maken","Om minder voedsel te hebben","Om water te besparen","option1"
-"Wat is duurzaam leven?","What is sustainable living?","Leven met aandacht voor milieu en toekomst","Leven met zoveel mogelijk afval","Nooit energie besparen","Altijd in een auto wonen","option1"
-"Welke energiebronnen zijn duurzaam?","Which energy sources are sustainable?","Zon, wind en water","Kolen en olie","Uranium","Geen enkele","option1"
-"Wat is een kringloopwinkel?","What is a thrift store?","Een winkel waar tweedehands spullen worden verkocht","Een dure juwelier","Een sportclub","Een apotheek","option1"
-"Wat is het doel van energiebesparing?","What is the goal of saving energy?","Minder verbruik en minder impact op het milieu","Meer vervuiling","Meer geld uitgeven","Meer verspilling","option1"
-"Wat zijn zonnepanelen?","What are solar panels?","Panelen die zonne-energie omzetten in elektriciteit","Gordijnen voor ramen","Schilderijen in een museum","Voedselresten","option1"
-"Mag je overal afval op straat gooien?","Can you throw litter on the street anywhere?","Nee, dat is strafbaar","Ja, overal","Alleen in parken","Alleen bij musea","option1"
-"Wat is een windmolenpark?","What is a wind farm?","Een groep windturbines die stroom opwekken","Een pretpark","Een sportveld","Een plek om fietsen te stallen","option1"
-"Wat is een elektrische auto?","What is an electric car?","Een auto die op elektriciteit rijdt in plaats van benzine","Een auto op kolen","Een auto zonder wielen","Een auto die niet rijdt","option1"
-
-"Wat is de NPO?","What is the NPO?","Nederlandse Publieke Omroep","Een politieke partij","Een sportorganisatie","Een bank","option1"
-"Wat is de rol van de publieke omroep?","What is the role of public broadcasting?","Onpartijdige informatie en educatie bieden","Alleen reclame maken","Alleen muziek laten horen","Alleen sportuitzendingen","option1"
-"Wat is persvrijheid?","What is freedom of the press?","Journalisten mogen vrij berichten zonder censuur","De regering bepaalt alle nieuwsberichten","Alleen buitenlandse media zijn toegestaan","Er mogen geen kranten worden uitgegeven","option1"
-"Waar vind je officiële overheidsinformatie?","Where can you find official government information?","Op Rijksoverheid.nl","Alleen in de krant","Alleen bij de supermarkt","Nergens beschikbaar","option1"
-"Wat is de functie van een krant?","What is the function of a newspaper?","Nieuws en informatie bieden","Alleen reclames plaatsen","Alleen grappige verhalen vertellen","Alleen roddels verspreiden","option1"
-"Mag je als consument je recht halen bij oneerlijke praktijken?","Can you as a consumer seek your rights against unfair practices?","Ja, bij de Consumentenbond of ACM","Nee, nooit","Alleen als je een winkel bezit","Alleen in het buitenland","option1"
-"Wat is een abonnement?","What is a subscription?","Een contract voor regelmatige levering van diensten of producten","Een boete van de overheid","Een eenmalige aankoop","Een type belasting","option1"
-"Wat is internetbankieren?","What is internet banking?","Online je bankzaken regelen","Alleen geld opnemen bij een pinautomaat","Een krant lezen op internet","Een sport beoefenen","option1"
-"Wat is reclame?","What is advertising?","Informatie om producten of diensten te verkopen","Een politiek manifest","Een krantenartikel","Een wet","option1"
-"Wat doet de Consumentenbond?","What does the Consumers' Association do?","Behartigt de belangen van consumenten en test producten","Verkoopt huizen","Beheert treinstations","Verzorgt de gezondheidszorg","option1"
-
-"Wat is de Belastingdienst?","What is the Tax and Customs Administration?","De overheidsdienst die belastingen int","Een sportvereniging","Een winkelketen","Een politieke partij","option1"
-"Wat is btw?","What is VAT?","Een belasting op goederen en diensten","Een type rijbewijs","Een computersysteem","Een internationale organisatie","option1"
-"Wanneer doe je aangifte inkomstenbelasting?","When do you file income tax returns?","Jaarlijks, rond het voorjaar","Nooit","Elke dag","Alleen bij verhuizing","option1"
-"Wat is zorgtoeslag?","What is healthcare allowance?","Een bijdrage in de zorgkosten","Een bijdrage voor een auto","Een korting op boodschappen","Een lening voor studie","option1"
-"Wat is huurtoeslag?","What is housing allowance?","Een bijdrage in de huurkosten","Een verzekering voor je huis","Een belasting op meubels","Een boete voor te hoge huur","option1"
-"Moet iedereen inkomstenbelasting betalen?","Does everyone have to pay income tax?","Ja, als je een inkomen hebt","Nee, nooit","Alleen gepensioneerden","Alleen kinderen","option1"
-"Wat is een aanslagbiljet?","What is a tax assessment notice?","Een brief met de berekening van de belasting","Een parkeerbon","Een lidmaatschapskaart","Een visum","option1"
-"Wat is belastingteruggave?","What is a tax refund?","Geld dat je terugkrijgt als je teveel belasting betaald hebt","Een boete omdat je niet betaald hebt","Een lening bij de bank","Een gift van de koning","option1"
-"Hoe heet de digitale omgeving van de Belastingdienst?","What is the digital environment of the tax office called?","Mijn Belastingdienst","Mijn Politie","Mijn Supermarkt","Mijn Bioscoop","option1"
-"Waarom heft de overheid belasting?","Why does the government levy taxes?","Om publieke voorzieningen te betalen","Om geld weg te gooien","Om burgers te straffen","Om televisieprogramma’s te maken","option1"
-
-"Wat is multiculturalisme?","What is multiculturalism?","Samenleven van verschillende culturen","Alleen één cultuur toestaan","Alleen dezelfde religie","Alleen één taal","option1"
-"Wat is gelijkheid tussen mannen en vrouwen?","What is equality between men and women?","Dezelfde rechten en kansen voor mannen en vrouwen","Mannen hebben altijd meer rechten","Vrouwen hebben altijd meer rechten","Geen rechten voor vrouwen","option1"
-"Zijn LHBTI+-rechten beschermd in Nederland?","Are LGBTQ+ rights protected in the Netherlands?","Ja, ze zijn wettelijk beschermd","Nee, nooit","Alleen op papier","Alleen voor mannen","option1"
-"Wat is een voorbeeld van discriminatie?","What is an example of discrimination?","Iemand achterstellen vanwege huidskleur","Iemand feliciteren met zijn verjaardag","Iemand helpen met huiswerk","Iemand bedanken","option1"
-"Waarom is tolerantie belangrijk?","Why is tolerance important?","Om in vrede en respect samen te leven","Om ruzie te maken","Om anderen te beperken","Om te voorkomen dat mensen praten","option1"
-"Wat is integratie?","What is integration?","Meedoen in de samenleving en de cultuur leren kennen","Afgezonderd leven","Alleen Nederlands praten en verder niets","Alleen met eigen groep omgaan","option1"
-"Wat is emancipatie?","What is emancipation?","Het streven naar gelijke rechten voor iedereen","Het afschaffen van rechten","Het ontkennen van diversiteit","Het beperken van vrijheid","option1"
-"Wanneer is het homohuwelijk gelegaliseerd in Nederland?","When was same-sex marriage legalized in the Netherlands?","In 2001","Nooit","In 1900","In 2010","option1"
-"Wat is een migrant?","What is a migrant?","Iemand die naar een ander land verhuist","Iemand die in een dorp woont","Iemand die in een stad werkt","Iemand die alleen reist","option1"
-"Wat bevordert sociale cohesie?","What promotes social cohesion?","Goede onderlinge relaties, respect en samenwerking","Mensen negeren","Discriminatie","Geweld tegen anderen","option1"
-
-"Moet je je inschrijven bij de gemeente als je verhuist binnen Nederland?","Do you have to register with the municipality if you move within the Netherlands?","Ja, bij de gemeente waar je gaat wonen","Nee, nooit","Alleen als je naar het buitenland gaat","Alleen als je huis koopt","option1"
-"Wat is DigiD?","What is DigiD?","Een digitale identiteit om in te loggen op overheidswebsites","Een bankpas","Een rijbewijs","Een OV-kaart","option1"
-"Hoe haal je een rijbewijs?","How do you get a driver's license?","Door theorie- en praktijkexamen bij het CBR te doen","Door een auto te kopen","Door een fiets te rijden","Door een cursus koken te volgen","option1"
-"Wat is een VOG (Verklaring Omtrent het Gedrag)?","What is a Certificate of Good Conduct (VOG)?","Een verklaring dat je geen strafbare feiten hebt gepleegd die relevant zijn voor een functie","Een schooldiploma","Een garantie voor inkomens","Een medische keuring","option1"
-"Moet je afval scheiden?","Must you separate waste?","Ja, dat wordt gestimuleerd door de gemeente","Nee, nooit","Alleen in de zomer","Alleen als je wil","option1"
-"Wat is een BSN (Burgerservicenummer)?","What is a BSN (Citizen Service Number)?","Een uniek persoonsnummer voor contact met de overheid","Een type verzekering","Een winkelkaart","Een betaalpas","option1"
-"Waarom is het handig een Nederlandse bankrekening te hebben?","Why is it useful to have a Dutch bank account?","Om salarissen, toeslagen en rekeningen gemakkelijk te betalen","Om gratis huizen te krijgen","Om geen belasting te betalen","Om overal te parkeren","option1"
-"Wat is een officiële brief van de overheid?","What is an official letter from the government?","Een brief met officiële informatie of beslissingen","Een reclamefolder","Een liefdesbrief","Een handgeschreven kaart","option1"
-"Kan iedereen naar de rechtbank als hij een juridisch probleem heeft?","Can everyone go to court if they have a legal problem?","Ja, toegang tot de rechter is een recht","Nee, alleen rijken","Alleen buitenlanders","Alleen als je politie bent","option1"
-"Waar kun je informatie krijgen over inburgeringscursussen?","Where can you get information about integration courses?","Bij DUO of op Inburgeren.nl","Bij een sportclub","Bij de politie","Bij de supermarkt","option1"
+question(dutch)|question(english translation)|option1|option2|option3|option4|answer
+Waar ligt Nederland in Europa?|Where is the Netherlands located in Europe?|In Noordwest-Europa|In Zuid-Europa|In Oost-Europa|In Noord-Europa|option1
+Met welke landen grenst Nederland?|Which countries border the Netherlands?|België en Duitsland|Frankrijk en Spanje|Denemarken en Zweden|Italië en Oostenrijk|option1
+Hoeveel provincies heeft Nederland?|How many provinces does the Netherlands have?|12|10|8|14|option1
+Welke zee ligt ten westen en noorden van Nederland?|Which sea lies to the west and north of the Netherlands?|De Noordzee|De Oostzee|De Middellandse Zee|De Zwarte Zee|option1
+Wat is de hoofdstad van Nederland?|What is the capital of the Netherlands?|Amsterdam|Rotterdam|Den Haag|Utrecht|option1
+In welk klimaat ligt Nederland?|In what climate is the Netherlands located?|Gematigd zeeklimaat|Tropisch klimaat|Woestijnklimaat|Poolklimaat|option1
+Wat is een polder?|What is a polder?|Drooggelegd land omringd door dijken|Een groot bosgebied|Een hoog berggebied|Een strandgebied|option1
+Wat is de functie van dijken in Nederland?|What is the function of dikes in the Netherlands?|Ze beschermen tegen overstromingen|Ze zijn alleen voor transport|Ze zijn voor olieopslag|Ze zijn voor drinkwatervoorziening|option1
+Welk land ligt ten oosten van Nederland?|Which country lies to the east of the Netherlands?|Duitsland|België|Frankrijk|Luxemburg|option1
+Welke grote rivier stroomt door Nederland?|Which major river flows through the Netherlands?|De Rijn|De Donau|De Thames|De Seine|option1
+Welke staatsvorm heeft Nederland?|What form of government does the Netherlands have?|Constitutionele monarchie|Republiek|Dictatuur|Militaire staat|option1
+Wat is de Tweede Kamer?|What is the Second Chamber?|Het direct gekozen deel van het parlement|De Raad van State|Het Europees Parlement|Het Koninklijk Huis|option1
+Hoe vaak zijn er verkiezingen voor de Tweede Kamer?|How often are there elections for the Second Chamber?|Eens per vier jaar|Eens per jaar|Eens per twee jaar|Eens per vijf jaar|option1
+Wie mogen stemmen bij de Tweede Kamerverkiezingen?|Who can vote in the Second Chamber elections?|Nederlandse burgers van 18 jaar en ouder|Alle inwoners ongeacht nationaliteit|Kinderen vanaf 12 jaar|Alleen mannen boven 18|option1
+Wat is de taak van de regering?|What is the task of the government?|Het land besturen en wetten uitvoeren|Alleen belastingen innen|Alleen ceremonies uitvoeren|Geen enkele taak|option1
+Wat is de Staten-Generaal?|What are the States General?|Het Nederlandse parlement|De lokale politie|De Europese Commissie|De Hoge Raad|option1
+Hoe heet de Eerste Kamer ook wel?|What is the First Chamber also called?|De Senaat|De Volksraad|Het Lagerhuis|De Bondsraad|option1
+Door wie wordt de Eerste Kamer gekozen?|By whom is the First Chamber elected?|Door de Provinciale Staten|Door de burgers rechtstreeks|Door de koning|Door de Europese Raad|option1
+Wat gebeurt er in een democratie?|What happens in a democracy?|Burgers kiezen hun vertegenwoordigers|Een persoon heeft alle macht|Er zijn geen verkiezingen|Alle macht ligt bij de koning|option1
+Wie vormt samen met de koning de regering?|Who forms the government together with the King?|De ministers|De rechters|De burgemeesters|De Staten-Generaal|option1
+Wie is het staatshoofd van Nederland?|Who is the head of state of the Netherlands?|De koning|De premier|De voorzitter van de Tweede Kamer|De burgemeester van Amsterdam|option1
+Wat is de rol van de koning in Nederland?|What is the king's role in the Netherlands?|Ceremonieel en symbolisch|Absolute macht uitoefenen|Ministers benoemen zonder advies|Leden van de Tweede Kamer kiezen|option1
+Hoe wordt de troonopvolging in Nederland bepaald?|How is succession to the throne determined in the Netherlands?|Volgens erfopvolging binnen het koninklijk huis|Door verkiezingen|Door loting|Door de Eerste Kamer|option1
+Wat is Koningsdag?|What is King's Day?|De verjaardag van de koning|De nationale verkiezingsdag|De dag van de boeren|De dag van de politie|option1
+Waar woont de koning meestal?|Where does the King usually live?|In een paleis in Den Haag|In de Tweede Kamer|In het stadhuis van Amsterdam|In een gewoon woonhuis|option1
+Wat gebeurt er tijdens Prinsjesdag?|What happens on Prinsjesdag?|De koning leest de troonrede voor|Er zijn nationale sportwedstrijden|Burgers kiezen de premier|Er worden nieuwe koningen gekozen|option1
+Wie schrijft de Troonrede?|Who writes the Speech from the Throne?|De ministers (regering)|De koning alleen|De Eerste Kamerleden|De burgemeester van Den Haag|option1
+Wat is de Gouden Koets?|What is the Golden Carriage?|Het voertuig waarin de koning op Prinsjesdag rijdt|Een bus voor de Tweede Kamerleden|Een veerpont in Rotterdam|Een trein van de NS|option1
+Welke familie vormt het koninklijk huis?|Which family forms the royal house?|De familie van Oranje-Nassau|De familie De Wit|De familie Rembrandt|De familie van Beethoven|option1
+Welke invloed heeft de koning op politieke beslissingen?|What influence does the King have on political decisions?|Hij heeft vooral een symbolische rol, weinig politieke macht|Hij bepaalt alle wetten|Hij mag veto uitspreken over alle wetten|Hij kiest persoonlijk de premier|option1
+Wat zijn Provinciale Staten?|What are the Provincial States?|Het parlement op provinciaal niveau|De rechterlijke macht|Een adviesraad van de koning|Een Europese instelling|option1
+Wie is de hoogste baas in de gemeente?|Who is the highest authority in the municipality?|De burgemeester|De premier|De koning|De commissaris van de Koning|option1
+Wat is een gemeente?|What is a municipality?|Een lokale bestuurslaag|Een religieuze instelling|Een bedrijf|Een provincie|option1
+Wie kiezen de leden van de gemeenteraad?|Who elects the members of the municipal council?|De inwoners van de gemeente|De koning|De Eerste Kamer|De Europese Commissie|option1
+Hoe heet het hoofd van een provincie?|What is the head of a province called?|De commissaris van de Koning|De burgemeester|De minister-president|De stadsregent|option1
+Wat doet de gemeenteraad?|What does the municipal council do?|Beslist over lokale zaken|Beheert de landsgrenzen|Beheert de munt|Is verantwoordelijk voor de rechtspraak|option1
+Waarvoor kun je bij het gemeentehuis terecht?|What can you do at the town hall?|Paspoorten aanvragen, huwelijken sluiten|Boodschappen doen|Medische behandeling krijgen|Je rijbewijs halen zonder examen|option1
+Hoe heet de vergadering waar de gemeente besluit over lokale plannen?|What is the meeting called where the municipality decides on local plans?|Raadsvergadering|Ministerraad|Troonrede|Europa-raad|option1
+Wat is de rol van de commissaris van de Koning?|What is the role of the King's commissioner?|Hij vertegenwoordigt de regering in de provincie|Hij is de nationale premier|Hij is burgemeester van alle steden|Hij beslist over alle gemeentelijke zaken|option1
+Kun je als EU-burger stemmen bij gemeenteraadsverkiezingen in Nederland?|Can you as an EU citizen vote in municipal elections in the Netherlands?|Ja, als je in de gemeente woont|Nee, nooit|Alleen als je 10 jaar in Nederland woont|Alleen bij nationale verkiezingen|option1
+Wat betekent een rechtsstaat?|What does a rule of law mean?|Iedereen moet zich aan de wet houden, ook de overheid|Alleen de overheid maakt de regels maar volgt ze niet|Er zijn geen vaste wetten|De koning bepaalt alleen de wetten|option1
+Wat doet een rechter?|What does a judge do?|Beslist onafhankelijk in rechtszaken|Schrijft alle wetten|Bepaalt de prijs van producten|Controleert stemlokalen|option1
+Wat is de Hoge Raad?|What is the Hoge Raad (Supreme Court)?|De hoogste rechterlijke instantie|Het gemeentebestuur|Een politieke partij|Een internationale organisatie|option1
+Waarom is discriminatie verboden?|Why is discrimination forbidden?|Iedereen is gelijk voor de wet|Het helpt bij meer winst voor bedrijven|Het is alleen verboden in sommige landen|Discriminatie is economisch voordelig|option1
+Wat is vrijheid van meningsuiting?|What is freedom of expression?|Je mag je eigen mening geven, zonder te discrimineren of oproepen tot geweld|Je mag altijd schelden en beledigen|Je mag alleen thuis je mening geven|Je mag alleen de mening van de overheid herhalen|option1
+Welke instantie maakt wetten in Nederland?|Which body makes laws in the Netherlands?|Het parlement (Staten-Generaal)|De rechter|De politie|De burgemeester|option1
+Wat is een grondrecht?|What is a fundamental right?|Een basisrecht dat in de grondwet staat|Een recht dat door de koning wordt gegeven|Een internationaal recht|Een recht dat in een lokale verordening staat|option1
+Kun je naar de rechter als je het niet eens bent met een besluit van de overheid?|Can you go to court if you disagree with a government decision?|Ja, in een rechtsstaat wel|Nee, nooit|Alleen met toestemming van de politie|Alleen als de koning het goedkeurt|option1
+Wat doet de politie?|What does the police do?|Handhaaft de wet en zorgt voor veiligheid|Maakt nieuwe wetten|Beheert het openbaar vervoer|Beslist over onderwijsprogramma’s|option1
+Wat is het doel van de wetgeving tegen discriminatie?|What is the purpose of anti-discrimination legislation?|Gelijke behandeling van iedereen|Beperken van vrijheid van meningsuiting|Alleen mannen beschermen|Alleen vrouwen beschermen|option1
+Wat is het doel van inburgering?|What is the purpose of integration (inburgering)?|Meedoen in de Nederlandse samenleving|Alleen Nederlands leren en verder niets|Alleen werk vinden|Migranten weren uit het land|option1
+Wat is het KNM-examen?|What is the KNM exam?|Een examen over kennis van de Nederlandse samenleving|Een rijexamen|Een medisch examen|Een sporttest|option1
+Wie moeten vaak inburgeren?|Who often has to integrate?|Nieuwkomers van buiten de EU|Iedereen met de Nederlandse nationaliteit|Alleen mensen die hier geboren zijn|Niemand|option1
+Waar vraag je inburgeringscursussen aan?|Where do you apply for integration courses?|Bij DUO of erkende taal- en inburgeringsscholen|Bij de supermarkt|Bij de politie|Bij een sportclub|option1
+Wat test het inburgeringsexamen?|What does the integration exam test?|Taal, kennis van maatschappij en oriëntatie op de arbeidsmarkt|Alleen wiskunde|Alleen geschiedenis|Alleen rijvaardigheid|option1
+Wat is DUO?|What is DUO?|Dienst Uitvoering Onderwijs, regelt studiefinanciering en inburgeringsexamens|Een sportorganisatie|Een politieke partij|Een woningcorporatie|option1
+Wat is de IND?|What is the IND?|Immigratie- en Naturalisatiedienst|Een bank|Een telecombedrijf|Een supermarktketen|option1
+Wat betekent naturalisatie?|What does naturalization mean?|De Nederlandse nationaliteit krijgen|Verhuizen naar een andere stad|Geld lenen bij de bank|Een rijbewijs behalen|option1
+Waarom is kennis van de Nederlandse taal belangrijk?|Why is knowledge of the Dutch language important?|Om te kunnen communiceren en meedoen in de samenleving|Om alleen films te begrijpen|Om minder belasting te betalen|Om geen werk te hoeven zoeken|option1
+Wat gebeurt er als je niet slaagt voor het inburgeringsexamen?|What happens if you do not pass the integration exam?|Je kunt een boete krijgen of geen verblijfsvergunning|Je wordt automatisch staatsburger|Je hoeft nooit meer iets te doen|Je krijgt een cadeau|option1
+Wat is basisschool?|What is primary school?|Onderwijs voor kinderen van 4 tot 12 jaar|Onderwijs voor studenten met diploma|Alleen voor volwassenen|Een type universiteit|option1
+Wat is voortgezet onderwijs?|What is secondary education?|Onderwijs na de basisschool zoals VMBO, HAVO, VWO|Onderwijs voor kleuters|Alleen studie in de avond|Alleen privéonderwijs|option1
+Wat is MBO?|What is MBO?|Middelbaar beroepsonderwijs|Basisuniversiteit|Politieke opleiding|Militaire training|option1
+Welke opleidingen volg je aan een hogeschool (HBO)?|Which courses do you follow at a university of applied sciences (HBO)?|Praktisch en theoretisch hoger beroepsonderwijs|Alleen wetenschappelijk onderzoek|Alleen talenonderwijs|Alleen sportopleidingen|option1
+Wat is WO?|What is WO?|Wetenschappelijk onderwijs (universiteit)|Winkelopleiding|Wereldonderwijs|Wiskundeonderwijs|option1
+Is leerplicht verplicht in Nederland?|Is compulsory education mandatory in the Netherlands?|Ja, kinderen vanaf 5 jaar moeten naar school|Nee, niemand hoeft naar school|Alleen jongens moeten naar school|Alleen vanaf 18 jaar|option1
+Wie bepaalt het niveau van voortgezet onderwijs voor een kind?|Who determines the level of secondary education for a child?|De basisschooladvies en Cito-toets|De koning|De burgemeester|De politie|option1
+Hoe betaal je voor hoger onderwijs?|How do you pay for higher education?|Met collegegeld, studiefinanciering is mogelijk via DUO|Helemaal gratis|Alleen met een lening bij een bank|Je wordt altijd betaald om te studeren|option1
+Wat doet een consultatiebureau?|What does a well-baby clinic do?|Controleert de gezondheid van jonge kinderen|Verkoopt kleding|Organiseert sportwedstrijden|Geeft belastingadvies|option1
+Krijg je hulp bij het leren van Nederlands op school als je het nog niet goed spreekt?|Do you get help at school if you do not speak Dutch well yet?|Ja, extra taalondersteuning|Nee, nooit|Alleen als je 18 bent|Alleen als je betaalt|option1
+Wat is een arbeidscontract?|What is an employment contract?|Een schriftelijke afspraak tussen werknemer en werkgever|Een auto die je huurt|Een huis dat je koopt|Een verzekering tegen onweer|option1
+Wat is het minimumloon?|What is the minimum wage?|Het laagste toegestane salaris|Het hoogste salaris|Een soort belasting|Een studiebeurs|option1
+Wie helpt je bij het zoeken naar werk als je werkloos bent?|Who helps you find work if you are unemployed?|Het UWV|De politie|De supermarkt|De GGD|option1
+Wat is een CAO (Collectieve Arbeidsovereenkomst)?|What is a CAO?|Afspraken over arbeidsvoorwaarden tussen vakbonden en werkgevers|Een winkelovereenkomst|Een examen|Een medisch protocol|option1
+Moet je belasting betalen over je loon?|Do you have to pay tax on your wages?|Ja, loonbelasting|Nee, nooit|Alleen als je meer dan 65 bent|Alleen als je wil|option1
+Wat is een proeftijd?|What is a probationary period?|Een periode aan het begin van een baan om te beoordelen of het past|Een periode waarin je niet hoeft te werken|Een periode voor vakantie|Een periode waarin je geen salaris krijgt|option1
+Mag je zomaar ontslagen worden?|Can you be fired just like that?|Nee, er zijn regels en bescherming voor werknemers|Ja, zonder reden|Ja, maar alleen als het mooi weer is|Alleen als je collega het wil|option1
+Wat is een uitzendbureau?|What is a temp agency?|Een bureau dat tijdelijke banen bemiddelt|Een bank voor leningen|Een fabriek|Een overheidsinstantie|option1
+Welk document heb je nodig om in Nederland te werken?|Which document do you need to work in the Netherlands?|Een geldig verblijfsdocument en eventueel een werkvergunning|Geen enkel document|Een zwemdiploma|Een gemeentelijke vergunning|option1
+Wat betekent deeltijd werken?|What does part-time working mean?|Minder dan voltijduren werken|Altijd 40 uur werken|Nooit werken|Alleen in het weekend werken|option1
+Wat is de WW-uitkering?|What is unemployment benefit (WW)?|Een uitkering als je onvrijwillig werkloos bent|Een verzekering voor je auto|Een studiefinanciering|Een toeslag voor huur|option1
+Wat is de bijstand?|What is social assistance?|Een uitkering voor mensen zonder inkomsten|Een medische verzekering|Een reisdocument|Een rijbewijs|option1
+Wat is de WIA?|What is the WIA?|Een uitkering bij arbeidsongeschiktheid|Een type rijexamen|Een belastingvorm|Een huurtoeslag|option1
+Wat is kinderbijslag?|What is child benefit?|Een financiële bijdrage voor ouders met kinderen|Een boete als je kinderen hebt|Een toeslag voor huisdieren|Een vakantietoeslag|option1
+Wie voert sociale verzekeringen uit?|Who implements social insurances?|Het UWV|De politie|De brandweer|De bibliotheek|option1
+Wat is AOW?|What is AOW?|Algemene Ouderdomswet, pensioenuitkering|Een sportwedstrijd|Een universiteit|Een autoverzekering|option1
+Wat is de zorgtoeslag?|What is the healthcare allowance?|Een toeslag om de zorgpremie betaalbaarder te maken|Een toeslag voor huur|Een toeslag voor auto|Een studietoeslag|option1
+Wanneer heb je recht op bijstand?|When are you entitled to social assistance?|Als je geen of te weinig inkomen en vermogen hebt|Altijd, ongeacht inkomen|Nooit|Alleen als je een auto bezit|option1
+Wat is Wajong?|What is Wajong?|Een uitkering voor jonggehandicapten|Een rijexamen|Een woningmarkt|Een studiebeurs|option1
+Wie betalen de sociale zekerheid?|Who pays for social security?|Werknemers en werkgevers via premies|Alleen de koning|Alleen de burgemeester|Niemand betaalt|option1
+Wat is een sociale huurwoning?|What is a social rental home?|Een woning met lagere huur voor mensen met lager inkomen|Een heel duur huis|Een koopwoning|Een studentenhuis|option1
+Wie beheren vaak sociale huurwoningen?|Who often manage social rental homes?|Woningcorporaties|Supermarkten|Ziekenhuizen|Politiebureaus|option1
+Wat is huurtoeslag?|What is housing allowance?|Een bijdrage om de huur betaalbaar te houden|Een belasting op je huis|Een premie voor de brandweer|Een toeslag om boodschappen te doen|option1
+Heb je een huurcontract nodig?|Do you need a rental contract?|Ja, om rechten en plichten vast te leggen|Nee, nooit|Alleen als de buren het willen|Alleen voor koopwoningen|option1
+Moet je je inschrijven bij de gemeente als je verhuist?|Must you register at the municipality when you move?|Ja, binnen 5 dagen|Nee, nooit|Alleen als je naar het buitenland verhuist|Alleen als je binnen dezelfde straat verhuist|option1
+Wat is een energielabel bij een woning?|What is an energy label for a house?|Een label met info over energiezuinigheid|Een vergunning om te verbouwen|Een belastingdocument|Een bewijs van eigendom|option1
+Kan de huur elk jaar stijgen?|Can the rent increase every year?|Ja, vaak met een vast percentage|Nee, nooit|Alleen als je het zelf wil|Alleen als de politie het toestaat|option1
+Wat is een makelaar?|What is a real estate agent?|Iemand die helpt bij de aan- en verkoop of huur van huizen|Iemand die eten verkoopt|Iemand die medische hulp biedt|Iemand die treinkaartjes verkoopt|option1
+Wat is een hypotheek?|What is a mortgage?|Een lening om een huis te kopen|Een huurcontract|Een verzekering tegen brand|Een type belasting|option1
+Waar kun je informatie krijgen over woningtoewijzing?|Where can you get information about housing allocation?|Bij de woningcorporatie of gemeente|Bij de bakker|Bij de politie|Bij de bibliotheek|option1
+Hoe groet je meestal mensen in Nederland?|How do you usually greet people in the Netherlands?|Met een handdruk en hallo|Door te buigen|Door te klappen|Door te zingen|option1
+Wat betekent ‘afspraak is afspraak’?|What does ‘afspraak is afspraak’ mean?|Als je iets afspreekt, moet je het nakomen|Je mag afspraken altijd veranderen|Afspraken zijn niet belangrijk|Je hoeft geen afspraken te maken|option1
+Hoe worden verjaardagen vaak gevierd?|How are birthdays often celebrated?|Met koffie, gebak en visite thuis|Door op straat te dansen|Door een huis te verven|Door naar het gemeentehuis te gaan|option1
+Is op tijd komen belangrijk in Nederland?|Is being on time important in the Netherlands?|Ja, het wordt als beleefd gezien|Nee, je mag altijd te laat komen|Alleen voor officiële ceremonies|Alleen bij de koning|option1
+Mag je overal roken in Nederland?|Can you smoke everywhere in the Netherlands?|Nee, er zijn veel rookvrije ruimtes|Ja, overal|Alleen in kerken|Alleen in ziekenhuizen|option1
+Wat doen Nederlanders vaak op zaterdag?|What do Dutch people often do on Saturdays?|Boodschappen doen op de markt|Werken op het gemeentehuis|Naar school gaan|Stemmen voor de regering|option1
+Wat is gebruikelijk bij het binnenkomen van een huis?|What is customary when entering a home?|Soms schoenen uitdoen, maar niet altijd verplicht|Altijd op de grond gaan zitten|Met een trompet spelen|Je pet afnemen en knielen|option1
+Mag je iemand zomaar duwen in een rij?|Can you just push someone in a queue?|Nee, dat is onbeleefd|Ja, altijd|Alleen als je haast hebt|Alleen als de ander het goed vindt|option1
+Wat betekent direct zijn in communicatie?|What does being direct in communication mean?|Je zegt eerlijk wat je denkt, zonder veel omwegen|Je zegt niets|Je spreekt altijd met poëzie|Je zegt iets via een brief|option1
+Wat betekent het om tolerant te zijn?|What does it mean to be tolerant?|Anderen respecteren en accepteren ondanks verschillen|Altijd boos worden|Iedereen verplichten hetzelfde te zijn|Nooit naar anderen luisteren|option1
+Wat is Koningsdag?|What is King's Day?|De verjaardag van de koning, gevierd op 27 april|Een religieus feest|Een herdenkingsdag voor de oorlog|Een verkiezingsdag|option1
+Wat vieren Nederlanders met Sinterklaas?|What do the Dutch celebrate with Sinterklaas?|Een kinderfeest met cadeaus op 5 december|Het nieuwjaar|Pasen|Kerstmis|option1
+Wat is Kerstmis in Nederland?|What is Christmas in the Netherlands?|Een christelijk feest op 25 en 26 december|Een zomers festival|Een sportevenement|Een nationale verkiezingsdag|option1
+Wat wordt herdacht op 4 mei?|What is commemorated on May 4?|De doden uit de Tweede Wereldoorlog|De geboorte van de koning|De start van de lente|De oprichting van Amsterdam|option1
+Wat viert men op 5 mei?|What is celebrated on May 5?|Bevrijdingsdag, de vrijheid na WOII|Een nieuwe regering|De langste dag van het jaar|Een voetbalwedstrijd|option1
+Wat is Pasen?|What is Easter?|Een christelijk feest in het voorjaar|Een feest van nationale verkiezingen|Een dag voor autoverkoop|Een zomerfestival|option1
+Wat is Pinksteren?|What is Pentecost?|Een christelijk feest, 50 dagen na Pasen|Een sportwedstrijd|De start van de herfst|De verjaardag van de premier|option1
+Wat is Carnaval?|What is Carnival?|Een uitbundig feest in het zuiden van Nederland voor de vastentijd|Een herdenkingsdag voor de oorlog|Een politieke vergadering|Een toets op school|option1
+Wat is Oud en Nieuw?|What is New Year's Eve and New Year’s Day?|De overgang van 31 december naar 1 januari|Een dag in de zomer|Een religieuze vastendag|Een willekeurige vakantie|option1
+Wat is Koningshuisconcert?|What is the Royal House Concert?|Een evenement georganiseerd door het koninklijk huis|Een verplicht schoolconcert|Een traditioneel examen|Een politieke bijeenkomst|option1
+Hoeveel religies zijn er in Nederland?|How many religions are there in the Netherlands?|Meerdere, er is religieuze diversiteit|Geen enkele|Alleen het christendom|Alleen de islam|option1
+Hebben mensen vrijheid van godsdienst?|Do people have freedom of religion?|Ja, iedereen mag geloven wat hij wil|Nee, alleen christenen|Nee, alleen moslims|Nee, religie is verboden|option1
+Wat betekent secularisatie?|What does secularization mean?|Minder invloed van religie in de samenleving|Meer religie in het openbaar|Alleen christelijke feestdagen|Verbod op alle religies|option1
+Worden andere religies getolereerd?|Are other religions tolerated?|Ja, tolerantie is belangrijk|Nee, nooit|Alleen als de regering het zegt|Alleen op zondag|option1
+Is er scheiding tussen kerk en staat?|Is there separation of church and state?|Ja, de overheid is neutraal in religieuze zaken|Nee, de kerk beslist alles|Nee, de staat bepaalt religie|Ja, maar alleen voor christenen|option1
+Mogen scholen religieus onderwijs geven?|May schools provide religious education?|Ja, maar er zijn ook openbare scholen zonder religie|Nee, nooit|Alleen islamitische scholen|Alleen als de gemeente dat wil|option1
+Waar staan moskeeën, kerken en tempels voor?|What do mosques, churches, and temples represent?|Plaatsen van gebed en samenkomst voor gelovigen|Winkels voor religieuze producten|Alleen musea|Discotheken|option1
+Mag je van religie veranderen?|Can you change your religion?|Ja, je bent vrij in je keuze|Nee, nooit|Alleen met toestemming van de overheid|Alleen als je 50 jaar bent|option1
+Wat is een humanist?|What is a humanist?|Iemand die het belang van de mens centraal stelt, vaak zonder religie|Iemand die in alle goden tegelijk gelooft|Een ambtenaar bij de gemeente|Een dokter|option1
+Welk deel van de bevolking is niet religieus?|Which part of the population is not religious?|Een aanzienlijk deel is niet gelovig (ongelovig of atheïst)|Niemand|Iedereen is religieus|Alleen kinderen niet|option1
+Wat is de OV-chipkaart?|What is the OV-chipkaart?|Een kaart om te reizen met openbaar vervoer|Een betaalpas voor boodschappen|Een lidmaatschap van een sportclub|Een identiteitskaart|option1
+Wat is de NS?|What is NS?|De Nederlandse Spoorwegen, het treinbedrijf|Een sportvereniging|Een politieke partij|Een supermarktketen|option1
+Heb je een rijbewijs nodig om auto te rijden?|Do you need a driving license to drive a car?|Ja, absoluut|Nee, nooit|Alleen als je ouder dan 50 bent|Alleen als het regent|option1
+Waarom fietsen mensen veel in Nederland?|Why do people cycle a lot in the Netherlands?|Omdat het vlak is en er goede fietspaden zijn|Omdat auto's verboden zijn|Omdat niemand mag lopen|Omdat fietsen gratis wordt weggegeven|option1
+Zijn er speciale fietspaden?|Are there special bike lanes?|Ja, bijna overal|Nee, nooit|Alleen in de winter|Alleen in het buitenland|option1
+Wat is een NS Business Card?|What is an NS Business Card?|Een vervoerskaart voor zakelijke reizigers|Een pas voor dokter|Een bankpas|Een bibliotheekkaart|option1
+Kun je met de bus reizen binnen één OV-chipkaart systeem?|Can you travel by bus within one OV-chipkaart system?|Ja, de OV-chipkaart werkt bij trein, bus, tram, metro|Nee, alleen voor treinen|Alleen voor internationale reizen|Alleen voor taxi's|option1
+Wat is carpoolen?|What is carpooling?|Samen rijden met anderen om brandstof en kosten te besparen|Alleen rijden|Op een boot reizen|Met een helikopter reizen|option1
+Moet je fietsverlichting hebben in het donker?|Do you need bicycle lights in the dark?|Ja, dat is verplicht|Nee, nooit|Alleen als je wil|Alleen in de zomer|option1
+Wat is een boete?|What is a fine?|Een strafbedrag dat je moet betalen bij overtreding van de regels|Een beloning voor goed gedrag|Een soort lening|Een toeslag voor boodschappen|option1
+Wat is een milieuzone?|What is an environmental zone?|Een gebied met regels voor auto's om luchtvervuiling te verminderen|Een winkelzone|Een sportgebied|Een militaire basis|option1
+Waarom scheiden mensen afval?|Why do people separate waste?|Om recycling mogelijk te maken|Om het duurder te maken|Om minder voedsel te hebben|Om water te besparen|option1
+Wat is duurzaam leven?|What is sustainable living?|Leven met aandacht voor milieu en toekomst|Leven met zoveel mogelijk afval|Nooit energie besparen|Altijd in een auto wonen|option1
+Welke energiebronnen zijn duurzaam?|Which energy sources are sustainable?|Zon, wind en water|Kolen en olie|Uranium|Geen enkele|option1
+Wat is een kringloopwinkel?|What is a thrift store?|Een winkel waar tweedehands spullen worden verkocht|Een dure juwelier|Een sportclub|Een apotheek|option1
+Wat is het doel van energiebesparing?|What is the goal of saving energy?|Minder verbruik en minder impact op het milieu|Meer vervuiling|Meer geld uitgeven|Meer verspilling|option1
+Wat zijn zonnepanelen?|What are solar panels?|Panelen die zonne-energie omzetten in elektriciteit|Gordijnen voor ramen|Schilderijen in een museum|Voedselresten|option1
+Mag je overal afval op straat gooien?|Can you throw litter on the street anywhere?|Nee, dat is strafbaar|Ja, overal|Alleen in parken|Alleen bij musea|option1
+Wat is een windmolenpark?|What is a wind farm?|Een groep windturbines die stroom opwekken|Een pretpark|Een sportveld|Een plek om fietsen te stallen|option1
+Wat is een elektrische auto?|What is an electric car?|Een auto die op elektriciteit rijdt in plaats van benzine|Een auto op kolen|Een auto zonder wielen|Een auto die niet rijdt|option1
+Wat is de NPO?|What is the NPO?|Nederlandse Publieke Omroep|Een politieke partij|Een sportorganisatie|Een bank|option1
+Wat is de rol van de publieke omroep?|What is the role of public broadcasting?|Onpartijdige informatie en educatie bieden|Alleen reclame maken|Alleen muziek laten horen|Alleen sportuitzendingen|option1
+Wat is persvrijheid?|What is freedom of the press?|Journalisten mogen vrij berichten zonder censuur|De regering bepaalt alle nieuwsberichten|Alleen buitenlandse media zijn toegestaan|Er mogen geen kranten worden uitgegeven|option1
+Waar vind je officiële overheidsinformatie?|Where can you find official government information?|Op Rijksoverheid.nl|Alleen in de krant|Alleen bij de supermarkt|Nergens beschikbaar|option1
+Wat is de functie van een krant?|What is the function of a newspaper?|Nieuws en informatie bieden|Alleen reclames plaatsen|Alleen grappige verhalen vertellen|Alleen roddels verspreiden|option1
+Mag je als consument je recht halen bij oneerlijke praktijken?|Can you as a consumer seek your rights against unfair practices?|Ja, bij de Consumentenbond of ACM|Nee, nooit|Alleen als je een winkel bezit|Alleen in het buitenland|option1
+Wat is een abonnement?|What is a subscription?|Een contract voor regelmatige levering van diensten of producten|Een boete van de overheid|Een eenmalige aankoop|Een type belasting|option1
+Wat is internetbankieren?|What is internet banking?|Online je bankzaken regelen|Alleen geld opnemen bij een pinautomaat|Een krant lezen op internet|Een sport beoefenen|option1
+Wat is reclame?|What is advertising?|Informatie om producten of diensten te verkopen|Een politiek manifest|Een krantenartikel|Een wet|option1
+Wat doet de Consumentenbond?|What does the Consumers' Association do?|Behartigt de belangen van consumenten en test producten|Verkoopt huizen|Beheert treinstations|Verzorgt de gezondheidszorg|option1
+Wat is de Belastingdienst?|What is the Tax and Customs Administration?|De overheidsdienst die belastingen int|Een sportvereniging|Een winkelketen|Een politieke partij|option1
+Wat is btw?|What is VAT?|Een belasting op goederen en diensten|Een type rijbewijs|Een computersysteem|Een internationale organisatie|option1
+Wanneer doe je aangifte inkomstenbelasting?|When do you file income tax returns?|Jaarlijks, rond het voorjaar|Nooit|Elke dag|Alleen bij verhuizing|option1
+Wat is zorgtoeslag?|What is healthcare allowance?|Een bijdrage in de zorgkosten|Een bijdrage voor een auto|Een korting op boodschappen|Een lening voor studie|option1
+Wat is huurtoeslag?|What is housing allowance?|Een bijdrage in de huurkosten|Een verzekering voor je huis|Een belasting op meubels|Een boete voor te hoge huur|option1
+Moet iedereen inkomstenbelasting betalen?|Does everyone have to pay income tax?|Ja, als je een inkomen hebt|Nee, nooit|Alleen gepensioneerden|Alleen kinderen|option1
+Wat is een aanslagbiljet?|What is a tax assessment notice?|Een brief met de berekening van de belasting|Een parkeerbon|Een lidmaatschapskaart|Een visum|option1
+Wat is belastingteruggave?|What is a tax refund?|Geld dat je terugkrijgt als je teveel belasting betaald hebt|Een boete omdat je niet betaald hebt|Een lening bij de bank|Een gift van de koning|option1
+Hoe heet de digitale omgeving van de Belastingdienst?|What is the digital environment of the tax office called?|Mijn Belastingdienst|Mijn Politie|Mijn Supermarkt|Mijn Bioscoop|option1
+Waarom heft de overheid belasting?|Why does the government levy taxes?|Om publieke voorzieningen te betalen|Om geld weg te gooien|Om burgers te straffen|Om televisieprogramma’s te maken|option1
+Wat is multiculturalisme?|What is multiculturalism?|Samenleven van verschillende culturen|Alleen één cultuur toestaan|Alleen dezelfde religie|Alleen één taal|option1
+Wat is gelijkheid tussen mannen en vrouwen?|What is equality between men and women?|Dezelfde rechten en kansen voor mannen en vrouwen|Mannen hebben altijd meer rechten|Vrouwen hebben altijd meer rechten|Geen rechten voor vrouwen|option1
+Zijn LHBTI+-rechten beschermd in Nederland?|Are LGBTQ+ rights protected in the Netherlands?|Ja, ze zijn wettelijk beschermd|Nee, nooit|Alleen op papier|Alleen voor mannen|option1
+Wat is een voorbeeld van discriminatie?|What is an example of discrimination?|Iemand achterstellen vanwege huidskleur|Iemand feliciteren met zijn verjaardag|Iemand helpen met huiswerk|Iemand bedanken|option1
+Waarom is tolerantie belangrijk?|Why is tolerance important?|Om in vrede en respect samen te leven|Om ruzie te maken|Om anderen te beperken|Om te voorkomen dat mensen praten|option1
+Wat is integratie?|What is integration?|Meedoen in de samenleving en de cultuur leren kennen|Afgezonderd leven|Alleen Nederlands praten en verder niets|Alleen met eigen groep omgaan|option1
+Wat is emancipatie?|What is emancipation?|Het streven naar gelijke rechten voor iedereen|Het afschaffen van rechten|Het ontkennen van diversiteit|Het beperken van vrijheid|option1
+Wanneer is het homohuwelijk gelegaliseerd in Nederland?|When was same-sex marriage legalized in the Netherlands?|In 2001|Nooit|In 1900|In 2010|option1
+Wat is een migrant?|What is a migrant?|Iemand die naar een ander land verhuist|Iemand die in een dorp woont|Iemand die in een stad werkt|Iemand die alleen reist|option1
+Wat bevordert sociale cohesie?|What promotes social cohesion?|Goede onderlinge relaties, respect en samenwerking|Mensen negeren|Discriminatie|Geweld tegen anderen|option1
+Moet je je inschrijven bij de gemeente als je verhuist binnen Nederland?|Do you have to register with the municipality if you move within the Netherlands?|Ja, bij de gemeente waar je gaat wonen|Nee, nooit|Alleen als je naar het buitenland gaat|Alleen als je huis koopt|option1
+Wat is DigiD?|What is DigiD?|Een digitale identiteit om in te loggen op overheidswebsites|Een bankpas|Een rijbewijs|Een OV-kaart|option1
+Hoe haal je een rijbewijs?|How do you get a driver's license?|Door theorie- en praktijkexamen bij het CBR te doen|Door een auto te kopen|Door een fiets te rijden|Door een cursus koken te volgen|option1
+Wat is een VOG (Verklaring Omtrent het Gedrag)?|What is a Certificate of Good Conduct (VOG)?|Een verklaring dat je geen strafbare feiten hebt gepleegd die relevant zijn voor een functie|Een schooldiploma|Een garantie voor inkomens|Een medische keuring|option1
+Moet je afval scheiden?|Must you separate waste?|Ja, dat wordt gestimuleerd door de gemeente|Nee, nooit|Alleen in de zomer|Alleen als je wil|option1
+Wat is een BSN (Burgerservicenummer)?|What is a BSN (Citizen Service Number)?|Een uniek persoonsnummer voor contact met de overheid|Een type verzekering|Een winkelkaart|Een betaalpas|option1
+Waarom is het handig een Nederlandse bankrekening te hebben?|Why is it useful to have a Dutch bank account?|Om salarissen, toeslagen en rekeningen gemakkelijk te betalen|Om gratis huizen te krijgen|Om geen belasting te betalen|Om overal te parkeren|option1
+Wat is een officiële brief van de overheid?|What is an official letter from the government?|Een brief met officiële informatie of beslissingen|Een reclamefolder|Een liefdesbrief|Een handgeschreven kaart|option1
+Kan iedereen naar de rechtbank als hij een juridisch probleem heeft?|Can everyone go to court if they have a legal problem?|Ja, toegang tot de rechter is een recht|Nee, alleen rijken|Alleen buitenlanders|Alleen als je politie bent|option1
+Waar kun je informatie krijgen over inburgeringscursussen?|Where can you get information about integration courses?|Bij DUO of op Inburgeren.nl|Bij een sportclub|Bij de politie|Bij de supermarkt|option1
