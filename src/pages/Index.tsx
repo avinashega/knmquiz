@@ -4,6 +4,7 @@ import { QuizCard } from "@/components/QuizCard";
 import { QuizProgress } from "@/components/QuizProgress";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import type { QuizState } from "@/types/quiz";
+import { BookOpen } from "lucide-react";
 
 const Index = () => {
   const [quizState, setQuizState] = useState<QuizState>({
@@ -29,7 +30,6 @@ const Index = () => {
         showAnswer: false,
       }));
     } else {
-      // Reset quiz with new shuffled questions
       setQuizState(prev => ({
         ...prev,
         currentQuestion: 0,
@@ -46,23 +46,43 @@ const Index = () => {
     }));
   };
 
-  if (!quizState.questions.length) {
-    return <LanguageSelector onSelectLanguage={handleLanguageChange} />;
-  }
-
   return (
-    <div className="min-h-screen p-8 bg-gray-50">
-      <QuizProgress
-        current={quizState.currentQuestion}
-        total={quizState.questions.length}
-        score={quizState.score}
-      />
-      <QuizCard
-        question={quizState.questions[quizState.currentQuestion]}
-        language={quizState.language}
-        onNext={handleNext}
-        onScore={handleScore}
-      />
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* Header with Logo */}
+      <header className="py-6 bg-white shadow-sm">
+        <div className="container mx-auto px-4 flex items-center justify-center">
+          <BookOpen className="h-8 w-8 text-dutch-blue mr-2" />
+          <h1 className="text-2xl font-bold text-dutch-blue">KNM Quiz</h1>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-grow container mx-auto px-4 py-8">
+        {!quizState.questions.length ? (
+          <LanguageSelector onSelectLanguage={handleLanguageChange} />
+        ) : (
+          <>
+            <QuizProgress
+              current={quizState.currentQuestion}
+              total={quizState.questions.length}
+              score={quizState.score}
+            />
+            <QuizCard
+              question={quizState.questions[quizState.currentQuestion]}
+              language={quizState.language}
+              onNext={handleNext}
+              onScore={handleScore}
+            />
+          </>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="py-4 bg-white border-t">
+        <div className="container mx-auto px-4 text-center text-sm text-gray-600">
+          Made by Avinash Ega
+        </div>
+      </footer>
     </div>
   );
 };
