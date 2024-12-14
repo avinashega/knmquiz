@@ -1,22 +1,22 @@
 import { QuizQuestion } from "@/types/quiz";
 
 export const parseCSVQuestions = (csvContent: string): QuizQuestion[] => {
-  const lines = csvContent.split('\n').filter(line => line.trim());
+  // Skip the header row and filter out empty lines
+  const lines = csvContent.split('\n').filter(line => line.trim() && !line.startsWith('question'));
   
   return lines.map((line, index) => {
     const [
       questionDutch,
       questionEnglish,
-      option1Dutch,
-      option2Dutch,
-      option3Dutch,
-      option4Dutch,
+      option1,
+      option2,
+      option3,
+      option4,
       answer
-    ] = line.split(',').map(str => str.replace(/^"|"$/g, '').trim());
+    ] = line.split('|').map(str => str.trim());
 
-    // Map Dutch options to English (using the same options for now as they're proper nouns/places)
-    const optionsDutch = [option1Dutch, option2Dutch, option3Dutch, option4Dutch];
-    const optionsEnglish = [option1Dutch, option2Dutch, option3Dutch, option4Dutch];
+    const optionsDutch = [option1, option2, option3, option4];
+    const optionsEnglish = [option1, option2, option3, option4];
 
     // Determine correct answer index based on the "option1", "option2" etc format
     const correctOptionIndex = parseInt(answer.replace('option', '')) - 1;
