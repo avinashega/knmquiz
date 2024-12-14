@@ -4,6 +4,9 @@ export interface QuizQuestion {
   questionEnglish: string;
   answerDutch: string;
   answerEnglish: string;
+  optionsDutch: string[];
+  optionsEnglish: string[];
+  correctOptionIndex: number;
 }
 
 export interface QuizState {

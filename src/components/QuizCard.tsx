@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { QuizQuestion } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
 
@@ -12,15 +14,20 @@ interface QuizCardProps {
 }
 
 export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps) => {
-  const [showAnswer, setShowAnswer] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const { toast } = useToast();
 
-  const handleShowAnswer = () => {
-    setShowAnswer(true);
-  };
+  const handleSubmit = () => {
+    if (selectedOption === null) {
+      toast({
+        title: "Please select an answer",
+        variant: "destructive",
+        duration: 1500,
+      });
+      return;
+    }
 
-  const handleResponse = (correct: boolean) => {
-    if (correct) {
+    if (selectedOption === question.correctOptionIndex) {
       onScore();
       toast({
         title: "Correct!",
@@ -30,14 +37,17 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
     } else {
       toast({
         title: "Not quite right",
-        description: "Keep practicing!",
+        description: language === 'dutch' ? question.answerDutch : question.answerEnglish,
         variant: "destructive",
-        duration: 1500,
+        duration: 3000,
       });
     }
-    setShowAnswer(false);
+    
+    setSelectedOption(null);
     onNext();
   };
+
+  const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
 
   return (
     <Card className="w-full max-w-2xl mx-auto animate-fadeIn">
@@ -46,34 +56,28 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
           {language === 'dutch' ? question.questionDutch : question.questionEnglish}
         </h2>
       </CardHeader>
-      <CardContent className="text-center">
-        {showAnswer ? (
-          <p className="text-lg">
-            {language === 'dutch' ? question.answerDutch : question.answerEnglish}
-          </p>
-        ) : (
-          <Button onClick={handleShowAnswer} className="bg-dutch-orange hover:bg-dutch-orange/90">
-            Show Answer
-          </Button>
-        )}
+      <CardContent className="space-y-6">
+        <RadioGroup
+          value={selectedOption?.toString()}
+          onValueChange={(value) => setSelectedOption(parseInt(value))}
+          className="space-y-4"
+        >
+          {options.map((option, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <RadioGroupItem value={index.toString()} id={`option-${index}`} />
+              <Label htmlFor={`option-${index}`} className="text-left">{option}</Label>
+            </div>
+          ))}
+        </RadioGroup>
       </CardContent>
-      {showAnswer && (
-        <CardFooter className="flex justify-center space-x-4">
-          <Button
-            onClick={() => handleResponse(false)}
-            variant="outline"
-            className="border-red-500 text-red-500 hover:bg-red-50"
-          >
-            Incorrect
-          </Button>
-          <Button
-            onClick={() => handleResponse(true)}
-            className="bg-green-500 hover:bg-green-600"
-          >
-            Correct
-          </Button>
-        </CardFooter>
-      )}
+      <CardFooter className="flex justify-center pt-6">
+        <Button
+          onClick={handleSubmit}
+          className="bg-dutch-orange hover:bg-dutch-orange/90 w-full max-w-xs"
+        >
+          Submit Answer
+        </Button>
+      </CardFooter>
     </Card>
   );
 };

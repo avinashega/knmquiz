@@ -37,6 +37,7 @@ const Index = () => {
         ...prev,
         currentQuestion: 0,
         questions: shuffleQuestions(quizQuestions),
+        score: 0,
       }));
     }
   };
