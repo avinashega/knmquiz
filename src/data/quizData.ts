@@ -5,6 +5,7 @@ import { geographyQuestions } from "./quiz/geography";
 import { politicsQuestions } from "./quiz/politics";
 import { sportsQuestions } from "./quiz/sports";
 import { artQuestions } from "./quiz/art";
+import { literatureQuestions } from "./quiz/literature";
 
 export const baseQuestions: QuizQuestion[] = [
   {
@@ -217,6 +218,7 @@ export const allQuestions = [
   ...politicsQuestions,
   ...sportsQuestions,
   ...artQuestions,
+  ...literatureQuestions,
 ];
 
 export const shuffleQuestions = (questions: QuizQuestion[]): QuizQuestion[] => {

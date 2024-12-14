@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { QuizQuestion } from "@/types/quiz";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 interface QuizCardProps {
   question: QuizQuestion;
@@ -16,7 +17,18 @@ interface QuizCardProps {
 export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const [shuffledOptions, setShuffledOptions] = useState<{ text: string; index: number }[]>([]);
   const { toast } = useToast();
+
+  // Shuffle options when question changes
+  useEffect(() => {
+    const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
+    const optionsWithIndices = options.map((text, index) => ({ text, index }));
+    const shuffled = [...optionsWithIndices].sort(() => Math.random() - 0.5);
+    setShuffledOptions(shuffled);
+    setSelectedOption(null);
+    setHasAnswered(false);
+  }, [question, language]);
 
   const handleSubmit = () => {
     if (selectedOption === null) {
@@ -53,8 +65,6 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
     onNext();
   };
 
-  const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
-
   return (
     <Card className="w-full max-w-2xl mx-auto animate-fadeIn">
       <CardHeader>
@@ -68,10 +78,23 @@ export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps)
           onValueChange={(value) => setSelectedOption(parseInt(value))}
           className="space-y-4"
         >
-          {options.map((option, index) => (
+          {shuffledOptions.map(({ text, index }) => (
             <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem value={index.toString()} id={`option-${index}`} disabled={hasAnswered} />
-              <Label htmlFor={`option-${index}`} className="text-left">{option}</Label>
+              <RadioGroupItem 
+                value={index.toString()} 
+                id={`option-${index}`} 
+                disabled={hasAnswered}
+              />
+              <Label 
+                htmlFor={`option-${index}`} 
+                className={cn(
+                  "text-left flex-1 p-2 rounded",
+                  hasAnswered && index === question.correctOptionIndex && "bg-green-100 text-green-800",
+                  hasAnswered && selectedOption === index && index !== question.correctOptionIndex && "bg-red-100 text-red-800"
+                )}
+              >
+                {text}
+              </Label>
             </div>
           ))}
         </RadioGroup>
