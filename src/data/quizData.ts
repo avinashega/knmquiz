@@ -1,6 +1,9 @@
 import { QuizQuestion } from "@/types/quiz";
+import { historyQuestions } from "./quiz/history";
+import { cultureQuestions } from "./quiz/culture";
+import { geographyQuestions } from "./quiz/geography";
 
-export const quizQuestions: QuizQuestion[] = [
+export const baseQuestions: QuizQuestion[] = [
   {
     id: 1,
     questionDutch: "Waar in Europa ligt Nederland en met welke landen grenst het?",
@@ -201,6 +204,13 @@ export const quizQuestions: QuizQuestion[] = [
     ],
     correctOptionIndex: 0
   }
+];
+
+export const allQuestions = [
+  ...baseQuestions,
+  ...historyQuestions,
+  ...cultureQuestions,
+  ...geographyQuestions,
 ];
 
 export const shuffleQuestions = (questions: QuizQuestion[]): QuizQuestion[] => {

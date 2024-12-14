@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { QuizCard } from "@/components/QuizCard";
 import { QuizProgress } from "@/components/QuizProgress";
-import { quizQuestions, shuffleQuestions } from "@/data/quizData";
+import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import type { QuizState } from "@/types/quiz";
 
 const Index = () => {
@@ -20,7 +20,7 @@ const Index = () => {
       score: 0,
       showAnswer: false,
       language,
-      questions: shuffleQuestions(quizQuestions),
+      questions: shuffleQuestions(allQuestions),
     });
   };
 
@@ -36,7 +36,7 @@ const Index = () => {
       setQuizState(prev => ({
         ...prev,
         currentQuestion: 0,
-        questions: shuffleQuestions(quizQuestions),
+        questions: shuffleQuestions(allQuestions),
         score: 0,
       }));
     }
