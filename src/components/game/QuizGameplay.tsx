@@ -20,34 +20,15 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
   const [timePerQuestion, setTimePerQuestion] = useState(30);
   const [selectedQuestions, setSelectedQuestions] = useState<QuizQuestion[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(timePerQuestion);
   const { progress, updateProgress } = useParticipantProgress(gameId, participantId);
   const { toast } = useToast();
 
   useEffect(() => {
-    // Fetch initial game settings
-    const fetchGameSettings = async () => {
-      try {
-        const { data: game, error } = await supabase
-          .from('games')
-          .select('time_per_question, current_question_index')
-          .eq('id', gameId)
-          .single();
-
-        if (error) throw error;
-
-        if (game) {
-          setTimePerQuestion(game.time_per_question);
-        }
-      } catch (error) {
-        console.error('Error fetching game settings:', error);
-      }
-    };
-
-    fetchGameSettings();
-
-    // Subscribe to game setting updates
+    // Subscribe to game updates for synchronized timing
     const channel = supabase
-      .channel(`game-settings-${gameId}`)
+      .channel(`game-timing-${gameId}`)
       .on(
         'postgres_changes',
         {
@@ -58,8 +39,11 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         },
         (payload: any) => {
           const game = payload.new;
-          if (game.time_per_question !== timePerQuestion) {
-            setTimePerQuestion(game.time_per_question);
+          if (game) {
+            setCurrentQuestionIndex(game.current_question_index || 0);
+            if (game.status === 'completed') {
+              setIsComplete(true);
+            }
           }
         }
       )
@@ -68,7 +52,23 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     return () => {
       channel.unsubscribe();
     };
-  }, [gameId, timePerQuestion]);
+  }, [gameId]);
+
+  useEffect(() => {
+    // Timer effect
+    const timer = setInterval(async () => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          // Time's up for this question
+          handleNext();
+          return timePerQuestion;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timePerQuestion, currentQuestionIndex]);
 
   const handleScore = async () => {
     const newScore = score + 1;
@@ -94,10 +94,29 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   };
 
   const handleNext = async () => {
-    const nextIndex = (progress?.currentQuestionIndex || 0) + 1;
+    const nextIndex = currentQuestionIndex + 1;
     
     if (nextIndex < selectedQuestions.length) {
-      await updateProgress(nextIndex, null);
+      try {
+        const { error } = await supabase
+          .from('games')
+          .update({ 
+            current_question_index: nextIndex,
+          })
+          .eq('id', gameId);
+
+        if (error) throw error;
+        
+        await updateProgress(nextIndex, null);
+        setTimeLeft(timePerQuestion);
+      } catch (error) {
+        console.error('Error updating question index:', error);
+        toast({
+          title: "Error",
+          description: "Failed to update question progress",
+          variant: "destructive",
+        });
+      }
     } else {
       setIsComplete(true);
       try {
@@ -152,18 +171,18 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
       />
 
       <QuizProgress
-        current={progress?.currentQuestionIndex || 0}
+        current={currentQuestionIndex}
         total={selectedQuestions.length}
         score={score}
       />
 
-      {progress && selectedQuestions[progress.currentQuestionIndex] && (
+      {selectedQuestions[currentQuestionIndex] && (
         <QuizCard
-          question={selectedQuestions[progress.currentQuestionIndex]}
+          question={selectedQuestions[currentQuestionIndex]}
           language="dutch"
           onNext={handleNext}
           onScore={handleScore}
-          timePerQuestion={timePerQuestion}
+          timePerQuestion={timeLeft}
         />
       )}
     </div>
