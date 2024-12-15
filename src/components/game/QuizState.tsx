@@ -27,7 +27,9 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
             onGameComplete();
           }
           if (game.selected_questions) {
-            onQuestionsLoaded(game.selected_questions);
+            // Ensure we're parsing the questions correctly
+            const questions = game.selected_questions as QuizQuestion[];
+            onQuestionsLoaded(questions);
           }
         }
         setIsLoading(false);

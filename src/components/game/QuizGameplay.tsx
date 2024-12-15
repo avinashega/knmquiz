@@ -67,7 +67,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   if (!selectedQuestions.length) {
     return (
       <Card className="p-6 max-w-2xl mx-auto mt-8">
-        <p className="text-center">No questions available.</p>
+        <p className="text-center">Loading questions...</p>
       </Card>
     );
   }
@@ -98,7 +98,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         score={score}
       />
 
-      {progress && (
+      {progress && selectedQuestions[progress.currentQuestionIndex] && (
         <QuizCard
           question={selectedQuestions[progress.currentQuestionIndex]}
           language="dutch"
