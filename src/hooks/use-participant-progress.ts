@@ -73,12 +73,16 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
     }
 
     try {
-      let answers = progress?.answers || [];
+      // Update local state immediately for optimistic updates
+      const updatedAnswers = progress?.answers ? [...progress.answers] : [];
       if (answer !== null) {
-        // Create a new array with the answer at the correct index
-        answers = [...answers];
-        answers[currentQuestionIndex] = answer;
+        updatedAnswers[currentQuestionIndex] = answer;
       }
+      
+      setProgress({
+        currentQuestionIndex,
+        answers: updatedAnswers
+      });
 
       const { error } = await supabase
         .from('participant_progress')
@@ -86,7 +90,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           participant_id: participantId,
           game_id: gameId,
           current_question_index: currentQuestionIndex,
-          answers: answers
+          answers: updatedAnswers
         }, {
           onConflict: 'participant_id,game_id'
         });
@@ -98,14 +102,12 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           description: "Failed to update progress",
           variant: "destructive",
         });
+        // Revert optimistic update on error
+        if (progress) {
+          setProgress(progress);
+        }
         return;
       }
-
-      // Update local state immediately for better UX
-      setProgress({
-        currentQuestionIndex,
-        answers
-      });
     } catch (error) {
       console.error('Error updating progress:', error);
       toast({
@@ -113,6 +115,10 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
         description: "Failed to update progress",
         variant: "destructive",
       });
+      // Revert optimistic update on error
+      if (progress) {
+        setProgress(progress);
+      }
     }
   };
 

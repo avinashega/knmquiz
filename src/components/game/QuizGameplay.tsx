@@ -39,7 +39,6 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         },
         (payload: any) => {
           const game = payload.new;
-          console.log({game})
           if (game) {
             setCurrentQuestionIndex(game.current_question_index || 0);
             if (game.status === 'completed') {
