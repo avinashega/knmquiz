@@ -46,6 +46,8 @@ export const QuizCard = ({
         if (prev <= 1) {
           clearInterval(timer);
           if (!isAnswered) {
+            // Mark as answered but with no selection to indicate timeout
+            setIsAnswered(true);
             handleNext();
           }
           return 0;
