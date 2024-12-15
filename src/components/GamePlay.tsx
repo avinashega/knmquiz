@@ -53,6 +53,7 @@ export const GamePlay = () => {
           }
         }
 
+        // Fetch initial participants data
         const { data: participantsData } = await supabase
           .from('participants')
           .select('id, name, score')
@@ -74,6 +75,7 @@ export const GamePlay = () => {
 
     checkGameStatus();
 
+    // Subscribe to game status changes
     const gameChannel = supabase
       .channel('game-status')
       .on(
@@ -93,6 +95,7 @@ export const GamePlay = () => {
       )
       .subscribe();
 
+    // Subscribe to participant updates
     const participantChannel = supabase
       .channel('participant-updates')
       .on(
@@ -123,10 +126,6 @@ export const GamePlay = () => {
     };
   }, [gameCode, gameId, toast]);
 
-  console.log('Current game status:', gameStatus);
-  console.log('Is creator:', isCreator);
-  console.log('Participant ID:', participantId);
-
   if (!gameId) {
     return null;
   }
@@ -137,7 +136,7 @@ export const GamePlay = () => {
         <h2 className="text-2xl font-bold mb-4">Game in Progress</h2>
         <Leaderboard 
           participants={participants}
-          currentParticipantId=""
+          currentParticipantId={participantId || ""}
         />
       </div>
     );
@@ -149,7 +148,7 @@ export const GamePlay = () => {
         <h2 className="text-2xl font-bold mb-4">Waiting Room</h2>
         <Leaderboard 
           participants={participants}
-          currentParticipantId=""
+          currentParticipantId={participantId || ""}
         />
       </div>
     );

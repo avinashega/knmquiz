@@ -7,7 +7,7 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Index = () => {
   const [showDemo, setShowDemo] = useState(false);
-  const [language, setLanguage] = useState<'dutch' | 'english'>('english');
+  const [selectedLanguage, setSelectedLanguage] = useState<'dutch' | 'english'>('english');
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -30,12 +30,12 @@ const Index = () => {
           {showDemo && (
             <div className="space-y-4">
               <LanguageSelector
-                language={language}
-                onLanguageChange={setLanguage}
+                selectedLanguage={selectedLanguage}
+                onLanguageChange={setSelectedLanguage}
               />
               <QuizCard
                 question={allQuestions[0]}
-                language={language}
+                language={selectedLanguage}
                 onNext={() => {}}
                 onScore={() => {}}
                 timePerQuestion={30}
