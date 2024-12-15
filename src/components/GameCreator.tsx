@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -6,6 +6,7 @@ import { Card } from "./ui/card";
 import { useToast } from "./ui/use-toast";
 import { Copy, Share2, Play } from "lucide-react";
 import { Avatar, AvatarFallback } from "./ui/avatar";
+import { supabase } from "@/integrations/supabase/client";
 
 interface GameConfig {
   numQuestions: number;
@@ -23,24 +24,75 @@ export const GameCreator = () => {
     timePerQuestion: 30,
   });
   const [gameCode, setGameCode] = useState<string>("");
+  const [gameId, setGameId] = useState<string>("");
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { toast } = useToast();
 
-  const handleCreateGame = () => {
-    const code = Math.random().toString(36).substring(2, 8).toUpperCase();
-    setGameCode(code);
-    
-    // Simulated participants for demo purposes
-    setParticipants([
-      { id: "1", name: "Alice" },
-      { id: "2", name: "Bob" },
-      { id: "3", name: "Charlie" },
-    ]);
-    
-    toast({
-      title: "Game Created!",
-      description: "Share the code or QR code with participants.",
-    });
+  // Subscribe to real-time updates when game is created
+  useEffect(() => {
+    if (!gameId) return;
+
+    const channel = supabase
+      .channel('schema-db-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'participants',
+          filter: `game_id=eq.${gameId}`,
+        },
+        (payload) => {
+          const newParticipant = payload.new as any;
+          setParticipants(prev => [...prev, {
+            id: newParticipant.id,
+            name: newParticipant.name
+          }]);
+          
+          toast({
+            title: "New Player Joined!",
+            description: `${newParticipant.name} has joined the game.`,
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [gameId, toast]);
+
+  const handleCreateGame = async () => {
+    try {
+      const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+      
+      const { data: game, error } = await supabase
+        .from('games')
+        .insert({
+          code: code,
+          num_questions: gameConfig.numQuestions,
+          time_per_question: gameConfig.timePerQuestion
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setGameCode(code);
+      setGameId(game.id);
+      
+      toast({
+        title: "Game Created!",
+        description: "Share the code or QR code with participants.",
+      });
+    } catch (error) {
+      console.error('Error creating game:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create game. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const copyGameCode = () => {
@@ -68,7 +120,7 @@ export const GameCreator = () => {
     }
   };
 
-  const startGame = () => {
+  const startGame = async () => {
     if (participants.length < 1) {
       toast({
         title: "Error",
@@ -77,12 +129,30 @@ export const GameCreator = () => {
       });
       return;
     }
-    
-    // In a future implementation, this would start the game
-    toast({
-      title: "Starting Game",
-      description: "The quiz will begin shortly...",
-    });
+
+    try {
+      const { error } = await supabase
+        .from('games')
+        .update({ 
+          status: 'playing',
+          started_at: new Date().toISOString()
+        })
+        .eq('id', gameId);
+
+      if (error) throw error;
+      
+      toast({
+        title: "Starting Game",
+        description: "The quiz will begin shortly...",
+      });
+    } catch (error) {
+      console.error('Error starting game:', error);
+      toast({
+        title: "Error",
+        description: "Failed to start game. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
