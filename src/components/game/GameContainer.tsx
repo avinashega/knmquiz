@@ -46,6 +46,11 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
 
         if (participantsError) {
           console.error('Error fetching participants:', participantsError);
+          toast({
+            title: "Error",
+            description: "Failed to fetch participants",
+            variant: "destructive",
+          });
           return;
         }
 
@@ -107,13 +112,16 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
         (participantPayload: any) => {
           console.log('Participant update:', participantPayload);
           if (participantPayload.new) {
-            onParticipantsData((prevParticipants: Array<{ id: string; name: string; score: number }>) => {
-              const existing = prevParticipants.find(p => p.id === participantPayload.new.id);
-              const updatedParticipants = existing
-                ? prevParticipants.map(p => 
-                    p.id === participantPayload.new.id ? participantPayload.new : p
-                  )
-                : [...prevParticipants, participantPayload.new];
+            onParticipantsData((prevParticipants) => {
+              const updatedParticipants = [...prevParticipants];
+              const existingIndex = updatedParticipants.findIndex(p => p.id === participantPayload.new.id);
+              
+              if (existingIndex >= 0) {
+                updatedParticipants[existingIndex] = participantPayload.new;
+              } else {
+                updatedParticipants.push(participantPayload.new);
+              }
+              
               return updatedParticipants;
             });
           }

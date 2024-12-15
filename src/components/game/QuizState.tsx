@@ -32,7 +32,7 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
           
           // Validate and convert the selected_questions data
           if (game.selected_questions && Array.isArray(game.selected_questions)) {
-            const questions = game.selected_questions as QuizQuestion[];
+            const questions = game.selected_questions as unknown as QuizQuestion[];
             const validQuestions = questions.every(q => 
               typeof q.id === 'number' &&
               typeof q.questionDutch === 'string' &&
@@ -91,7 +91,14 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
           
           // If questions or current question index changed, update the state
           if (game.selected_questions && Array.isArray(game.selected_questions)) {
-            onQuestionsLoaded(game.selected_questions);
+            const questions = game.selected_questions as unknown as QuizQuestion[];
+            if (questions.every(q => 
+              typeof q.id === 'number' &&
+              typeof q.questionDutch === 'string' &&
+              typeof q.questionEnglish === 'string'
+            )) {
+              onQuestionsLoaded(questions);
+            }
           }
         }
       )
