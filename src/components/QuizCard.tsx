@@ -29,27 +29,27 @@ export const QuizCard = ({
   const [shuffledOptions, setShuffledOptions] = useState<ShuffledOption[]>([]);
   const [timeLeft, setTimeLeft] = useState(timePerQuestion);
 
+  // Only shuffle options when the question changes
   useEffect(() => {
-    // Reset state and shuffle options when question changes
-    setSelectedAnswer(null);
-    setIsAnswered(false);
-    setTimeLeft(timePerQuestion);
-
-    // Shuffle options while maintaining the mapping to correct answer
     const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
     const optionsWithIndex = options.map((text, index) => ({ text, originalIndex: index }));
     const shuffled = [...optionsWithIndex].sort(() => Math.random() - 0.5);
+    
+    setSelectedAnswer(null);
+    setIsAnswered(false);
+    setTimeLeft(timePerQuestion);
     setShuffledOptions(shuffled);
-  }, [question, language, timePerQuestion]);
+  }, [question.id, language, timePerQuestion]); // Only depend on question.id instead of entire question object
 
+  // Handle timer
   useEffect(() => {
+    if (isAnswered) return;
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          if (!isAnswered) {
-            onNext();
-          }
+          onNext();
           return 0;
         }
         return prev - 1;
@@ -61,15 +61,17 @@ export const QuizCard = ({
 
   const handleAnswer = (option: ShuffledOption) => {
     if (isAnswered) return;
+    
     setSelectedAnswer(option.text);
     setIsAnswered(true);
+    
     if (option.originalIndex === question.correctOptionIndex) {
       onScore();
     }
+    
     setTimeout(onNext, 1000);
   };
 
-  // Get the appropriate question text based on language
   const questionText = language === 'dutch' ? question.questionDutch : question.questionEnglish;
   const timerProgress = (timeLeft / timePerQuestion) * 100;
 
