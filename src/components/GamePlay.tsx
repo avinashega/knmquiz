@@ -16,6 +16,8 @@ export const GamePlay = () => {
     gameId: "",
     participantId: "",
     timePerQuestion: 30,
+    isCreator: false,
+    isGameFinished: false
   });
   const [participants, setParticipants] = useState<{ id: string; name: string; score: number }[]>([]);
   const { toast } = useToast();
@@ -26,7 +28,7 @@ export const GamePlay = () => {
         // Get game details
         const { data: game } = await supabase
           .from('games')
-          .select('id, num_questions, time_per_question')
+          .select('id, num_questions, time_per_question, status')
           .eq('code', gameCode)
           .single();
 
@@ -34,15 +36,15 @@ export const GamePlay = () => {
           // Get participant details from localStorage
           const participantId = localStorage.getItem(`game_${game.id}_participant`);
           
-          if (participantId) {
-            setGameState(prev => ({
-              ...prev,
-              gameId: game.id,
-              participantId,
-              questions: shuffleQuestions(allQuestions).slice(0, game.num_questions),
-              timePerQuestion: game.time_per_question,
-            }));
-          }
+          setGameState(prev => ({
+            ...prev,
+            gameId: game.id,
+            participantId: participantId || "",
+            questions: shuffleQuestions(allQuestions).slice(0, game.num_questions),
+            timePerQuestion: game.time_per_question,
+            isCreator: !participantId,
+            isGameFinished: game.status === 'finished'
+          }));
         }
       } catch (error) {
         console.error('Error initializing game:', error);
@@ -71,7 +73,7 @@ export const GamePlay = () => {
           table: 'participants',
           filter: `game_id=eq.${gameState.gameId}`,
         },
-        (payload) => {
+        () => {
           // Update participants list
           supabase
             .from('participants')
@@ -100,13 +102,20 @@ export const GamePlay = () => {
     } else {
       // Game finished
       try {
-        await supabase
-          .from('games')
-          .update({ 
-            status: 'finished',
-            finished_at: new Date().toISOString()
-          })
-          .eq('id', gameState.gameId);
+        if (gameState.isCreator) {
+          await supabase
+            .from('games')
+            .update({ 
+              status: 'finished',
+              finished_at: new Date().toISOString()
+            })
+            .eq('id', gameState.gameId);
+        }
+
+        setGameState(prev => ({
+          ...prev,
+          isGameFinished: true
+        }));
 
         toast({
           title: "Game Finished!",
@@ -140,16 +149,32 @@ export const GamePlay = () => {
     }
   };
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-center mb-4">Game in Progress</h2>
+  if (gameState.isGameFinished) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-center mb-8">Game Finished!</h2>
           <Leaderboard 
             participants={participants}
             currentParticipantId={gameState.participantId}
           />
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto">
+        {gameState.isCreator && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-center mb-4">Game in Progress</h2>
+            <Leaderboard 
+              participants={participants}
+              currentParticipantId={gameState.participantId}
+            />
+          </div>
+        )}
 
         <QuizProgress
           current={gameState.currentQuestion}
@@ -162,6 +187,7 @@ export const GamePlay = () => {
           language="dutch"
           onNext={handleNext}
           onScore={handleScore}
+          hideAnswer={!gameState.isCreator}
         />
       </div>
     </div>
