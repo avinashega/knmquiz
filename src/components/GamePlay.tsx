@@ -77,19 +77,27 @@ export const GamePlay = () => {
 
     // Subscribe to game status changes
     const gameChannel = supabase
-      .channel('game-status')
+      .channel(`game-status-${gameCode}`)
       .on(
         'postgres_changes',
         {
           event: '*',
           schema: 'public',
           table: 'games',
-          filter: gameId ? `id=eq.${gameId}` : undefined,
+          filter: `code=eq.${gameCode}`,
         },
         (payload: any) => {
           console.log('Game status changed:', payload);
           if (payload.new && payload.new.status) {
+            console.log('Setting new game status:', payload.new.status);
             setGameStatus(payload.new.status);
+            
+            if (payload.new.status === 'playing') {
+              toast({
+                title: "Game Started!",
+                description: "The quiz is now beginning...",
+              });
+            }
           }
         }
       )
@@ -97,7 +105,7 @@ export const GamePlay = () => {
 
     // Subscribe to participant updates
     const participantChannel = supabase
-      .channel('participant-updates')
+      .channel(`participant-updates-${gameCode}`)
       .on(
         'postgres_changes',
         {
