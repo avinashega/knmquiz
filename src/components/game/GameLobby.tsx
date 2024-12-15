@@ -33,6 +33,7 @@ export const GameLobby = ({
   useEffect(() => {
     if (!gameId) return;
 
+    // Subscribe to real-time updates for new participants
     const channel = supabase
       .channel('schema-db-changes')
       .on(
@@ -140,7 +141,7 @@ export const GameLobby = ({
             >
               <Avatar className="h-6 w-6">
                 <AvatarFallback>
-                  {participant.name.charAt(0)}
+                  {participant.name.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <span className="text-sm">{participant.name}</span>
@@ -148,7 +149,7 @@ export const GameLobby = ({
           ))}
         </div>
         {isCreator && participants.length > 0 && (
-          <Button onClick={onStartGame} className="w-full">
+          <Button onClick={onStartGame} className="w-full mt-4">
             <Play className="w-4 h-4 mr-2" />
             Start Game
           </Button>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -13,6 +13,7 @@ interface Participant {
 }
 
 export const GameJoiner = () => {
+  const navigate = useNavigate();
   const [participantName, setParticipantName] = useState("");
   const [isJoining, setIsJoining] = useState(false);
   const [hasJoined, setHasJoined] = useState(false);
