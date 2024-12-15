@@ -3,9 +3,11 @@ import { LanguageSelector } from "@/components/LanguageSelector";
 import { QuizCard } from "@/components/QuizCard";
 import { QuizProgress } from "@/components/QuizProgress";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
+import { GameCreator } from "@/components/GameCreator";
 import type { QuizState } from "@/types/quiz";
 import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Index = () => {
   const [quizState, setQuizState] = useState<QuizState>({
@@ -49,7 +51,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Header with Logo */}
       <header className="py-6 bg-white shadow-sm">
         <div className="container mx-auto px-4 flex items-center justify-center">
           <BookOpen className="h-8 w-8 text-dutch-blue mr-2" />
@@ -57,28 +58,39 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="flex-grow container mx-auto px-4 py-8">
-        {!quizState.questions.length ? (
-          <LanguageSelector onSelectLanguage={handleLanguageChange} />
-        ) : (
-          <>
-            <QuizProgress
-              current={quizState.currentQuestion}
-              total={quizState.questions.length}
-              score={quizState.score}
-            />
-            <QuizCard
-              question={quizState.questions[quizState.currentQuestion]}
-              language={quizState.language}
-              onNext={handleNext}
-              onScore={handleScore}
-            />
-          </>
-        )}
+        <Tabs defaultValue="practice" className="max-w-3xl mx-auto">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="practice">Practice Mode</TabsTrigger>
+            <TabsTrigger value="multiplayer">Multiplayer Mode</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="practice">
+            {!quizState.questions.length ? (
+              <LanguageSelector onSelectLanguage={handleLanguageChange} />
+            ) : (
+              <>
+                <QuizProgress
+                  current={quizState.currentQuestion}
+                  total={quizState.questions.length}
+                  score={quizState.score}
+                />
+                <QuizCard
+                  question={quizState.questions[quizState.currentQuestion]}
+                  language={quizState.language}
+                  onNext={handleNext}
+                  onScore={handleScore}
+                />
+              </>
+            )}
+          </TabsContent>
+          
+          <TabsContent value="multiplayer">
+            <GameCreator />
+          </TabsContent>
+        </Tabs>
       </main>
 
-      {/* Footer */}
       <footer className="py-4 bg-white border-t">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-gray-600">
