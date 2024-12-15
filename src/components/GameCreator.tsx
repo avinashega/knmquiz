@@ -28,6 +28,18 @@ export const GameCreator = () => {
       // Get random questions
       const selectedQuestions: QuizQuestion[] = shuffleQuestions(allQuestions).slice(0, numQuestions);
       
+      // Convert questions to a plain object array for Supabase
+      const questionsForDb = selectedQuestions.map(q => ({
+        id: q.id,
+        questionDutch: q.questionDutch,
+        questionEnglish: q.questionEnglish,
+        answerDutch: q.answerDutch,
+        answerEnglish: q.answerEnglish,
+        optionsDutch: q.optionsDutch,
+        optionsEnglish: q.optionsEnglish,
+        correctOptionIndex: q.correctOptionIndex
+      }));
+      
       // Create game in database
       const { data: game, error } = await supabase
         .from('games')
@@ -36,7 +48,7 @@ export const GameCreator = () => {
           num_questions: numQuestions,
           time_per_question: timePerQuestion,
           status: 'waiting',
-          selected_questions: selectedQuestions
+          selected_questions: questionsForDb
         })
         .select()
         .single();
