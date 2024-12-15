@@ -23,7 +23,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
         if (existingProgress) {
           setProgress({
             currentQuestionIndex: existingProgress.current_question_index,
-            answers: existingProgress.answers as any[] || []
+            answers: Array.isArray(existingProgress.answers) ? existingProgress.answers : []
           });
         } else {
           // Create initial progress
@@ -43,7 +43,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           if (newProgress) {
             setProgress({
               currentQuestionIndex: newProgress.current_question_index,
-              answers: newProgress.answers as any[] || []
+              answers: Array.isArray(newProgress.answers) ? newProgress.answers : []
             });
           }
         }
@@ -69,7 +69,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           if (payload.new) {
             setProgress({
               currentQuestionIndex: payload.new.current_question_index,
-              answers: payload.new.answers || []
+              answers: Array.isArray(payload.new.answers) ? payload.new.answers : []
             });
           }
         }
@@ -83,11 +83,15 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
 
   const updateProgress = async (currentQuestionIndex: number, answer: any) => {
     try {
+      const updatedAnswers = answer 
+        ? [...(progress?.answers || []), answer]
+        : (progress?.answers || []);
+
       const { data, error } = await supabase
         .from('participant_progress')
         .update({
           current_question_index: currentQuestionIndex,
-          answers: answer ? [...(progress?.answers || []), answer] : progress?.answers
+          answers: updatedAnswers
         })
         .eq('game_id', gameId)
         .eq('participant_id', participantId)
@@ -99,7 +103,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
       if (data) {
         setProgress({
           currentQuestionIndex: data.current_question_index,
-          answers: data.answers || []
+          answers: Array.isArray(data.answers) ? data.answers : []
         });
       }
     } catch (error) {

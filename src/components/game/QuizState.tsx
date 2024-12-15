@@ -27,8 +27,8 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
             onGameComplete();
           }
           if (game.selected_questions) {
-            // Ensure we're parsing the questions correctly
-            const questions = game.selected_questions as QuizQuestion[];
+            // Type assertion to handle the JSON data
+            const questions = game.selected_questions as unknown as QuizQuestion[];
             onQuestionsLoaded(questions);
           }
         }

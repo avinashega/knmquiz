@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -21,6 +21,38 @@ export const GameJoiner = () => {
   const [gameId, setGameId] = useState("");
   const { gameCode } = useParams();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      if (!gameCode) return;
+
+      try {
+        // First get the game ID
+        const { data: game } = await supabase
+          .from('games')
+          .select('id')
+          .eq('code', gameCode)
+          .single();
+
+        if (game) {
+          setGameId(game.id);
+          // Then fetch participants
+          const { data: participantsData } = await supabase
+            .from('participants')
+            .select('id, name')
+            .eq('game_id', game.id);
+
+          if (participantsData) {
+            setParticipants(participantsData);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching participants:', error);
+      }
+    };
+
+    fetchParticipants();
+  }, [gameCode]);
 
   const handleJoinGame = async () => {
     if (!participantName.trim()) {
