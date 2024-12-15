@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { QuizCard } from "./QuizCard";
 import { QuizProgress } from "./QuizProgress";
+import { Leaderboard } from "./Leaderboard";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -11,7 +12,7 @@ export const GamePlay = () => {
   const [gameState, setGameState] = useState({
     currentQuestion: 0,
     score: 0,
-    questions: shuffleQuestions(allQuestions).slice(0, 10), // Default to 10 questions
+    questions: shuffleQuestions(allQuestions).slice(0, 10),
     gameId: "",
     participantId: "",
     timePerQuestion: 30,
@@ -19,7 +20,6 @@ export const GamePlay = () => {
   const [participants, setParticipants] = useState<{ id: string; name: string; score: number }[]>([]);
   const { toast } = useToast();
 
-  // Initialize game state
   useEffect(() => {
     const initializeGame = async () => {
       try {
@@ -145,21 +145,10 @@ export const GamePlay = () => {
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-center mb-4">Game in Progress</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {participants.map((participant) => (
-              <div
-                key={participant.id}
-                className={`p-3 rounded-lg ${
-                  participant.id === gameState.participantId
-                    ? "bg-dutch-orange text-white"
-                    : "bg-gray-100"
-                }`}
-              >
-                <p className="font-medium">{participant.name}</p>
-                <p className="text-sm">Score: {participant.score}</p>
-              </div>
-            ))}
-          </div>
+          <Leaderboard 
+            participants={participants}
+            currentParticipantId={gameState.participantId}
+          />
         </div>
 
         <QuizProgress
