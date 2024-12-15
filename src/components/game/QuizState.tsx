@@ -18,7 +18,7 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
       try {
         const { data: game, error } = await supabase
           .from('games')
-          .select('selected_questions, status')
+          .select('selected_questions, status, time_per_question, current_question_index')
           .eq('id', gameId)
           .single();
 
@@ -27,11 +27,12 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
         if (game) {
           if (game.status === 'completed') {
             onGameComplete();
+            return;
           }
           
           // Validate and convert the selected_questions data
           if (game.selected_questions && Array.isArray(game.selected_questions)) {
-            const questions = game.selected_questions as any[];
+            const questions = game.selected_questions as QuizQuestion[];
             const validQuestions = questions.every(q => 
               typeof q.id === 'number' &&
               typeof q.questionDutch === 'string' &&
@@ -45,7 +46,7 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
 
             if (validQuestions && questions.length > 0) {
               console.log('Valid questions loaded:', questions);
-              onQuestionsLoaded(questions as QuizQuestion[]);
+              onQuestionsLoaded(questions);
             } else {
               console.error('Invalid question format:', questions);
               throw new Error('Invalid question format in data');
@@ -69,9 +70,9 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
 
     initializeQuiz();
 
-    // Subscribe to game updates
+    // Subscribe to game updates for real-time question changes
     const channel = supabase
-      .channel('game-updates')
+      .channel(`game-updates-${gameId}`)
       .on(
         'postgres_changes',
         {
@@ -83,8 +84,14 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
         (payload: any) => {
           console.log('Game update:', payload);
           const game = payload.new;
+          
           if (game.status === 'completed') {
             onGameComplete();
+          }
+          
+          // If questions or current question index changed, update the state
+          if (game.selected_questions && Array.isArray(game.selected_questions)) {
+            onQuestionsLoaded(game.selected_questions);
           }
         }
       )

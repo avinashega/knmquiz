@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { QuizProgress } from "@/components/QuizProgress";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,6 +7,7 @@ import { QuizCard } from "../QuizCard";
 import { Leaderboard } from "../Leaderboard";
 import { useParticipantProgress } from "@/hooks/use-participant-progress";
 import { QuizState } from "./QuizState";
+import { useToast } from "@/hooks/use-toast";
 
 interface QuizGameplayProps {
   gameId: string;
@@ -20,6 +21,54 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [timePerQuestion, setTimePerQuestion] = useState(30);
   const [selectedQuestions, setSelectedQuestions] = useState<QuizQuestion[]>([]);
   const { progress, updateProgress } = useParticipantProgress(gameId, participantId);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    // Fetch initial game settings
+    const fetchGameSettings = async () => {
+      try {
+        const { data: game, error } = await supabase
+          .from('games')
+          .select('time_per_question, current_question_index')
+          .eq('id', gameId)
+          .single();
+
+        if (error) throw error;
+
+        if (game) {
+          setTimePerQuestion(game.time_per_question);
+        }
+      } catch (error) {
+        console.error('Error fetching game settings:', error);
+      }
+    };
+
+    fetchGameSettings();
+
+    // Subscribe to game setting updates
+    const channel = supabase
+      .channel(`game-settings-${gameId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'games',
+          filter: `id=eq.${gameId}`,
+        },
+        (payload: any) => {
+          const game = payload.new;
+          if (game.time_per_question !== timePerQuestion) {
+            setTimePerQuestion(game.time_per_question);
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }, [gameId, timePerQuestion]);
 
   const handleScore = async () => {
     const newScore = score + 1;
@@ -33,6 +82,11 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
 
       if (error) {
         console.error('Error updating score:', error);
+        toast({
+          title: "Error",
+          description: "Failed to update score",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Error updating score:', error);
@@ -57,6 +111,11 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
 
         if (error) {
           console.error('Error marking game as complete:', error);
+          toast({
+            title: "Error",
+            description: "Failed to complete the game",
+            variant: "destructive",
+          });
         }
       } catch (error) {
         console.error('Error marking game as complete:', error);
