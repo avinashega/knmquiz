@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { GameConfigForm } from "./game/GameConfigForm";
 import { GameLobby } from "./game/GameLobby";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
+import { QuizQuestion } from "@/types/quiz";
 
 interface Participant {
   id: string;
@@ -25,7 +26,7 @@ export const GameCreator = () => {
       const code = Math.random().toString(36).substring(2, 8).toUpperCase();
       
       // Get random questions
-      const selectedQuestions = shuffleQuestions(allQuestions).slice(0, numQuestions);
+      const selectedQuestions: QuizQuestion[] = shuffleQuestions(allQuestions).slice(0, numQuestions);
       
       // Create game in database
       const { data: game, error } = await supabase
@@ -34,12 +35,16 @@ export const GameCreator = () => {
           code: code,
           num_questions: numQuestions,
           time_per_question: timePerQuestion,
-          status: 'waiting'
+          status: 'waiting',
+          selected_questions: selectedQuestions
         })
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error creating game:', error);
+        throw error;
+      }
 
       if (!game) {
         throw new Error('Failed to create game');
