@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { GameConfigForm } from "./game/GameConfigForm";
 import { GameLobby } from "./game/GameLobby";
+import { allQuestions, shuffleQuestions } from "@/data/quizData";
 
 interface Participant {
   id: string;
@@ -18,9 +19,52 @@ export const GameCreator = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { toast } = useToast();
 
-  const handleGameCreated = (code: string, id: string) => {
-    setGameCode(code);
-    setGameId(id);
+  const handleGameCreated = async (numQuestions: number, timePerQuestion: number) => {
+    try {
+      // Generate a random 6-character code
+      const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+      
+      // Get random questions
+      const selectedQuestions = shuffleQuestions(allQuestions).slice(0, numQuestions);
+      
+      // Create game in database
+      const { data: game, error } = await supabase
+        .from('games')
+        .insert({
+          code: code,
+          num_questions: numQuestions,
+          time_per_question: timePerQuestion,
+          status: 'waiting'
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      if (!game) {
+        throw new Error('Failed to create game');
+      }
+
+      // Store creator status in localStorage
+      localStorage.setItem(`game_${game.id}_creator`, 'true');
+      
+      // Update state
+      setGameCode(code);
+      setGameId(game.id);
+      
+      toast({
+        title: "Game Created!",
+        description: "Share the code with participants to join.",
+      });
+
+    } catch (error: any) {
+      console.error('Error creating game:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create game. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const startGame = async () => {

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 interface GameConfig {
   numQuestions: number;
@@ -10,7 +9,7 @@ interface GameConfig {
 }
 
 interface GameConfigFormProps {
-  onGameCreated: (gameCode: string, gameId: string) => void;
+  onGameCreated: (numQuestions: number, timePerQuestion: number) => void;
 }
 
 export const GameConfigForm = ({ onGameCreated }: GameConfigFormProps) => {
@@ -20,36 +19,26 @@ export const GameConfigForm = ({ onGameCreated }: GameConfigFormProps) => {
   });
   const { toast } = useToast();
 
-  const handleCreateGame = async () => {
-    try {
-      const code = Math.random().toString(36).substring(2, 8).toUpperCase();
-      
-      const { data: game, error } = await supabase
-        .from('games')
-        .insert({
-          code: code,
-          num_questions: gameConfig.numQuestions,
-          time_per_question: gameConfig.timePerQuestion
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      onGameCreated(code, game.id);
-      
+  const handleCreateGame = () => {
+    if (gameConfig.numQuestions < 1 || gameConfig.numQuestions > 50) {
       toast({
-        title: "Game Created!",
-        description: "Share the code or QR code with participants.",
-      });
-    } catch (error) {
-      console.error('Error creating game:', error);
-      toast({
-        title: "Error",
-        description: "Failed to create game. Please try again.",
+        title: "Invalid Configuration",
+        description: "Number of questions must be between 1 and 50",
         variant: "destructive",
       });
+      return;
     }
+
+    if (gameConfig.timePerQuestion < 10 || gameConfig.timePerQuestion > 120) {
+      toast({
+        title: "Invalid Configuration",
+        description: "Time per question must be between 10 and 120 seconds",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    onGameCreated(gameConfig.numQuestions, gameConfig.timePerQuestion);
   };
 
   return (
