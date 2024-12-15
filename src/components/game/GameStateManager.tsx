@@ -4,6 +4,7 @@ import { QuizGameplay } from "./QuizGameplay";
 import { WaitingRoom } from "./WaitingRoom";
 import { Leaderboard } from "../Leaderboard";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface GameStateManagerProps {
   gameId: string;
@@ -20,6 +21,7 @@ export const GameStateManager = ({
   isCreator, 
   participantId 
 }: GameStateManagerProps) => {
+  const { toast } = useToast();
   
   const initializeParticipantProgress = async (gameId: string, participantId: string) => {
     try {
@@ -30,13 +32,25 @@ export const GameStateManager = ({
           game_id: gameId,
           current_question_index: 0,
           answers: []
+        }, {
+          onConflict: 'participant_id,game_id'
         });
 
       if (error) {
         console.error('Error initializing participant progress:', error);
+        toast({
+          title: "Error",
+          description: "Failed to initialize game progress",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Error initializing participant progress:', error);
+      toast({
+        title: "Error",
+        description: "Failed to initialize game progress",
+        variant: "destructive",
+      });
     }
   };
 
