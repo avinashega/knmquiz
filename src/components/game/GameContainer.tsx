@@ -17,6 +17,33 @@ interface GameContainerProps {
 export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: GameContainerProps) => {
   const { toast } = useToast();
   const [currentGameId, setCurrentGameId] = useState<string | null>(null);
+  const [participants, setParticipants] = useState<Participant[]>([]);
+
+  const fetchParticipants = async (gameId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('participants')
+        .select('id, name, score')
+        .eq('game_id', gameId);
+
+      if (error) {
+        console.error('Error fetching participants:', error);
+        throw error;
+      }
+
+      if (data) {
+        setParticipants(data);
+        onParticipantsData(data);
+      }
+    } catch (error: any) {
+      console.error('Error in fetchParticipants:', error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch participants data. Please refresh the page.",
+        variant: "destructive",
+      });
+    }
+  };
 
   useEffect(() => {
     const checkGameStatus = async () => {
@@ -53,25 +80,7 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
         onGameData(game);
         
         // Fetch initial participants data
-        const { data: participantsData, error: participantsError } = await supabase
-          .from('participants')
-          .select('id, name, score')
-          .eq('game_id', game.id);
-
-        if (participantsError) {
-          console.error('Error fetching participants:', participantsError);
-          toast({
-            title: "Error",
-            description: "Failed to fetch participants",
-            variant: "destructive",
-          });
-          return;
-        }
-
-        if (participantsData) {
-          console.log('Participants data:', participantsData);
-          onParticipantsData(participantsData);
-        }
+        await fetchParticipants(game.id);
       } catch (error: any) {
         console.error('Error checking game status:', error);
         toast({
@@ -123,21 +132,11 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
           table: 'participants',
           filter: `game_id=eq.${currentGameId}`,
         },
-        (participantPayload: any) => {
+        async (participantPayload: any) => {
           console.log('Participant update:', participantPayload);
           if (participantPayload.new) {
-            onParticipantsData((prevParticipants: Participant[]) => {
-              const updatedParticipants = [...prevParticipants];
-              const existingIndex = updatedParticipants.findIndex(p => p.id === participantPayload.new.id);
-              
-              if (existingIndex >= 0) {
-                updatedParticipants[existingIndex] = participantPayload.new;
-              } else {
-                updatedParticipants.push(participantPayload.new);
-              }
-              
-              return updatedParticipants;
-            });
+            // Fetch all participants again to ensure consistency
+            await fetchParticipants(currentGameId!);
           }
         }
       )
@@ -147,7 +146,7 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
       gameChannel.unsubscribe();
       participantChannel.unsubscribe();
     };
-  }, [gameCode, onGameData, onParticipantsData, toast, currentGameId]);
+  }, [gameCode, onGameData, toast, currentGameId]);
 
   return null;
 };
