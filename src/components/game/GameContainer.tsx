@@ -2,10 +2,16 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
+interface Participant {
+  id: string;
+  name: string;
+  score: number;
+}
+
 interface GameContainerProps {
   gameCode: string;
   onGameData: (data: { id: string; status: string }) => void;
-  onParticipantsData: (data: Array<{ id: string; name: string; score: number }>) => void;
+  onParticipantsData: (data: Participant[]) => void;
 }
 
 export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: GameContainerProps) => {
@@ -23,7 +29,15 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
           .eq('code', gameCode)
           .single();
 
-        if (error) throw error;
+        if (error) {
+          console.error('Error fetching game:', error);
+          toast({
+            title: "Error",
+            description: "Failed to fetch game data",
+            variant: "destructive",
+          });
+          return;
+        }
 
         if (!game) {
           toast({
@@ -112,7 +126,7 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
         (participantPayload: any) => {
           console.log('Participant update:', participantPayload);
           if (participantPayload.new) {
-            onParticipantsData((prevParticipants) => {
+            onParticipantsData((prevParticipants: Participant[]) => {
               const updatedParticipants = [...prevParticipants];
               const existingIndex = updatedParticipants.findIndex(p => p.id === participantPayload.new.id);
               
