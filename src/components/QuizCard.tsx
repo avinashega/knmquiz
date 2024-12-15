@@ -27,18 +27,37 @@ export const QuizCard = ({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [shuffledOptions, setShuffledOptions] = useState<ShuffledOption[]>([]);
+  const [timeLeft, setTimeLeft] = useState(timePerQuestion);
 
   useEffect(() => {
     // Reset state and shuffle options when question changes
     setSelectedAnswer(null);
     setIsAnswered(false);
+    setTimeLeft(timePerQuestion);
 
     // Shuffle options while maintaining the mapping to correct answer
     const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
     const optionsWithIndex = options.map((text, index) => ({ text, originalIndex: index }));
     const shuffled = [...optionsWithIndex].sort(() => Math.random() - 0.5);
     setShuffledOptions(shuffled);
-  }, [question, language]);
+  }, [question, language, timePerQuestion]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          if (!isAnswered) {
+            onNext();
+          }
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [isAnswered, onNext]);
 
   const handleAnswer = (option: ShuffledOption) => {
     if (isAnswered) return;
@@ -47,17 +66,18 @@ export const QuizCard = ({
     if (option.originalIndex === question.correctOptionIndex) {
       onScore();
     }
+    setTimeout(onNext, 1000);
   };
 
   // Get the appropriate question text based on language
   const questionText = language === 'dutch' ? question.questionDutch : question.questionEnglish;
-  const timerProgress = (timePerQuestion / 30) * 100;
+  const timerProgress = (timeLeft / timePerQuestion) * 100;
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <div className="mb-4 space-y-2">
         <div className="flex justify-between text-sm text-gray-600">
-          <span>Resterende tijd: {timePerQuestion}s</span>
+          <span>Resterende tijd: {timeLeft}s</span>
         </div>
         <Progress value={timerProgress} className="h-2" />
       </div>
