@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { allQuestions } from "@/data/quizData";
 import { QuizCard } from "@/components/QuizCard";
-import { GameCreator } from "@/components/GameCreator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
+import { GameCreator } from "@/components/GameCreator";
 
 const Index = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -23,7 +23,11 @@ const Index = () => {
           <img 
             src="/knm-logo.png" 
             alt="KNM Quiz Logo" 
-            className="h-24 mx-auto mb-4"
+            className="h-24 mx-auto mb-4 object-contain"
+            onError={(e) => {
+              e.currentTarget.src = "/placeholder.svg";
+              e.currentTarget.className = "h-24 mx-auto mb-4 object-contain opacity-50";
+            }}
           />
           <h1 className="text-4xl font-bold text-center mb-4">KNM Quiz</h1>
           <p className="text-gray-600">Test your knowledge of Dutch society</p>

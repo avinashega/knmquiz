@@ -7,6 +7,8 @@ import { GameConfigForm } from "./game/GameConfigForm";
 import { GameLobby } from "./game/GameLobby";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import { QuizQuestion } from "@/types/quiz";
+import { Button } from "./ui/button";
+import { Play } from "lucide-react";
 
 interface Participant {
   id: string;
@@ -128,14 +130,24 @@ export const GameCreator = () => {
       {!gameCode ? (
         <GameConfigForm onGameCreated={handleGameCreated} />
       ) : (
-        <GameLobby
-          gameId={gameId}
-          gameCode={gameCode}
-          participants={participants}
-          onParticipantsChange={setParticipants}
-          onStartGame={startGame}
-          isCreator={true}
-        />
+        <>
+          <GameLobby
+            gameId={gameId}
+            gameCode={gameCode}
+            participants={participants}
+            onParticipantsChange={setParticipants}
+            onStartGame={startGame}
+            isCreator={true}
+          />
+          <Button 
+            onClick={startGame} 
+            className="w-full mt-4"
+            disabled={participants.length < 1}
+          >
+            <Play className="mr-2" />
+            Start Game
+          </Button>
+        </>
       )}
     </Card>
   );
