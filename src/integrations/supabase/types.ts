@@ -13,9 +13,11 @@ export type Database = {
         Row: {
           code: string
           created_at: string
+          current_question_index: number | null
           finished_at: string | null
           id: string
           num_questions: number
+          selected_questions: Json | null
           started_at: string | null
           status: string
           time_per_question: number
@@ -23,9 +25,11 @@ export type Database = {
         Insert: {
           code: string
           created_at?: string
+          current_question_index?: number | null
           finished_at?: string | null
           id?: string
           num_questions?: number
+          selected_questions?: Json | null
           started_at?: string | null
           status?: string
           time_per_question?: number
@@ -33,9 +37,11 @@ export type Database = {
         Update: {
           code?: string
           created_at?: string
+          current_question_index?: number | null
           finished_at?: string | null
           id?: string
           num_questions?: number
+          selected_questions?: Json | null
           started_at?: string | null
           status?: string
           time_per_question?: number
