@@ -37,12 +37,14 @@ export const GamePlay = () => {
           return;
         }
 
+        console.log('Game data:', game);
         setGameId(game.id);
         setGameStatus(game.status);
         
         // Check if user is the creator of this game
         const isGameCreator = localStorage.getItem(`game_${game.id}_creator`) === 'true';
         setIsCreator(isGameCreator);
+        console.log('Is creator:', isGameCreator);
         
         // Only set participantId if not the creator
         if (!isGameCreator) {
@@ -59,6 +61,7 @@ export const GamePlay = () => {
           .eq('game_id', game.id);
 
         if (participantsData) {
+          console.log('Participants data:', participantsData);
           setParticipants(participantsData);
         }
       } catch (error: any) {
@@ -74,66 +77,82 @@ export const GamePlay = () => {
     checkGameStatus();
 
     // Subscribe to game status changes
-    let gameChannel;
-    if (gameId) {
-      gameChannel = supabase
-        .channel('game-status-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'games',
-            filter: `id=eq.${gameId}`,
-          },
-          (payload: any) => {
-            console.log('Game status changed:', payload);
-            if (payload.new && payload.new.status) {
-              setGameStatus(payload.new.status);
+    const gameChannel = supabase
+      .channel('game-status')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'games',
+          filter: gameId ? `id=eq.${gameId}` : undefined,
+        },
+        (payload: any) => {
+          console.log('Game status changed:', payload);
+          if (payload.new && payload.new.status) {
+            setGameStatus(payload.new.status);
+          }
+        }
+      )
+      .subscribe();
+
+    // Subscribe to participant updates
+    const participantChannel = supabase
+      .channel('participant-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'participants',
+          filter: gameId ? `game_id=eq.${gameId}` : undefined,
+        },
+        (payload: any) => {
+          console.log('Participant update:', payload);
+          const participant = payload.new;
+          setParticipants(prev => {
+            const existing = prev.find(p => p.id === participant.id);
+            if (existing) {
+              return prev.map(p => p.id === participant.id ? participant : p);
             }
-          }
-        )
-        .subscribe();
+            return [...prev, participant];
+          });
+        }
+      )
+      .subscribe();
 
-      // Subscribe to participant updates
-      const participantChannel = supabase
-        .channel('participants-changes')
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'participants',
-            filter: `game_id=eq.${gameId}`,
-          },
-          (payload) => {
-            const participant = payload.new as any;
-            setParticipants(prev => {
-              const existing = prev.find(p => p.id === participant.id);
-              if (existing) {
-                return prev.map(p => p.id === participant.id ? participant : p);
-              }
-              return [...prev, participant];
-            });
-          }
-        )
-        .subscribe();
-
-      return () => {
-        if (gameChannel) supabase.removeChannel(gameChannel);
-        if (participantChannel) supabase.removeChannel(participantChannel);
-      };
-    }
+    return () => {
+      gameChannel.unsubscribe();
+      participantChannel.unsubscribe();
+    };
   }, [gameCode, gameId, toast]);
+
+  console.log('Current game status:', gameStatus);
+  console.log('Is creator:', isCreator);
+  console.log('Participant ID:', participantId);
 
   if (!gameId) {
     return null;
   }
 
-  // If user is creator, show leaderboard
-  if (isCreator) {
+  // If user is creator and game is playing, show leaderboard
+  if (isCreator && gameStatus === 'playing') {
     return (
       <div className="container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-bold mb-4">Game in Progress</h2>
+        <Leaderboard 
+          participants={participants}
+          currentParticipantId=""
+        />
+      </div>
+    );
+  }
+
+  // If user is creator and game is waiting, show waiting room
+  if (isCreator && gameStatus === 'waiting') {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-bold mb-4">Waiting Room</h2>
         <Leaderboard 
           participants={participants}
           currentParticipantId=""

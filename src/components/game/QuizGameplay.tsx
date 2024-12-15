@@ -22,6 +22,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   useEffect(() => {
     const initializeQuiz = async () => {
       try {
+        console.log('Initializing quiz for game:', gameId);
         const { data: game } = await supabase
           .from('games')
           .select('num_questions')
@@ -29,7 +30,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
           .single();
 
         if (game) {
-          console.log('Initializing quiz with', game.num_questions, 'questions');
+          console.log('Game settings:', game);
           const shuffled = shuffleQuestions(allQuestions);
           setQuestions(shuffled.slice(0, game.num_questions));
         }
@@ -53,10 +54,15 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     setScore(newScore);
     
     try {
-      await supabase
+      console.log('Updating score for participant:', participantId);
+      const { error } = await supabase
         .from('participants')
         .update({ score: newScore })
         .eq('id', participantId);
+
+      if (error) {
+        console.error('Error updating score:', error);
+      }
     } catch (error) {
       console.error('Error updating score:', error);
     }
