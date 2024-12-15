@@ -29,17 +29,30 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
             onGameComplete();
           }
           
-          // Parse the selected_questions array and validate its structure
+          // Validate and convert the selected_questions data
           if (game.selected_questions && Array.isArray(game.selected_questions)) {
-            const questions = game.selected_questions as QuizQuestion[];
-            if (questions.length > 0) {
-              console.log('Loaded questions:', questions); // Debug log
-              onQuestionsLoaded(questions);
+            const questions = game.selected_questions as any[];
+            const validQuestions = questions.every(q => 
+              typeof q.id === 'number' &&
+              typeof q.questionDutch === 'string' &&
+              typeof q.questionEnglish === 'string' &&
+              typeof q.answerDutch === 'string' &&
+              typeof q.answerEnglish === 'string' &&
+              Array.isArray(q.optionsDutch) &&
+              Array.isArray(q.optionsEnglish) &&
+              typeof q.correctOptionIndex === 'number'
+            );
+
+            if (validQuestions && questions.length > 0) {
+              console.log('Valid questions loaded:', questions);
+              onQuestionsLoaded(questions as QuizQuestion[]);
             } else {
-              throw new Error('No questions available');
+              console.error('Invalid question format:', questions);
+              throw new Error('Invalid question format in data');
             }
           } else {
-            throw new Error('Invalid questions data');
+            console.error('Invalid selected_questions data:', game.selected_questions);
+            throw new Error('No valid questions data available');
           }
         }
         setIsLoading(false);
