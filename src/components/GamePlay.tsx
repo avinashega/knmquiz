@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { GameJoiner } from "./GameJoiner";
+import { QuizGameplay } from "./game/QuizGameplay";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -52,17 +53,13 @@ export const GamePlay = () => {
     checkGameStatus();
   }, [gameCode, toast]);
 
-  // If we don't have a participantId yet, show the join form
   if (!participantId) {
     return <GameJoiner />;
   }
 
-  // TODO: Implement the actual quiz gameplay component
-  return (
-    <div className="p-4">
-      <h1>Game in progress</h1>
-      <p>Game Code: {gameCode}</p>
-      <p>Participant ID: {participantId}</p>
-    </div>
-  );
+  if (!gameId) {
+    return null;
+  }
+
+  return <QuizGameplay gameId={gameId} participantId={participantId} />;
 };
