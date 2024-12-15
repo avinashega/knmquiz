@@ -1,145 +1,54 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
 import { QuizQuestion } from "@/types/quiz";
-import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
-import { Languages } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface QuizCardProps {
   question: QuizQuestion;
   language: 'dutch' | 'english';
   onNext: () => void;
   onScore: () => void;
+  hideAnswer?: boolean;
 }
 
-export const QuizCard = ({ question, language, onNext, onScore }: QuizCardProps) => {
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [shuffledOptions, setShuffledOptions] = useState<{ text: string; index: number }[]>([]);
-  const { toast } = useToast();
+export const QuizCard = ({ question, language, onNext, onScore, hideAnswer = false }: QuizCardProps) => {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
 
-  // Reset state and shuffle options when question changes
-  useEffect(() => {
-    const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
-    const optionsWithIndices = options.map((text, index) => ({ text, index }));
-    const shuffled = [...optionsWithIndices].sort(() => Math.random() - 0.5);
-    setShuffledOptions(shuffled);
-    setSelectedOption(null);
-    setHasAnswered(false);
-  }, [question, language]);
-
-  const handleSubmit = () => {
-    if (selectedOption === null) {
-      toast({
-        title: "Please select an answer",
-        variant: "destructive",
-        duration: 1500,
-      });
-      return;
-    }
-
-    setHasAnswered(true);
-
-    if (selectedOption === question.correctOptionIndex) {
+  const handleAnswer = (answer: string) => {
+    setSelectedAnswer(answer);
+    setIsAnswered(true);
+    if (answer === question.correct_answer) {
       onScore();
-      toast({
-        title: "Correct!",
-        description: "Well done! Keep going!",
-        duration: 1500,
-      });
-    } else {
-      toast({
-        title: "Not quite right",
-        description: language === 'dutch' ? question.answerDutch : question.answerEnglish,
-        variant: "destructive",
-        duration: 3000,
-      });
     }
   };
 
   const handleNext = () => {
-    setSelectedOption(null);
-    setHasAnswered(false);
+    setSelectedAnswer(null);
+    setIsAnswered(false);
     onNext();
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto animate-fadeIn">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-dutch-blue">
-            {language === 'dutch' ? question.questionDutch : question.questionEnglish}
-          </h2>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="focus:ring-2 focus:ring-offset-2 focus:ring-dutch-blue"
-              >
-                <Languages className="h-5 w-5" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-4">
-              <p className="text-sm">
-                {language === 'dutch' ? question.questionEnglish : question.questionDutch}
-              </p>
-            </PopoverContent>
-          </Popover>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <RadioGroup
-          value={selectedOption?.toString()}
-          onValueChange={(value) => !hasAnswered && setSelectedOption(parseInt(value))}
-          className="space-y-4"
-        >
-          {shuffledOptions.map(({ text, index }) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem 
-                value={index.toString()} 
-                id={`option-${index}`} 
-                disabled={hasAnswered}
-                className={cn(
-                  hasAnswered && "opacity-50"
-                )}
-              />
-              <Label 
-                htmlFor={`option-${index}`} 
-                className={cn(
-                  "text-left flex-1 p-2 rounded cursor-pointer",
-                  hasAnswered && selectedOption === index && index === question.correctOptionIndex && "bg-green-100 text-green-800",
-                  hasAnswered && selectedOption === index && index !== question.correctOptionIndex && "bg-red-100 text-red-800",
-                  hasAnswered && selectedOption !== index && index === question.correctOptionIndex && "bg-green-100 text-green-800"
-                )}
-              >
-                {text}
-              </Label>
-            </div>
-          ))}
-        </RadioGroup>
-      </CardContent>
-      <CardFooter className="flex justify-center pt-6 space-x-4">
-        {!hasAnswered ? (
-          <Button
-            onClick={handleSubmit}
-            className="bg-dutch-orange hover:bg-dutch-orange/90 w-full max-w-xs"
+    <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-xl font-bold mb-4">{question.question}</h2>
+      <div className="space-y-2">
+        {question.answers.map((answer) => (
+          <button
+            key={answer}
+            className={`w-full text-left p-2 rounded-lg ${isAnswered ? (answer === question.correct_answer ? 'bg-green-500 text-white' : (selectedAnswer === answer ? 'bg-red-500 text-white' : 'bg-gray-200')) : 'bg-gray-100 hover:bg-gray-200'}`}
+            onClick={() => handleAnswer(answer)}
+            disabled={isAnswered}
           >
-            Submit Answer
-          </Button>
-        ) : (
-          <Button
-            onClick={handleNext}
-            className="bg-dutch-blue hover:bg-dutch-blue/90 w-full max-w-xs"
-          >
+            {answer}
+          </button>
+        ))}
+      </div>
+      {isAnswered && (
+        <div className="mt-4">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleNext}>
             Next Question
-          </Button>
-        )}
-      </CardFooter>
-    </Card>
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
