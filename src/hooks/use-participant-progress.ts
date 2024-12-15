@@ -1,65 +1,47 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from './use-toast';
 
-interface ParticipantProgress {
+interface Progress {
   currentQuestionIndex: number;
   answers: any[];
 }
 
 export const useParticipantProgress = (gameId: string, participantId: string) => {
-  const [progress, setProgress] = useState<ParticipantProgress | null>(null);
+  const [progress, setProgress] = useState<Progress | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
-    const initializeProgress = async () => {
+    const fetchProgress = async () => {
       try {
-        // First check if progress exists
-        const { data: existingProgress } = await supabase
+        const { data, error } = await supabase
           .from('participant_progress')
-          .select('*')
+          .select('current_question_index, answers')
           .eq('game_id', gameId)
           .eq('participant_id', participantId)
           .single();
 
-        if (existingProgress) {
+        if (error) {
+          console.error('Error fetching progress:', error);
+          return;
+        }
+
+        if (data) {
           setProgress({
-            currentQuestionIndex: existingProgress.current_question_index,
-            answers: existingProgress.answers || []
+            currentQuestionIndex: data.current_question_index,
+            answers: Array.isArray(data.answers) ? data.answers : []
           });
-        } else {
-          // Create initial progress
-          const { data: newProgress, error } = await supabase
-            .from('participant_progress')
-            .insert({
-              game_id: gameId,
-              participant_id: participantId,
-              current_question_index: 0,
-              answers: []
-            })
-            .select()
-            .single();
-
-          if (error) {
-            console.error('Error creating progress:', error);
-            return;
-          }
-
-          if (newProgress) {
-            setProgress({
-              currentQuestionIndex: newProgress.current_question_index,
-              answers: newProgress.answers || []
-            });
-          }
         }
       } catch (error) {
-        console.error('Error initializing participant progress:', error);
+        console.error('Error fetching progress:', error);
       }
     };
 
-    initializeProgress();
+    fetchProgress();
 
     // Subscribe to progress updates
     const channel = supabase
-      .channel('progress-updates')
+      .channel(`progress-${participantId}`)
       .on(
         'postgres_changes',
         {
@@ -69,10 +51,11 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           filter: `participant_id=eq.${participantId}`,
         },
         (payload: any) => {
+          console.log('Progress update:', payload);
           if (payload.new) {
             setProgress({
               currentQuestionIndex: payload.new.current_question_index,
-              answers: payload.new.answers || []
+              answers: Array.isArray(payload.new.answers) ? payload.new.answers : []
             });
           }
         }
@@ -86,36 +69,47 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
 
   const updateProgress = async (currentQuestionIndex: number, answer: any) => {
     try {
-      const updatedAnswers = answer 
-        ? [...(progress?.answers || []), answer]
-        : (progress?.answers || []);
+      let answers = progress?.answers || [];
+      if (answer !== null) {
+        answers = [...answers];
+        answers[currentQuestionIndex] = answer;
+      }
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('participant_progress')
         .upsert({
-          game_id: gameId,
           participant_id: participantId,
+          game_id: gameId,
           current_question_index: currentQuestionIndex,
-          answers: updatedAnswers
-        })
-        .select()
-        .single();
+          answers: answers
+        });
 
       if (error) {
         console.error('Error updating progress:', error);
+        toast({
+          title: "Error",
+          description: "Failed to update progress",
+          variant: "destructive",
+        });
         return;
       }
 
-      if (data) {
-        setProgress({
-          currentQuestionIndex: data.current_question_index,
-          answers: data.answers || []
-        });
-      }
+      setProgress({
+        currentQuestionIndex,
+        answers
+      });
     } catch (error) {
       console.error('Error updating progress:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update progress",
+        variant: "destructive",
+      });
     }
   };
 
-  return { progress, updateProgress };
+  return {
+    progress,
+    updateProgress
+  };
 };

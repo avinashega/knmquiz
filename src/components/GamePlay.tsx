@@ -93,6 +93,10 @@ export const GamePlay = () => {
             setGameStatus(payload.new.status);
             
             if (payload.new.status === 'playing') {
+              // Initialize participant progress when game starts
+              if (participantId) {
+                initializeParticipantProgress(payload.new.id, participantId);
+              }
               toast({
                 title: "Game Started!",
                 description: "The quiz is now beginning...",
@@ -132,7 +136,31 @@ export const GamePlay = () => {
       gameChannel.unsubscribe();
       participantChannel.unsubscribe();
     };
-  }, [gameCode, gameId, toast]);
+  }, [gameCode, gameId, participantId, toast]);
+
+  const initializeParticipantProgress = async (gameId: string, participantId: string) => {
+    try {
+      const { error } = await supabase
+        .from('participant_progress')
+        .upsert({
+          participant_id: participantId,
+          game_id: gameId,
+          current_question_index: 0,
+          answers: []
+        });
+
+      if (error) {
+        console.error('Error initializing participant progress:', error);
+        toast({
+          title: "Error",
+          description: "Failed to initialize quiz progress",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Error initializing participant progress:', error);
+    }
+  };
 
   if (!gameId) {
     return null;
