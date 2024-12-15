@@ -11,6 +11,7 @@ export const GamePlay = () => {
   const [gameId, setGameId] = useState<string | null>(null);
   const [participantId, setParticipantId] = useState<string | null>(null);
   const [isCreator, setIsCreator] = useState(false);
+  const [gameStatus, setGameStatus] = useState<string>('waiting');
   const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
   const { toast } = useToast();
 
@@ -37,6 +38,7 @@ export const GamePlay = () => {
         }
 
         setGameId(game.id);
+        setGameStatus(game.status);
         
         // Check if user is the creator of this game
         const isGameCreator = localStorage.getItem(`game_${game.id}_creator`) === 'true';
@@ -71,9 +73,30 @@ export const GamePlay = () => {
 
     checkGameStatus();
 
-    // Subscribe to participant updates
+    // Subscribe to game status changes
+    let gameChannel;
     if (gameId) {
-      const channel = supabase
+      gameChannel = supabase
+        .channel('game-status-changes')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'games',
+            filter: `id=eq.${gameId}`,
+          },
+          (payload: any) => {
+            console.log('Game status changed:', payload);
+            if (payload.new && payload.new.status) {
+              setGameStatus(payload.new.status);
+            }
+          }
+        )
+        .subscribe();
+
+      // Subscribe to participant updates
+      const participantChannel = supabase
         .channel('participants-changes')
         .on(
           'postgres_changes',
@@ -97,7 +120,8 @@ export const GamePlay = () => {
         .subscribe();
 
       return () => {
-        supabase.removeChannel(channel);
+        if (gameChannel) supabase.removeChannel(gameChannel);
+        if (participantChannel) supabase.removeChannel(participantChannel);
       };
     }
   }, [gameCode, gameId, toast]);
@@ -106,6 +130,7 @@ export const GamePlay = () => {
     return null;
   }
 
+  // If user is creator, show leaderboard
   if (isCreator) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -117,9 +142,25 @@ export const GamePlay = () => {
     );
   }
 
-  if (!participantId) {
+  // If game hasn't started and user is not joined, show joiner
+  if (gameStatus === 'waiting' && !participantId) {
     return <GameJoiner />;
   }
 
-  return <QuizGameplay gameId={gameId} participantId={participantId} />;
-};
+  // If user has joined and game is playing, show gameplay
+  if (participantId && gameStatus === 'playing') {
+    return <QuizGameplay gameId={gameId} participantId={participantId} />;
+  }
+
+  // If user has joined but game hasn't started, show waiting screen
+  if (participantId && gameStatus === 'waiting') {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <h2 className="text-2xl font-bold mb-4">Waiting for the game to start...</h2>
+        <p className="text-gray-600">The quiz will begin when the host starts the game.</p>
+      </div>
+    );
+  }
+
+  return null;
+});
