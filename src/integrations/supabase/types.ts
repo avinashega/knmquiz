@@ -48,6 +48,51 @@ export type Database = {
         }
         Relationships: []
       }
+      participant_progress: {
+        Row: {
+          answers: Json | null
+          created_at: string
+          current_question_index: number
+          game_id: string
+          id: string
+          participant_id: string
+          updated_at: string
+        }
+        Insert: {
+          answers?: Json | null
+          created_at?: string
+          current_question_index?: number
+          game_id: string
+          id?: string
+          participant_id: string
+          updated_at?: string
+        }
+        Update: {
+          answers?: Json | null
+          created_at?: string
+          current_question_index?: number
+          game_id?: string
+          id?: string
+          participant_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participant_progress_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "participant_progress_participant_id_fkey"
+            columns: ["participant_id"]
+            isOneToOne: false
+            referencedRelation: "participants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       participants: {
         Row: {
           created_at: string
