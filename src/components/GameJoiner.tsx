@@ -100,32 +100,35 @@ export const GameJoiner = () => {
   }
 
   return (
-    <Card className="p-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Join Quiz Game</h2>
-      <div className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Your Name</label>
-          <Input
-            type="text"
-            value={participantName}
-            onChange={(e) => setParticipantName(e.target.value)}
-            placeholder="Enter your name"
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <Card className="p-6 max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-4 text-center">Join Quiz Game</h2>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Your Name</label>
+            <Input
+              type="text"
+              value={participantName}
+              onChange={(e) => setParticipantName(e.target.value)}
+              placeholder="Enter your name"
+              disabled={isJoining}
+              autoFocus
+            />
+          </div>
+
+          <div className="p-4 bg-gray-50 rounded-lg">
+            <p className="text-center font-mono text-xl">Game Code: {gameCode}</p>
+          </div>
+
+          <Button 
+            onClick={handleJoinGame} 
+            className="w-full"
             disabled={isJoining}
-          />
+          >
+            {isJoining ? "Joining..." : "Join Game"}
+          </Button>
         </div>
-
-        <div className="p-4 bg-gray-50 rounded-lg">
-          <p className="text-center font-mono text-xl">Game Code: {gameCode}</p>
-        </div>
-
-        <Button 
-          onClick={handleJoinGame} 
-          className="w-full"
-          disabled={isJoining}
-        >
-          {isJoining ? "Joining..." : "Join Game"}
-        </Button>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
