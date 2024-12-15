@@ -21,7 +21,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [timePerQuestion, setTimePerQuestion] = useState(30);
   const [selectedQuestions, setSelectedQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(timePerQuestion);
+  const [isLoading, setIsLoading] = useState(true);
   const { progress, updateProgress } = useParticipantProgress(gameId, participantId);
   const { toast } = useToast();
 
@@ -54,22 +54,6 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
       channel.unsubscribe();
     };
   }, [gameId]);
-
-  useEffect(() => {
-    // Timer effect
-    const timer = setInterval(async () => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          // Time's up for this question
-          handleNext();
-          return timePerQuestion;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timePerQuestion, currentQuestionIndex]);
 
   const handleScore = async () => {
     const newScore = score + 1;
@@ -109,7 +93,6 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         if (error) throw error;
         
         await updateProgress(nextIndex, null);
-        setTimeLeft(timePerQuestion);
       } catch (error) {
         console.error('Error updating question index:', error);
         toast({
@@ -143,14 +126,6 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     }
   };
 
-  if (!selectedQuestions.length) {
-    return (
-      <Card className="p-6 max-w-2xl mx-auto mt-8">
-        <p className="text-center">Loading questions...</p>
-      </Card>
-    );
-  }
-
   if (isComplete) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -167,24 +142,35 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     <div className="container mx-auto px-4 py-8">
       <QuizState
         gameId={gameId}
-        onQuestionsLoaded={setSelectedQuestions}
+        onQuestionsLoaded={(questions) => {
+          setSelectedQuestions(questions);
+          setIsLoading(false);
+        }}
         onGameComplete={() => setIsComplete(true)}
       />
 
-      <QuizProgress
-        current={currentQuestionIndex}
-        total={selectedQuestions.length}
-        score={score}
-      />
+      {isLoading ? (
+        <Card className="p-6 max-w-2xl mx-auto mt-8">
+          <p className="text-center">Loading questions...</p>
+        </Card>
+      ) : (
+        <>
+          <QuizProgress
+            current={currentQuestionIndex}
+            total={selectedQuestions.length}
+            score={score}
+          />
 
-      {selectedQuestions[currentQuestionIndex] && (
-        <QuizCard
-          question={selectedQuestions[currentQuestionIndex]}
-          language="dutch"
-          onNext={handleNext}
-          onScore={handleScore}
-          timePerQuestion={timeLeft}
-        />
+          {selectedQuestions[currentQuestionIndex] && (
+            <QuizCard
+              question={selectedQuestions[currentQuestionIndex]}
+              language="dutch"
+              onNext={handleNext}
+              onScore={handleScore}
+              timePerQuestion={timePerQuestion}
+            />
+          )}
+        </>
       )}
     </div>
   );
