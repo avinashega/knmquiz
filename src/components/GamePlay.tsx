@@ -130,6 +130,19 @@ export const GamePlay = () => {
     return null;
   }
 
+  // Show leaderboard for completed games
+  if (gameStatus === 'completed') {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-bold text-center mb-8">Game Complete!</h2>
+        <Leaderboard 
+          participants={participants}
+          currentParticipantId={participantId || ""}
+        />
+      </div>
+    );
+  }
+
   if (isCreator && gameStatus === 'playing') {
     return (
       <div className="container mx-auto px-4 py-8">

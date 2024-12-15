@@ -20,7 +20,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
   const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
-  const [timePerQuestion, setTimePerQuestion] = useState(30); // Default value
+  const [timePerQuestion, setTimePerQuestion] = useState(30);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -102,11 +102,32 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       setIsComplete(true);
+      // Mark game as complete in the backend
+      try {
+        const { error } = await supabase
+          .from('games')
+          .update({ 
+            status: 'completed',
+            finished_at: new Date().toISOString()
+          })
+          .eq('id', gameId);
+
+        if (error) {
+          console.error('Error marking game as complete:', error);
+          toast({
+            title: "Error",
+            description: "Failed to update game status",
+            variant: "destructive",
+          });
+        }
+      } catch (error) {
+        console.error('Error marking game as complete:', error);
+      }
     }
   };
 
@@ -148,7 +169,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
 
       <QuizCard
         question={questions[currentQuestionIndex]}
-        language="english"
+        language="dutch"
         onNext={handleNext}
         onScore={handleScore}
         timePerQuestion={timePerQuestion}
