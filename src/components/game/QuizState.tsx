@@ -16,28 +16,38 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
   useEffect(() => {
     const initializeQuiz = async () => {
       try {
-        const { data: game } = await supabase
+        const { data: game, error } = await supabase
           .from('games')
           .select('selected_questions, status')
           .eq('id', gameId)
           .single();
 
+        if (error) throw error;
+
         if (game) {
           if (game.status === 'completed') {
             onGameComplete();
           }
-          if (game.selected_questions) {
-            // Type assertion to handle the JSON data
-            const questions = game.selected_questions as unknown as QuizQuestion[];
-            onQuestionsLoaded(questions);
+          
+          // Parse the selected_questions array and validate its structure
+          if (game.selected_questions && Array.isArray(game.selected_questions)) {
+            const questions = game.selected_questions as QuizQuestion[];
+            if (questions.length > 0) {
+              console.log('Loaded questions:', questions); // Debug log
+              onQuestionsLoaded(questions);
+            } else {
+              throw new Error('No questions available');
+            }
+          } else {
+            throw new Error('Invalid questions data');
           }
         }
         setIsLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error initializing quiz:', error);
         toast({
           title: "Error",
-          description: "Failed to load quiz questions",
+          description: error.message || "Failed to load quiz questions",
           variant: "destructive",
         });
         setIsLoading(false);
