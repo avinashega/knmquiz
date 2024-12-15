@@ -16,7 +16,8 @@ export const QuizCard = ({ question, language, onNext, onScore, hideAnswer = fal
   const handleAnswer = (answer: string) => {
     setSelectedAnswer(answer);
     setIsAnswered(true);
-    if (answer === question.correct_answer) {
+    const correctAnswer = question.optionsEnglish[question.correctOptionIndex];
+    if (answer === correctAnswer) {
       onScore();
     }
   };
@@ -27,14 +28,27 @@ export const QuizCard = ({ question, language, onNext, onScore, hideAnswer = fal
     onNext();
   };
 
+  // Get the appropriate question text and options based on language
+  const questionText = language === 'dutch' ? question.questionDutch : question.questionEnglish;
+  const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
+  const correctAnswer = question.optionsEnglish[question.correctOptionIndex];
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">{question.question}</h2>
+      <h2 className="text-xl font-bold mb-4">{questionText}</h2>
       <div className="space-y-2">
-        {question.answers.map((answer) => (
+        {options.map((answer) => (
           <button
             key={answer}
-            className={`w-full text-left p-2 rounded-lg ${isAnswered ? (answer === question.correct_answer ? 'bg-green-500 text-white' : (selectedAnswer === answer ? 'bg-red-500 text-white' : 'bg-gray-200')) : 'bg-gray-100 hover:bg-gray-200'}`}
+            className={`w-full text-left p-2 rounded-lg ${
+              isAnswered && !hideAnswer
+                ? answer === options[question.correctOptionIndex]
+                  ? 'bg-green-500 text-white'
+                  : selectedAnswer === answer
+                  ? 'bg-red-500 text-white'
+                  : 'bg-gray-200'
+                : 'bg-gray-100 hover:bg-gray-200'
+            }`}
             onClick={() => handleAnswer(answer)}
             disabled={isAnswered}
           >
@@ -44,7 +58,10 @@ export const QuizCard = ({ question, language, onNext, onScore, hideAnswer = fal
       </div>
       {isAnswered && (
         <div className="mt-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleNext}>
+          <button 
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors" 
+            onClick={handleNext}
+          >
             Next Question
           </button>
         </div>
