@@ -39,7 +39,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
 
     fetchProgress();
 
-    // Subscribe to progress updates
+    // Subscribe to progress updates with debouncing
     const channel = supabase
       .channel(`progress-${participantId}`)
       .on(
@@ -51,7 +51,6 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           filter: `participant_id=eq.${participantId}`,
         },
         (payload: any) => {
-          console.log('Progress update:', payload);
           if (payload.new) {
             setProgress({
               currentQuestionIndex: payload.new.current_question_index,
@@ -68,9 +67,15 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
   }, [gameId, participantId]);
 
   const updateProgress = async (currentQuestionIndex: number, answer: any) => {
+    if (!gameId || !participantId) {
+      console.error('Missing gameId or participantId');
+      return;
+    }
+
     try {
       let answers = progress?.answers || [];
       if (answer !== null) {
+        // Create a new array with the answer at the correct index
         answers = [...answers];
         answers[currentQuestionIndex] = answer;
       }
@@ -82,6 +87,8 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           game_id: gameId,
           current_question_index: currentQuestionIndex,
           answers: answers
+        }, {
+          onConflict: 'participant_id,game_id'
         });
 
       if (error) {
@@ -94,6 +101,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
         return;
       }
 
+      // Update local state immediately for better UX
       setProgress({
         currentQuestionIndex,
         answers

@@ -80,6 +80,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
 
   const handleAnswer = async (answer: { questionId: number; selectedOptionIndex: number; correct: boolean }) => {
     try {
+      console.log('Updating progress with answer:', answer);
       await updateProgress(currentQuestionIndex, answer);
     } catch (error) {
       console.error('Error updating progress:', error);
