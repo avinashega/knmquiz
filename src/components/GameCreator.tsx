@@ -30,7 +30,6 @@ export const GameCreator = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const { toast } = useToast();
 
-  // Subscribe to real-time updates when game is created
   useEffect(() => {
     if (!gameId) return;
 
@@ -105,20 +104,41 @@ export const GameCreator = () => {
     });
   };
 
-  const shareGameLink = () => {
+  const shareGameLink = async () => {
     const gameLink = `${window.location.origin}/game/${gameCode}`;
-    if (navigator.share) {
-      navigator.share({
-        title: "Join my KNM Quiz!",
-        text: "Click to join the quiz game",
-        url: gameLink,
-      });
-    } else {
-      navigator.clipboard.writeText(gameLink);
-      toast({
-        title: "Copied!",
-        description: "Game link copied to clipboard",
-      });
+    
+    try {
+      // Check if the Web Share API is supported and if we're in a secure context
+      if (navigator.share && window.isSecureContext) {
+        await navigator.share({
+          title: "Join my KNM Quiz!",
+          text: "Click to join the quiz game",
+          url: gameLink,
+        });
+      } else {
+        // Fallback to copying to clipboard if sharing is not available
+        await navigator.clipboard.writeText(gameLink);
+        toast({
+          title: "Copied!",
+          description: "Game link copied to clipboard",
+        });
+      }
+    } catch (error) {
+      console.error('Error sharing:', error);
+      // Fallback to copying to clipboard if sharing fails
+      try {
+        await navigator.clipboard.writeText(gameLink);
+        toast({
+          title: "Copied!",
+          description: "Game link copied to clipboard",
+        });
+      } catch (clipboardError) {
+        toast({
+          title: "Error",
+          description: "Could not share or copy the game link",
+          variant: "destructive",
+        });
+      }
     }
   };
 
