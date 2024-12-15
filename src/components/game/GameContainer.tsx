@@ -39,10 +39,15 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
         onGameData(game);
         
         // Fetch initial participants data
-        const { data: participantsData } = await supabase
+        const { data: participantsData, error: participantsError } = await supabase
           .from('participants')
           .select('id, name, score')
           .eq('game_id', game.id);
+
+        if (participantsError) {
+          console.error('Error fetching participants:', participantsError);
+          return;
+        }
 
         if (participantsData) {
           console.log('Participants data:', participantsData);
@@ -104,12 +109,12 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
           if (participantPayload.new) {
             onParticipantsData((prevParticipants: Array<{ id: string; name: string; score: number }>) => {
               const existing = prevParticipants.find(p => p.id === participantPayload.new.id);
-              if (existing) {
-                return prevParticipants.map(p => 
-                  p.id === participantPayload.new.id ? participantPayload.new : p
-                );
-              }
-              return [...prevParticipants, participantPayload.new];
+              const updatedParticipants = existing
+                ? prevParticipants.map(p => 
+                    p.id === participantPayload.new.id ? participantPayload.new : p
+                  )
+                : [...prevParticipants, participantPayload.new];
+              return updatedParticipants;
             });
           }
         }
