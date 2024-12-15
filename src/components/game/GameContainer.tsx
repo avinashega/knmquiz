@@ -10,6 +10,7 @@ interface GameContainerProps {
 
 export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: GameContainerProps) => {
   const { toast } = useToast();
+  const [currentGameId, setCurrentGameId] = useState<string | null>(null);
 
   useEffect(() => {
     const checkGameStatus = async () => {
@@ -34,6 +35,7 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
         }
 
         console.log('Game data:', game);
+        setCurrentGameId(game.id);
         onGameData(game);
         
         // Fetch initial participants data
@@ -95,17 +97,19 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
           event: '*',
           schema: 'public',
           table: 'participants',
-          filter: `game_id=eq.${payload?.new?.id}`,
+          filter: `game_id=eq.${currentGameId}`,
         },
-        (payload: any) => {
-          console.log('Participant update:', payload);
-          if (payload.new) {
-            onParticipantsData(prev => {
-              const existing = prev.find(p => p.id === payload.new.id);
+        (participantPayload: any) => {
+          console.log('Participant update:', participantPayload);
+          if (participantPayload.new) {
+            onParticipantsData((prevParticipants: Array<{ id: string; name: string; score: number }>) => {
+              const existing = prevParticipants.find(p => p.id === participantPayload.new.id);
               if (existing) {
-                return prev.map(p => p.id === payload.new.id ? payload.new : p);
+                return prevParticipants.map(p => 
+                  p.id === participantPayload.new.id ? participantPayload.new : p
+                );
               }
-              return [...prev, payload.new];
+              return [...prevParticipants, participantPayload.new];
             });
           }
         }
@@ -116,7 +120,7 @@ export const GameContainer = ({ gameCode, onGameData, onParticipantsData }: Game
       gameChannel.unsubscribe();
       participantChannel.unsubscribe();
     };
-  }, [gameCode, onGameData, onParticipantsData, toast]);
+  }, [gameCode, onGameData, onParticipantsData, toast, currentGameId]);
 
   return null;
 };
