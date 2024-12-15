@@ -16,6 +16,7 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
   useEffect(() => {
     const initializeQuiz = async () => {
       try {
+        console.log('initializing quiz');
         const { data: game, error } = await supabase
           .from('games')
           .select('selected_questions, status, time_per_question, current_question_index')
@@ -25,6 +26,7 @@ export const QuizState = ({ gameId, onQuestionsLoaded, onGameComplete }: QuizSta
         if (error) throw error;
 
         if (game) {
+          console.log({game});
           if (game.status === 'completed') {
             onGameComplete();
             return;
