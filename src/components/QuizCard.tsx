@@ -9,6 +9,7 @@ interface QuizCardProps {
   onScore: () => void;
   timePerQuestion: number;
   hideAnswer?: boolean;
+  onAnswer?: (answer: { questionId: number; selectedOptionIndex: number; correct: boolean }) => void;
 }
 
 interface ShuffledOption {
@@ -22,7 +23,8 @@ export const QuizCard = ({
   onNext, 
   onScore, 
   timePerQuestion,
-  hideAnswer = false 
+  hideAnswer = false,
+  onAnswer 
 }: QuizCardProps) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -39,7 +41,7 @@ export const QuizCard = ({
     setIsAnswered(false);
     setTimeLeft(timePerQuestion);
     setShuffledOptions(shuffled);
-  }, [question.id, language, timePerQuestion]); // Only depend on question.id instead of entire question object
+  }, [question.id, language, timePerQuestion]);
 
   // Handle timer
   useEffect(() => {
@@ -65,8 +67,18 @@ export const QuizCard = ({
     setSelectedAnswer(option.text);
     setIsAnswered(true);
     
-    if (option.originalIndex === question.correctOptionIndex) {
+    const isCorrect = option.originalIndex === question.correctOptionIndex;
+    if (isCorrect) {
       onScore();
+    }
+
+    // Call onAnswer with the answer details
+    if (onAnswer) {
+      onAnswer({
+        questionId: question.id,
+        selectedOptionIndex: option.originalIndex,
+        correct: isCorrect
+      });
     }
     
     setTimeout(onNext, 1000);

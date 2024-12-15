@@ -78,6 +78,19 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     }
   };
 
+  const handleAnswer = async (answer: { questionId: number; selectedOptionIndex: number; correct: boolean }) => {
+    try {
+      await updateProgress(currentQuestionIndex, answer);
+    } catch (error) {
+      console.error('Error updating progress:', error);
+      toast({
+        title: "Error",
+        description: "Failed to update answer progress",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleNext = async () => {
     const nextIndex = currentQuestionIndex + 1;
     
@@ -168,6 +181,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
               onNext={handleNext}
               onScore={handleScore}
               timePerQuestion={timePerQuestion}
+              onAnswer={handleAnswer}
             />
           )}
         </>
