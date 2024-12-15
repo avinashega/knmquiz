@@ -4,11 +4,14 @@ import { GameJoiner } from "./GameJoiner";
 import { QuizGameplay } from "./game/QuizGameplay";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Leaderboard } from "./Leaderboard";
 
 export const GamePlay = () => {
   const { gameCode } = useParams();
   const [gameId, setGameId] = useState<string | null>(null);
   const [participantId, setParticipantId] = useState<string | null>(null);
+  const [isCreator, setIsCreator] = useState(false);
+  const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -37,8 +40,21 @@ export const GamePlay = () => {
         
         // Check if user has already joined this game
         const storedParticipantId = localStorage.getItem(`game_${game.id}_participant`);
-        if (storedParticipantId) {
+        const isGameCreator = localStorage.getItem(`game_${game.id}_creator`) === 'true';
+        setIsCreator(isGameCreator);
+        
+        if (storedParticipantId || isGameCreator) {
           setParticipantId(storedParticipantId);
+        }
+
+        // Fetch participants
+        const { data: participantsData } = await supabase
+          .from('participants')
+          .select('id, name, score')
+          .eq('game_id', game.id);
+
+        if (participantsData) {
+          setParticipants(participantsData);
         }
       } catch (error: any) {
         console.error('Error checking game status:', error);
@@ -51,14 +67,55 @@ export const GamePlay = () => {
     };
 
     checkGameStatus();
-  }, [gameCode, toast]);
 
-  if (!participantId) {
-    return <GameJoiner />;
-  }
+    // Subscribe to participant updates
+    if (gameId) {
+      const channel = supabase
+        .channel('participants-changes')
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'participants',
+            filter: `game_id=eq.${gameId}`,
+          },
+          (payload) => {
+            const participant = payload.new as any;
+            setParticipants(prev => {
+              const existing = prev.find(p => p.id === participant.id);
+              if (existing) {
+                return prev.map(p => p.id === participant.id ? participant : p);
+              }
+              return [...prev, participant];
+            });
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [gameCode, gameId, toast]);
 
   if (!gameId) {
     return null;
+  }
+
+  if (isCreator) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Leaderboard 
+          participants={participants}
+          currentParticipantId=""
+        />
+      </div>
+    );
+  }
+
+  if (!participantId) {
+    return <GameJoiner />;
   }
 
   return <QuizGameplay gameId={gameId} participantId={participantId} />;
