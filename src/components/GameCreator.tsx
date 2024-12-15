@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { Copy, Share2, Play } from "lucide-react";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
@@ -19,6 +20,7 @@ interface Participant {
 }
 
 export const GameCreator = () => {
+  const navigate = useNavigate();
   const [gameConfig, setGameConfig] = useState<GameConfig>({
     numQuestions: 10,
     timePerQuestion: 30,
@@ -145,6 +147,9 @@ export const GameCreator = () => {
         title: "Starting Game",
         description: "The quiz will begin shortly...",
       });
+
+      // Navigate to the game
+      navigate(`/game/${gameCode}`);
     } catch (error) {
       console.error('Error starting game:', error);
       toast({
