@@ -11,9 +11,14 @@ interface QuizCardProps {
   hideAnswer?: boolean;
 }
 
+interface ShuffledOption {
+  text: string;
+  originalIndex: number;
+}
+
 export const QuizCard = ({ 
   question, 
-  language, 
+  language = 'dutch',
   onNext, 
   onScore, 
   timePerQuestion,
@@ -22,12 +27,19 @@ export const QuizCard = ({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [timeLeft, setTimeLeft] = useState(timePerQuestion);
+  const [shuffledOptions, setShuffledOptions] = useState<ShuffledOption[]>([]);
 
   useEffect(() => {
-    // Reset timer when question changes
+    // Reset timer and shuffle options when question changes
     setTimeLeft(timePerQuestion);
     setSelectedAnswer(null);
     setIsAnswered(false);
+
+    // Shuffle options while maintaining the mapping to correct answer
+    const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
+    const optionsWithIndex = options.map((text, index) => ({ text, originalIndex: index }));
+    const shuffled = [...optionsWithIndex].sort(() => Math.random() - 0.5);
+    setShuffledOptions(shuffled);
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -45,12 +57,11 @@ export const QuizCard = ({
     return () => clearInterval(timer);
   }, [question, timePerQuestion]);
 
-  const handleAnswer = (answer: string) => {
+  const handleAnswer = (option: ShuffledOption) => {
     if (isAnswered) return;
-    setSelectedAnswer(answer);
+    setSelectedAnswer(option.text);
     setIsAnswered(true);
-    const correctAnswer = question.optionsEnglish[question.correctOptionIndex];
-    if (answer === correctAnswer) {
+    if (option.originalIndex === question.correctOptionIndex) {
       onScore();
     }
   };
@@ -61,40 +72,37 @@ export const QuizCard = ({
     onNext();
   };
 
-  // Get the appropriate question text and options based on language
+  // Get the appropriate question text based on language
   const questionText = language === 'dutch' ? question.questionDutch : question.questionEnglish;
-  const options = language === 'dutch' ? question.optionsDutch : question.optionsEnglish;
-  const correctAnswer = question.optionsEnglish[question.correctOptionIndex];
-
   const timerProgress = (timeLeft / timePerQuestion) * 100;
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <div className="mb-4 space-y-2">
         <div className="flex justify-between text-sm text-gray-600">
-          <span>Time remaining: {timeLeft}s</span>
+          <span>Resterende tijd: {timeLeft}s</span>
         </div>
         <Progress value={timerProgress} className="h-2" />
       </div>
 
       <h2 className="text-xl font-bold mb-4">{questionText}</h2>
       <div className="space-y-2">
-        {options.map((answer) => (
+        {shuffledOptions.map((option) => (
           <button
-            key={answer}
+            key={option.text}
             className={`w-full text-left p-2 rounded-lg ${
               isAnswered && !hideAnswer
-                ? answer === options[question.correctOptionIndex]
+                ? option.originalIndex === question.correctOptionIndex
                   ? 'bg-green-500 text-white'
-                  : selectedAnswer === answer
+                  : selectedAnswer === option.text
                   ? 'bg-red-500 text-white'
                   : 'bg-gray-200'
                 : 'bg-gray-100 hover:bg-gray-200'
             }`}
-            onClick={() => handleAnswer(answer)}
+            onClick={() => handleAnswer(option)}
             disabled={isAnswered}
           >
-            {answer}
+            {option.text}
           </button>
         ))}
       </div>
