@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import { QuizQuestion } from "@/types/quiz";
 import { QuizCard } from "../QuizCard";
+import { Leaderboard } from "../Leaderboard";
 
 interface QuizGameplayProps {
   gameId: string;
@@ -17,6 +18,8 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
+  const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -47,6 +50,35 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     };
 
     initializeQuiz();
+
+    // Subscribe to participant updates
+    const participantChannel = supabase
+      .channel('participant-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'participants',
+          filter: `game_id=eq.${gameId}`,
+        },
+        (payload: any) => {
+          console.log('Participant update:', payload);
+          setParticipants(prev => {
+            const participant = payload.new;
+            const existing = prev.find(p => p.id === participant.id);
+            if (existing) {
+              return prev.map(p => p.id === participant.id ? participant : p);
+            }
+            return [...prev, participant];
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      participantChannel.unsubscribe();
+    };
   }, [gameId, toast]);
 
   const handleScore = async () => {
@@ -71,6 +103,8 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      setIsComplete(true);
     }
   };
 
@@ -87,6 +121,18 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
       <Card className="p-6 max-w-2xl mx-auto mt-8">
         <p className="text-center">No questions available.</p>
       </Card>
+    );
+  }
+
+  if (isComplete) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h2 className="text-2xl font-bold text-center mb-8">Quiz Complete!</h2>
+        <Leaderboard 
+          participants={participants}
+          currentParticipantId={participantId}
+        />
+      </div>
     );
   }
 

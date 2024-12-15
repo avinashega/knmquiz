@@ -5,7 +5,7 @@ import { QuizGameplay } from "./game/QuizGameplay";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Leaderboard } from "./Leaderboard";
-import { Card } from "./ui/card";
+import { WaitingRoom } from "./game/WaitingRoom";
 
 export const GamePlay = () => {
   const { gameCode } = useParams();
@@ -42,12 +42,10 @@ export const GamePlay = () => {
         setGameId(game.id);
         setGameStatus(game.status);
         
-        // Check if user is the creator of this game
         const isGameCreator = localStorage.getItem(`game_${game.id}_creator`) === 'true';
         setIsCreator(isGameCreator);
         console.log('Is creator:', isGameCreator);
         
-        // Only set participantId if not the creator
         if (!isGameCreator) {
           const storedParticipantId = localStorage.getItem(`game_${game.id}_participant`);
           if (storedParticipantId) {
@@ -55,7 +53,6 @@ export const GamePlay = () => {
           }
         }
 
-        // Fetch participants
         const { data: participantsData } = await supabase
           .from('participants')
           .select('id, name, score')
@@ -77,7 +74,6 @@ export const GamePlay = () => {
 
     checkGameStatus();
 
-    // Subscribe to game status changes
     const gameChannel = supabase
       .channel('game-status')
       .on(
@@ -97,7 +93,6 @@ export const GamePlay = () => {
       )
       .subscribe();
 
-    // Subscribe to participant updates
     const participantChannel = supabase
       .channel('participant-updates')
       .on(
@@ -136,7 +131,6 @@ export const GamePlay = () => {
     return null;
   }
 
-  // If user is creator and game is playing, show leaderboard
   if (isCreator && gameStatus === 'playing') {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -149,7 +143,6 @@ export const GamePlay = () => {
     );
   }
 
-  // If user is creator and game is waiting, show waiting room
   if (isCreator && gameStatus === 'waiting') {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -162,40 +155,16 @@ export const GamePlay = () => {
     );
   }
 
-  // If game hasn't started and user is not joined, show joiner
   if (gameStatus === 'waiting' && !participantId) {
     return <GameJoiner />;
   }
 
-  // If user has joined and game is playing, show gameplay
   if (participantId && gameStatus === 'playing') {
     return <QuizGameplay gameId={gameId} participantId={participantId} />;
   }
 
-  // If user has joined but game hasn't started, show waiting screen
   if (participantId && gameStatus === 'waiting') {
-    return (
-      <Card className="container mx-auto px-4 py-8 max-w-md mt-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Waiting for the game to start...</h2>
-          <p className="text-gray-600 mb-4">The quiz will begin when the host starts the game.</p>
-          
-          <div className="mt-8">
-            <h3 className="font-semibold mb-2">Current Players:</h3>
-            <div className="space-y-2">
-              {participants.map((participant) => (
-                <div 
-                  key={participant.id}
-                  className="bg-gray-50 p-2 rounded-lg"
-                >
-                  {participant.name}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Card>
-    );
+    return <WaitingRoom participants={participants} />;
   }
 
   return null;
