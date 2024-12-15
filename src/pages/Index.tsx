@@ -82,7 +82,7 @@ const Index = () => {
       <footer className="py-4 bg-white border-t">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-gray-600">
-            Made by Avinash Ega | <Link to="/questions" className="text-blue-600 hover:underline">View All Questions</Link>
+            Made by <a href="https://linkedin.com/in/avinashega" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Avinash Ega</a> | <Link to="/questions" className="text-blue-600 hover:underline">View All Questions</Link>
           </p>
         </div>
       </footer>
