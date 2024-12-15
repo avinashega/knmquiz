@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { allQuestions } from "@/data/quizData";
 import { QuizCard } from "@/components/QuizCard";
-import { LanguageSelector } from "@/components/LanguageSelector";
 import { GameCreator } from "@/components/GameCreator";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 
 const Index = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState<'dutch' | 'english'>('dutch');
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < allQuestions.length - 1) {
@@ -39,18 +37,13 @@ const Index = () => {
 
           <TabsContent value="practice">
             <Card className="p-6">
-              <LanguageSelector
-                onSelectLanguage={setSelectedLanguage}
+              <QuizCard
+                question={allQuestions[currentQuestionIndex]}
+                language="dutch"
+                onNext={handleNextQuestion}
+                onScore={() => {}}
+                timePerQuestion={30}
               />
-              <div className="mt-6">
-                <QuizCard
-                  question={allQuestions[currentQuestionIndex]}
-                  language={selectedLanguage}
-                  onNext={handleNextQuestion}
-                  onScore={() => {}}
-                  timePerQuestion={30}
-                />
-              </div>
             </Card>
           </TabsContent>
 
@@ -58,6 +51,11 @@ const Index = () => {
             <GameCreator />
           </TabsContent>
         </Tabs>
+
+        <footer className="mt-8 text-center text-sm text-gray-500">
+          <p>© 2024 KNM Quiz. All rights reserved.</p>
+          <p>Created by Avinash Ega</p>
+        </footer>
       </div>
     </div>
   );
