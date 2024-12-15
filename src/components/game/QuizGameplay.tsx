@@ -20,6 +20,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isComplete, setIsComplete] = useState(false);
   const [participants, setParticipants] = useState<Array<{ id: string; name: string; score: number }>>([]);
+  const [timePerQuestion, setTimePerQuestion] = useState(30); // Default value
   const { toast } = useToast();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         console.log('Initializing quiz for game:', gameId);
         const { data: game } = await supabase
           .from('games')
-          .select('num_questions')
+          .select('num_questions, time_per_question')
           .eq('id', gameId)
           .single();
 
@@ -36,6 +37,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
           console.log('Game settings:', game);
           const shuffled = shuffleQuestions(allQuestions);
           setQuestions(shuffled.slice(0, game.num_questions));
+          setTimePerQuestion(game.time_per_question);
         }
         setIsLoading(false);
       } catch (error) {
@@ -149,6 +151,7 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
         language="english"
         onNext={handleNext}
         onScore={handleScore}
+        timePerQuestion={timePerQuestion}
       />
     </div>
   );
