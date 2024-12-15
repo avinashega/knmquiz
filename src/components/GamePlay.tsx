@@ -5,6 +5,7 @@ import { QuizGameplay } from "./game/QuizGameplay";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Leaderboard } from "./Leaderboard";
+import { Card } from "./ui/card";
 
 export const GamePlay = () => {
   const { gameCode } = useParams();
@@ -174,10 +175,26 @@ export const GamePlay = () => {
   // If user has joined but game hasn't started, show waiting screen
   if (participantId && gameStatus === 'waiting') {
     return (
-      <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-bold mb-4">Waiting for the game to start...</h2>
-        <p className="text-gray-600">The quiz will begin when the host starts the game.</p>
-      </div>
+      <Card className="container mx-auto px-4 py-8 max-w-md mt-8">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Waiting for the game to start...</h2>
+          <p className="text-gray-600 mb-4">The quiz will begin when the host starts the game.</p>
+          
+          <div className="mt-8">
+            <h3 className="font-semibold mb-2">Current Players:</h3>
+            <div className="space-y-2">
+              {participants.map((participant) => (
+                <div 
+                  key={participant.id}
+                  className="bg-gray-50 p-2 rounded-lg"
+                >
+                  {participant.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Card>
     );
   }
 
