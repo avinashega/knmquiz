@@ -38,13 +38,16 @@ export const GamePlay = () => {
 
         setGameId(game.id);
         
-        // Check if user has already joined this game
-        const storedParticipantId = localStorage.getItem(`game_${game.id}_participant`);
+        // Check if user is the creator of this game
         const isGameCreator = localStorage.getItem(`game_${game.id}_creator`) === 'true';
         setIsCreator(isGameCreator);
         
-        if (storedParticipantId || isGameCreator) {
-          setParticipantId(storedParticipantId);
+        // Only set participantId if not the creator
+        if (!isGameCreator) {
+          const storedParticipantId = localStorage.getItem(`game_${game.id}_participant`);
+          if (storedParticipantId) {
+            setParticipantId(storedParticipantId);
+          }
         }
 
         // Fetch participants

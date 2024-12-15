@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { Card } from "../ui/card";
-import { Button } from "../ui/button";
-import { Progress } from "../ui/progress";
-import { useToast } from "@/hooks/use-toast";
+import { useState, useEffect } from "react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { QuizProgress } from "@/components/QuizProgress";
 import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { allQuestions, shuffleQuestions } from "@/data/quizData";
 import { QuizQuestion } from "@/types/quiz";
 
@@ -12,46 +12,43 @@ interface QuizGameplayProps {
   participantId: string;
 }
 
-interface GameState {
-  currentQuestion: number;
-  timeRemaining: number;
-  status: string;
-  questions: QuizQuestion[];
-}
-
 export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
-  const [gameState, setGameState] = useState<GameState>({
-    currentQuestion: 0,
-    timeRemaining: 30,
-    status: 'waiting',
-    questions: shuffleQuestions(allQuestions).slice(0, 10)
-  });
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
-    // Subscribe to game state changes
+    const initializeQuiz = async () => {
+      const { data: game } = await supabase
+        .from('games')
+        .select('num_questions')
+        .eq('id', gameId)
+        .single();
+
+      if (game) {
+        const shuffled = shuffleQuestions(allQuestions);
+        setQuestions(shuffled.slice(0, game.num_questions));
+      }
+    };
+
+    initializeQuiz();
+
     const channel = supabase
-      .channel('game-state')
+      .channel('game-status')
       .on(
         'postgres_changes',
         {
-          event: '*',
+          event: 'UPDATE',
           schema: 'public',
           table: 'games',
           filter: `id=eq.${gameId}`,
         },
         (payload) => {
-          const game = payload.new as any;
-          setGameState(prevState => ({
-            ...prevState,
-            status: game.status
-          }));
-          
-          if (game.status === 'started' && prevState.status !== 'started') {
-            toast({
-              title: "Game Started!",
-              description: "The quiz has begun.",
-            });
+          if (payload.new.status === 'playing') {
+            setGameStarted(true);
           }
         }
       )
@@ -60,100 +57,96 @@ export const QuizGameplay = ({ gameId, participantId }: QuizGameplayProps) => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [gameId, toast]);
+  }, [gameId]);
 
-  // Timer effect
-  useEffect(() => {
-    if (gameState.status !== 'started') return;
-
-    const timer = setInterval(() => {
-      setGameState(prevState => ({
-        ...prevState,
-        timeRemaining: Math.max(0, prevState.timeRemaining - 1)
-      }));
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [gameState.status]);
-
-  const handleAnswer = async (answer: string) => {
-    const currentQuestion = gameState.questions[gameState.currentQuestion];
-    const isCorrect = answer === currentQuestion.optionsEnglish[currentQuestion.correctOptionIndex];
+  const handleOptionSelect = async (optionIndex: number) => {
+    if (selectedOption !== null) return;
     
+    setSelectedOption(optionIndex);
+    
+    const isCorrect = optionIndex === questions[currentQuestionIndex].correctOptionIndex;
     if (isCorrect) {
+      setScore(s => s + 1);
+      
       // Update score in database
       await supabase
         .from('participants')
-        .update({ score: supabase.sql`score + 1` })
+        .update({ score: score + 1 })
         .eq('id', participantId);
+
+      toast({
+        title: "Correct!",
+        description: "Good job!",
+      });
+    } else {
+      toast({
+        title: "Incorrect",
+        description: "Better luck next time!",
+        variant: "destructive",
+      });
     }
 
-    toast({
-      title: isCorrect ? "Correct!" : "Incorrect",
-      description: isCorrect ? "You got it right!" : "Better luck next time!",
-      variant: isCorrect ? "default" : "destructive",
-    });
-
-    // Move to next question
-    setGameState(prev => ({
-      ...prev,
-      currentQuestion: prev.currentQuestion + 1,
-      timeRemaining: 30
-    }));
+    // Move to next question after a delay
+    setTimeout(() => {
+      setSelectedOption(null);
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(i => i + 1);
+      }
+    }, 2000);
   };
 
-  if (gameState.status === 'waiting') {
+  if (!gameStarted) {
     return (
-      <Card className="p-6 max-w-md mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Waiting for Game to Start</h2>
-        <p className="text-center text-gray-600">The host will start the game soon...</p>
+      <Card className="p-6 max-w-2xl mx-auto mt-8">
+        <h2 className="text-2xl font-bold text-center mb-4">Waiting for the game to start...</h2>
+        <p className="text-center text-gray-600">The quiz will begin when the host starts the game.</p>
       </Card>
     );
   }
 
-  const currentQuestion = gameState.questions[gameState.currentQuestion];
-  if (!currentQuestion) {
+  if (!questions.length) {
     return (
-      <Card className="p-6 max-w-md mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Quiz Complete!</h2>
-        <p className="text-center text-gray-600">Wait for final results...</p>
+      <Card className="p-6 max-w-2xl mx-auto mt-8">
+        <p className="text-center">Loading questions...</p>
       </Card>
     );
   }
+
+  const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <Card className="p-6 max-w-2xl mx-auto">
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <span className="text-sm font-medium">
-            Question {gameState.currentQuestion + 1} of {gameState.questions.length}
-          </span>
-          <span className="text-sm font-medium">
-            Time: {gameState.timeRemaining}s
-          </span>
+    <div className="container mx-auto px-4 py-8">
+      <QuizProgress
+        current={currentQuestionIndex}
+        total={questions.length}
+        score={score}
+      />
+
+      <Card className="p-6 max-w-2xl mx-auto">
+        <h2 className="text-xl font-semibold mb-4">
+          {currentQuestion.questionEnglish}
+        </h2>
+
+        <div className="space-y-3">
+          {currentQuestion.optionsEnglish.map((option, index) => (
+            <Button
+              key={index}
+              className={`w-full justify-start text-left ${
+                selectedOption === index
+                  ? index === currentQuestion.correctOptionIndex
+                    ? "bg-green-500 hover:bg-green-600"
+                    : "bg-red-500 hover:bg-red-600"
+                  : ""
+              }`}
+              variant={selectedOption === null ? "outline" : "secondary"}
+              onClick={() => handleOptionSelect(index)}
+              disabled={selectedOption !== null}
+            >
+              {option}
+            </Button>
+          ))}
         </div>
-
-        <Progress value={(gameState.timeRemaining / 30) * 100} />
-
-        <div className="space-y-4">
-          <h3 className="text-xl font-bold text-center">
-            {currentQuestion.questionEnglish}
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentQuestion.optionsEnglish.map((option) => (
-              <Button
-                key={option}
-                variant="outline"
-                className="p-4 h-auto text-left"
-                onClick={() => handleAnswer(option)}
-              >
-                {option}
-              </Button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
