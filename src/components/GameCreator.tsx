@@ -87,15 +87,6 @@ export const GameCreator = () => {
   };
 
   const startGame = async () => {
-    if (participants.length < 1) {
-      toast({
-        title: "Error",
-        description: "Wait for participants to join",
-        variant: "destructive",
-      });
-      return;
-    }
-
     try {
       const { error } = await supabase
         .from('games')
@@ -142,7 +133,6 @@ export const GameCreator = () => {
           <Button 
             onClick={startGame} 
             className="w-full mt-4"
-            disabled={participants.length < 1}
           >
             <Play className="mr-2" />
             Start Game

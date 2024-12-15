@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Button } from "../ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Copy, Share2, Play } from "lucide-react";
+import { Copy, Share2 } from "lucide-react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -32,6 +32,25 @@ export const GameLobby = ({
 
   useEffect(() => {
     if (!gameId) return;
+
+    // Initial fetch of participants
+    const fetchParticipants = async () => {
+      const { data, error } = await supabase
+        .from('participants')
+        .select('id, name')
+        .eq('game_id', gameId);
+
+      if (error) {
+        console.error('Error fetching participants:', error);
+        return;
+      }
+
+      if (data) {
+        onParticipantsChange(data);
+      }
+    };
+
+    fetchParticipants();
 
     // Subscribe to real-time updates for new participants
     const channel = supabase
@@ -148,12 +167,6 @@ export const GameLobby = ({
             </div>
           ))}
         </div>
-        {isCreator && participants.length > 0 && (
-          <Button onClick={onStartGame} className="w-full mt-4">
-            <Play className="w-4 h-4 mr-2" />
-            Start Game
-          </Button>
-        )}
       </div>
     </div>
   );
