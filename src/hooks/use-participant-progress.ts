@@ -23,27 +23,30 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
         if (existingProgress) {
           setProgress({
             currentQuestionIndex: existingProgress.current_question_index,
-            answers: Array.isArray(existingProgress.answers) ? existingProgress.answers : []
+            answers: existingProgress.answers || []
           });
         } else {
           // Create initial progress
-          const { data: newProgress } = await supabase
+          const { data: newProgress, error } = await supabase
             .from('participant_progress')
-            .insert([
-              {
-                game_id: gameId,
-                participant_id: participantId,
-                current_question_index: 0,
-                answers: []
-              }
-            ])
+            .insert({
+              game_id: gameId,
+              participant_id: participantId,
+              current_question_index: 0,
+              answers: []
+            })
             .select()
             .single();
+
+          if (error) {
+            console.error('Error creating progress:', error);
+            return;
+          }
 
           if (newProgress) {
             setProgress({
               currentQuestionIndex: newProgress.current_question_index,
-              answers: Array.isArray(newProgress.answers) ? newProgress.answers : []
+              answers: newProgress.answers || []
             });
           }
         }
@@ -69,7 +72,7 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
           if (payload.new) {
             setProgress({
               currentQuestionIndex: payload.new.current_question_index,
-              answers: Array.isArray(payload.new.answers) ? payload.new.answers : []
+              answers: payload.new.answers || []
             });
           }
         }
@@ -89,21 +92,24 @@ export const useParticipantProgress = (gameId: string, participantId: string) =>
 
       const { data, error } = await supabase
         .from('participant_progress')
-        .update({
+        .upsert({
+          game_id: gameId,
+          participant_id: participantId,
           current_question_index: currentQuestionIndex,
           answers: updatedAnswers
         })
-        .eq('game_id', gameId)
-        .eq('participant_id', participantId)
         .select()
         .single();
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating progress:', error);
+        return;
+      }
 
       if (data) {
         setProgress({
           currentQuestionIndex: data.current_question_index,
-          answers: Array.isArray(data.answers) ? data.answers : []
+          answers: data.answers || []
         });
       }
     } catch (error) {
